@@ -1,0 +1,116 @@
+import { createContext, ReactNode, useContext, useState } from "react";
+
+//for toggling
+interface ICanvaDataContextType {
+  canvaData: {};
+  setCanvaData: any;
+  //function carries data for canva management and canva space
+  fetchEssentialData: (userid: string) => {};
+  //2nd function
+  fetchWorkspaceData: (userid: string, workspaceid: string) => {};
+}
+
+// Context for managing shared state across components
+const CanvaDataContext = createContext<ICanvaDataContextType | null>(null);
+
+export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
+  const [canvaData, setCanvaData] = useState<any>({});
+
+  //Carry canva data between pages by fetching canva space mandatory data for preview name and description and then the actual data to allow the 2nd functionbelow this one to collect workspace data
+  const fetchEssentialData = async (userid: string) => {
+    const response = await fetch(
+      `http://localhost:5000/api/account/${userid}/canvas-management`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "x-active-user": userid,
+        },
+      }
+    );
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      console.log("data from response: ", data);
+
+      setCanvaData(data);
+      console.log("frontend dashboard initial user data: ", data);
+    } else {
+      const issue = await response.json();
+      console.log(issue);
+
+      console.log("frontend dashboard initial user data: ", issue);
+    }
+  };
+
+  //find the canva data based on the selected canva space
+
+  const fetchWorkspaceData = async (
+    userid: string,
+    // workspacename: string,
+    workspaceid: string
+  ) => {
+    const response = await fetch(
+      `http://localhost:5000/api/account/${userid}/canvas-management/${workspaceid}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "x-active-user": userid,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      const data = await response.json();
+      switch (data.code) {
+        case "NO_WORKSPACE_DATA":
+          return {
+            status: "empty",
+            message: data.message,
+          };
+        case "NO_USER_DATA":
+          return {
+            status: "empty",
+            message: data.message,
+          };
+        default:
+          console.log("route error");
+
+          return {
+            status: "error",
+            message: data.message || "Unhandled backend condition.",
+          };
+      }
+    } else {
+      const data = await response.json();
+
+      return {
+        status: "success",
+        data: data.data,
+      };
+    }
+  };
+  return (
+    <CanvaDataContext.Provider
+      value={{
+        fetchWorkspaceData,
+        fetchEssentialData,
+        canvaData,
+        setCanvaData,
+      }}
+    >
+      {children}
+    </CanvaDataContext.Provider>
+  );
+};
+
+export const useFetchCanvaContext = () => {
+  const context = useContext(CanvaDataContext);
+  if (!context) {
+    throw new Error(
+      "useFetchCanvaContext must be used within CanvaDataProvider "
+    );
+  }
+  return context;
+};

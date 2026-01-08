@@ -1,0 +1,38 @@
+{
+  "name": "mindcanvas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+   "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-Code-Hashira/mindcanvas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/The-Code-Hashira/mindcanvas/issues"
+  },
+  "homepage": "https://github.com/The-Code-Hashira/mindcanvas#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongo-connect": "^0.0.6",
+    "mongodb": "^6.19.0",
+    "mongoose": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "nodemon": "^3.1.10"
+  }
+}

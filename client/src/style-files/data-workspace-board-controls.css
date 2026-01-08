@@ -1,0 +1,37 @@
+.controls {
+  border-top: 2px solid rgba(255, 255, 255, 0.8666666667);
+  height: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 20px auto;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.controls .button-wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-items: center;
+  margin: 0px auto;
+}
+.controls .button-wrapper .create-new-workspace-sheet-button {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  background-color: #1c1c1c;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 4px;
+  height: 28px;
+  cursor: pointer;
+  width: 30px;
+  font-size: 17pt;
+}/*# sourceMappingURL=data-workspace-board-controls.css.map */

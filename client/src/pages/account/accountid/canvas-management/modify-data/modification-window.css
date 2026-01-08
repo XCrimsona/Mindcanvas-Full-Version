@@ -1,0 +1,176 @@
+.modifications-window-container {
+  display: block;
+  position: absolute;
+  content: "";
+  z-index: 11;
+  background-color: #000000;
+  top: 0;
+  left: 30px;
+  width: 200px;
+  height: -moz-fit-content;
+  height: fit-content;
+  box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922);
+  cursor: default;
+}
+.modifications-window-container .edit-button,
+.modifications-window-container .component-reposition-button,
+.modifications-window-container .delete-button {
+  background-color: #000000;
+  border: 2px solid rgba(250, 170, 0, 0.2509803922);
+  border-radius: 4px;
+  font-size: 14px;
+}
+.modifications-window-container .edit-button {
+  width: 170px;
+  cursor: pointer;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.modifications-window-container .component-reposition-button {
+  width: 170px;
+  cursor: pointer;
+  color: #fa0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.modifications-window-container .delete-container {
+  width: 170px;
+}
+.modifications-window-container .delete-container .toggle-delete {
+  display: block;
+  cursor: pointer;
+  width: 25px;
+}
+.modifications-window-container .delete-container .delete-button {
+  width: 140px;
+  color: #f00;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+.edit-window-container {
+  position: absolute;
+  display: block;
+  cursor: default;
+  top: 0px;
+  z-index: 11;
+  left: 6.2%;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #000000;
+  box-shadow: inset 0px 0px 4px 2px rgba(250, 170, 0, 0.2509803922), 0px 0px 4px 0px rgba(250, 170, 0, 0.2509803922);
+  width: 600px;
+}
+.edit-window-container .update-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  padding-bottom: 0px;
+  height: 272px;
+  width: 600px;
+}
+.edit-window-container .update-box .box-one {
+  display: block;
+  font-size: 10px;
+  margin-left: 4px;
+  margin-right: 15px;
+  text-align: left;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #79674E;
+  width: 250px;
+}
+.edit-window-container .update-box .box-one .pulled-data {
+  background-color: #000000;
+  color: white;
+  resize: none;
+  outline: none;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 0px;
+  cursor: text;
+  height: 148px;
+  white-space: pre-wrap;
+  width: 250px;
+}
+.edit-window-container .update-box .box-one .pulled-data::-moz-selection {
+  background-color: #79674E;
+  color: white;
+}
+.edit-window-container .update-box .box-one .pulled-data::selection {
+  background-color: #79674E;
+  color: white;
+}
+.edit-window-container .update-box .box-one .pulled-data:focus {
+  outline: none;
+}
+.edit-window-container .update-box .box-one .copy-clipboard-button,
+.edit-window-container .update-box .box-one .change-windows {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  width: 250px;
+  color: #FABB00;
+  border-radius: 4px;
+  padding: 4px 3px;
+  background-color: #000000;
+  box-shadow: 0px 0px 4px 0px rgba(250, 170, 0, 0.251);
+  border: 2px solid rgba(250, 170, 0, 0.251);
+}
+.edit-window-container .update-box .style-div {
+  width: 1px;
+  height: 190px;
+  background-color: #79674E;
+}
+.edit-window-container .update-box .box-two {
+  width: 250px;
+  font-size: 10px;
+  margin-left: 15px;
+  margin-right: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #79674E;
+}
+.edit-window-container .update-box .box-two .new-text .new-data {
+  background-color: #000000;
+  color: white;
+  width: 250px;
+  resize: none;
+  font-size: 12px;
+  outline: none;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 0px;
+  cursor: text;
+  height: 148px;
+  white-space: pre-wrap;
+}
+.edit-window-container .update-box .box-two .new-text .new-data::-moz-placeholder {
+  color: #ccc;
+}
+.edit-window-container .update-box .box-two .new-text .new-data::placeholder {
+  color: #ccc;
+}
+.edit-window-container .update-box .box-two .new-text .new-data:focus {
+  outline: none;
+}
+.edit-window-container .update-box .box-two .new-text .new-data::-moz-selection {
+  background-color: #79674E;
+  color: white;
+}
+.edit-window-container .update-box .box-two .new-text .new-data::selection {
+  background-color: #79674E;
+  color: white;
+}
+.edit-window-container .update-box .box-two .paste-clipboard-button,
+.edit-window-container .update-box .box-two .update-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  width: 250px;
+  color: #FABB00;
+  padding: 4px 3px;
+  background-color: #000000;
+  box-shadow: 0px 0px 4px 0px rgba(250, 170, 0, 0.251);
+  border: 2px solid rgba(250, 170, 0, 0.251);
+  border-radius: 4px;
+}/*# sourceMappingURL=modification-window.css.map */
