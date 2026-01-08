@@ -1,0 +1,73 @@
+//Comonent Hub child component functionality properties
+.comp-hub-data-component-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    height: 200px;
+    width: 200px;
+    background-color: #000000;
+    margin: 0px auto 0px auto;
+    z-index: 4;
+    border-top: 2px solid #FABB0040;
+    border-bottom: 2px solid #FABB0040;
+    border-left: 2px solid #FABB0040;
+    border-right: 2px solid #FABB0040;
+    box-shadow: 0px 0px 4px 2px #FABB0040;
+    border-radius: 4px;
+
+    .center-comp-hub-component {
+        position: relative;
+        height: 200px;
+        width: 200px;
+        margin: 0px auto 0px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .close-icon-wrapper {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 10px;
+            right: 6px;
+            width: 28px;
+            height: 28px;
+            border: 2px solid #000;
+            background-color: #000;
+            transform: rotate(45deg);
+            cursor: pointer;
+
+            .close-icon {
+                display: block;
+                width: 20px;
+                height: 20px;
+                border-radius: 8px;
+            }
+        }
+
+        .comp-hub-data-creation-components {
+
+            .text-comp,
+            .audio-comp,
+            .image-comp,
+            .video-comp {
+
+
+                width: 150px;
+                margin: 5px auto 5px auto;
+                background-color: #141414B3;
+                color: #ffffff;
+                border-top: 2px solid #000000B3;
+                border-bottom: 2px solid #00BFA0B3;
+                border-left: 2px solid #000000B3;
+                border-right: 2px solid #000000B3;
+                border-radius: 4px;
+                cursor: grab;
+            }
+        }
+    }
+}

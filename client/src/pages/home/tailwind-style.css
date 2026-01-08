@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+:root {
+    --golden-brown: rgba(250, 170, 0, 0.251);
+    --faded-black: rgba(0, 0, 0, 0.65);
+    --One-pixel: 1px;
+    --Two-pixel: 2px;
+    --Ten-pixel: 10px;
+    --Twenty-pixel: 20px;
+    --size20: 20px;
+    --size24: 24px;
+    --size32: 32px;
+    --size40: 40px;
+}
+
+.heading-one {
+    font-size: 32px;
+}
+
+.gold-brown-border-shadow {
+    box-shadow: 0 0 7px 3px var(--golden-brown);
+    border: 1px solid var(--golden-brown);
+}
+
+.black-cover {
+    background-color: var(--faded-black);
+}
+
+.info-container {
+    background-color: var(--faded-black);
+    border-radius: 50px;
+    border: var(--Two-pixel) solid var(--golden-brown);
+    box-shadow: 0 0 7px 3px var(--golden-brown);
+}
+
+.box-heading {
+    font-size: var(--Twenty-pixel);
+}
+
+@media screen and (min-width: 300px) and (max-width: 424.9px) {
+    .heading-one {
+        font-size: var(--size32);
+    }
+
+    .accent-button {
+        font-size: var(--size20);
+    }
+
+}
+
+@media screen and (min-width: 425px) {
+    .heading-one {
+        font-size: var(--size40);
+    }
+
+    .accent-button {
+        font-size: var(--size20);
+    }
+}

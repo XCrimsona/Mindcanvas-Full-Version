@@ -1,0 +1,194 @@
+[
+    {
+        "id": 1,
+        "src": "/academy/steps/step--1.png",
+        "alt": "Canvaspace Management Dashboard",
+        "description": "Your Canvaspace management dashboard."
+    },
+    {
+        "id": 2,
+        "src": "/academy/steps/step--2.png",
+        "alt": "Creating a Canvaspace",
+        "description": "Canvaspace creation process."
+    },
+    {
+        "id": 3,
+        "src": "/academy/steps/step--3.png",
+        "alt": "Creating a Canvaspace",
+        "description": "Create a new Canvaspace."
+    },
+    {
+        "id": 4,
+        "src": "/academy/steps/step--4.png",
+        "alt": "Canvaspace Creation",
+        "description": "Complete the Canvaspace creation process."
+    },
+    {
+        "id": 5,
+        "src": "/academy/steps/step--5.png",
+        "alt": "Canvaspace Created",
+        "description": "Successful creation of a Canvaspace."
+    },
+    {
+        "id": 6,
+        "src": "/academy/steps/step--6.png",
+        "alt": "Update Your Canvaspace",
+        "description": "Update an existing Canvaspace."
+    },
+    {
+        "id": 7,
+        "src": "/academy/steps/step--7.png",
+        "alt": "Inside a Canvaspace",
+        "description": "Explore the features available inside the Canvaspace."
+    },
+    {
+        "id": 8,
+        "src": "/academy/steps/step--8.png",
+        "alt": "Accessing the Sidebar",
+        "description": "Click the 'i' icon to open the left sidebar for options."
+    },
+    {
+        "id": 9,
+        "src": "/academy/steps/step--9.png",
+        "alt": "Exploring the UI",
+        "description": "Get familiar with the interface of a Canvaspace."
+    },
+    {
+        "id": 10,
+        "src": "/academy/steps/step--10.png",
+        "alt": "Adjust Canvaspace Size",
+        "description": "Adjust the size of a Canvaspace to your requirements."
+    },
+    {
+        "id": 11,
+        "src": "/academy/steps/step--11.png",
+        "alt": "Delete or Refresh Canvaspace",
+        "description": "Options to delete or refresh your Canvaspace."
+    },
+    {
+        "id": 12,
+        "src": "/academy/steps/step--12.png",
+        "alt": "Creating Your First Data Fragment",
+        "description": "Creating a data fragment."
+    },
+    {
+        "id": 13,
+        "src": "/academy/steps/step--13.png",
+        "alt": "Text Fragment Input UI",
+        "description": "Overview of the text fragment input user interface."
+    },
+    {
+        "id": 14,
+        "src": "/academy/steps/step--14.png",
+        "alt": "Drag and Save Text",
+        "description": "Drag to the center, enter your text, and save it."
+    },
+    {
+        "id": 15,
+        "src": "/academy/steps/step--15.png",
+        "alt": "Text Fragment Created",
+        "description": "Your text fragment is created; adjust the UI to view user data."
+    },
+    {
+        "id": 16,
+        "src": "/academy/steps/step--16.png",
+        "alt": "Well Done!",
+        "description": "Congratulations on completing the task!"
+    },
+    {
+        "id": 17,
+        "src": "/academy/steps/step--17.png",
+        "alt": "Edit Text Fragment",
+        "description": "Click the 'i' icon next to the fragment to edit."
+    },
+    {
+        "id": 18,
+        "src": "/academy/steps/step--18.png",
+        "alt": "Update Data",
+        "description": "Type your new data on the right to replace the old data."
+    },
+    {
+        "id": 19,
+        "src": "/academy/steps/step--19.png",
+        "alt": "Hit Update",
+        "description": "Don't forget to hit 'Update' to save your changes."
+    },
+    {
+        "id": 20,
+        "src": "/academy/steps/step--20.png",
+        "alt": "Go Back After Update",
+        "description": "After updating, you can go back to the previous screen."
+    },
+    {
+        "id": 21,
+        "src": "/academy/steps/step--21.png",
+        "alt": "Reorganize Data Fragment",
+        "description": "Click to reorganize your data fragments."
+    },
+    {
+        "id": 22,
+        "src": "/academy/steps/step--22.png",
+        "alt": "Drag and Update Coordinates",
+        "description": "Drag the fragment, click 'Update Coordinates' to save, then Click 'I'm Done' to collapse the edit window."
+    },
+    {
+        "id": 23,
+        "src": "/academy/steps/step--23.png",
+        "alt": "Collapse Edit Window",
+        "description": "Click the shield icon to disable the lock. Once deleted, your data cannot be recovered."
+    },
+    {
+        "id": 24,
+        "src": "/academy/steps/step--24.png",
+        "alt": "Data Deletion Warning",
+        "description": "Click Delete"
+    },
+    {
+        "id": 25,
+        "src": "/academy/steps/step--25.png",
+        "alt": "Important Notifications",
+        "description": "Keep an eye on notifications; they are important."
+    },
+    {
+        "id": 26,
+        "src": "/academy/steps/step--26.png",
+        "alt": "Close Text Input Window",
+        "description": "Go to the fragment hub to close the text input window."
+    },
+    {
+        "id": 27,
+        "src": "/academy/steps/step--27.png",
+        "alt": "Click Delete",
+        "description": "Click the delete button to remove the selected item."
+    },
+    {
+        "id": 28,
+        "src": "/academy/steps/step--28.png",
+        "alt": "Delete the Canva",
+        "description": "Deleting the Canva is permanent; proceed with caution."
+    },
+    {
+        "id": 29,
+        "src": "/academy/steps/step--29.png",
+        "alt": "Training Complete",
+        "description": "Congratulations! You're ready to create your own data."
+    },
+    {
+        "id": 30,
+        "src": "/academy/steps/step--30.png",
+        "alt": "Account Profile Data",
+        "description": "View and manage your account profile data."
+    },
+    {
+        "id": 31,
+        "src": "/academy/steps/step--31.png",
+        "alt": "Final Tip on Account Deletion",
+        "description": "Click Unlock to disable the lock that prevents accidental account deletion; this action is irreversible. It's instant"
+    },
+    {
+        "id": 32,
+        "src": "/academy/steps/step--32.png",
+        "alt": "Warning",
+        "description": "Important warning regarding data management."
+    }
+]
