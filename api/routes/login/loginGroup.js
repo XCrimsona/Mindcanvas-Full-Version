@@ -51,7 +51,7 @@ loginRouter
       const tknservice = new TokenService();
       const signedToken = tknservice.sign(payload);
       res.cookie(`authtoken${user._id}`, signedToken, {
-        secure: process.env.SECURE,
+        secure: process.env.SECURE || false,//have an alternative or the if the env doesnt see it directly it can fall back. if that is missing you may get kicked out
         httpOnly: true,
         sameSite: "lax",
         maxAge: 2 * 60 * 60 * 1000,
@@ -60,7 +60,7 @@ loginRouter
       //end
     } catch (err) {
       return res.status(500).json({
-        error: err.message || "Unexpected server error",
+        message: err.message || "Unexpected server error",
         status: 500,
       });
     }

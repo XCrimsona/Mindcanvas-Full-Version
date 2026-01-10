@@ -13,7 +13,7 @@ accountRouter
   .get("/:userid/account-info", async (req, res) => {
     await getDB();
 
-    const userid = req.params.userid;
+    const userid = req.user?.sub;
 
     const user = await UserModel.findOne({ _id: userid });
     console.log("user: ", user);
@@ -27,7 +27,7 @@ accountRouter
     try {
       //finds and updates user data
       await getDB();
-      const userid = req.params.userid;
+      const userid = req.user?.sub;
       console.log(userid);
       console.log(req);
 
@@ -110,7 +110,7 @@ accountRouter
     try {
       //finds and updates user data
       await getDB();
-      const userid = req.params.userid;
+      const userid = req.user?.sub;
 
       //check for incoming logs while doing maintnance
 
@@ -186,9 +186,4 @@ accountRouter
     };
   }
   )
-
-// .delete
-
-//delete functionality required
-
 export default accountRouter;

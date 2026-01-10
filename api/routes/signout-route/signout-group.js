@@ -13,7 +13,7 @@ const signOut = Router();
 signOut
     .post("/:userid/logout", async (req, response) => {
         try {
-            const userid = req.params.userid;
+            const userid = req.user?.sub;
             if (!userid) {
                 response.json({
                     success: false,

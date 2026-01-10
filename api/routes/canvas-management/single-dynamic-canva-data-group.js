@@ -16,7 +16,7 @@ singleDynamicCanvaDataGroupRouter
 
         try {
             await getDB();
-            const userid = req.params.userid;
+            const userid = req.user?.sub;
             const canvaid = req.params.canvaid;
             // console.log(userid);
 
@@ -107,7 +107,7 @@ singleDynamicCanvaDataGroupRouter
         // { params }
         try {
             await getDB();
-            const userid = req.params.userid;
+            const userid = req.user?.sub;;
             const canvaid = req.params.canvaid;
             if (!userid || !canvaid) {
                 return response.status(401).json({
@@ -197,7 +197,7 @@ singleDynamicCanvaDataGroupRouter
     .patch("/:userid/canvas-management/:canvaid", async (req, res) => {
         try {
             await getDB();
-            const userid = req.params.userid;
+            const sub = req.user?.sub;
             const canvaid = req.params.canvaid;
 
             //id can be passed as the layout/fragment id store in the db 
@@ -208,8 +208,8 @@ singleDynamicCanvaDataGroupRouter
             console.log(newHeight, newWidth);
 
 
-            if (userid && canvaid) {
-                const user = await UserModel.findById(String(userid));
+            if (sub && canvaid) {
+                const user = await UserModel.findById(String(sub));
                 if (user) {
                     const canvaspace = await canvaspaceModel.findOne({
                         createdBy: user._id,
@@ -461,12 +461,12 @@ singleDynamicCanvaDataGroupRouter
     .delete("/:userid/canvas-management/:canvaid", async (req, res) => {
         try {
             await getDB();
-            const userid = req.params.userid;
+            const sub = req.user?.sub;
             const canvaid = req.params.canvaid;
             const { type, _id } = req.body;
 
-            if (userid && canvaid) {
-                const user = await UserModel.findById(String(userid));
+            if (sub && canvaid) {
+                const user = await UserModel.findById(String(sub));
                 if (!user) {
                     return res.status(404).json({
 
