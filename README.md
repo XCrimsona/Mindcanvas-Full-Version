@@ -4,22 +4,31 @@
 <p>Designed for large screens | Working on better solutions for small screens</p>
 
 ## Public Collaboration
-<p>I will not permit others to push new features to the original code BUT,</p> 
+<p>Kind note: I won't grant others permission to push new features to the original code because</p> 
 <ul>
-  <li>nr1: it a trial version of this new app, its not perfect, I dont expect it to be</li> 
-  <li>Nr2: you may modify it locally and go nuts, its a great app, seriously...</p></li>
+  <li>Nr1: It a trial version.</li> 
+  <li>Nr2: You may modify it without breaking the trial code so on your machine go nuts, its a great app, seriously...</li>
 </ul>
 
-
+(Instructions in development)
 ## Missing config | You need to create this yourself since .env uploads are dangerous
 create a .env file some keys you can set. 
 STRICTLY FOLLOW THE GUIDE for stable oeprations:
 
-SECURE= false 
-SESSION_SECRET and JWT is a 64 number string | my other repos will have a generator for that just download it
+Install MongoDB software to run a local database as a service.
 
-DB_CONNECTION_STRING | you can make it local. 
-Its made for local | If you want to do it via mongodb cloud then change all api routes' locahost to https endpoints.
+SECURE= false 
+SESSION_SECRET & JWT is a 64 character string 
+Another repository will have a generator for that: 32-64-character-string-generator
+
+DB_CONNECTION_STRING | local mongodb string recomended because its designed for localhost use| 
+
+Cloud Based: If you want to do it via mongodb cloud then change all api routes' localhost to https endpoints.
+(This isnt recommended because you may havily struggle configuring the reoutes)
+If you wish to go the cloud route, In the next few months, I will have the trial built for local and cloud which will include a local and cloud separated folders. 
+
+The default api route will be configured as local 
+
 
 JWT server token security is set to 1 hour expiry
 PORT 5000 | backend

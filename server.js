@@ -12,6 +12,7 @@ import cors from "cors"
 import AuthService from "./lib/Auth.js";
 import cookieParser from "cookie-parser";
 import signOut from "./api/routes/signout-route/signout-group.js";
+import AccountRecoveryRouter from "./api/routes/account-recovery/AccountRecoveryGroup.js";
 const app = express();
 
 try {
@@ -30,6 +31,9 @@ try {
     //routes no auth
     app.use("/api/signup-portal", registerRouter);
     app.use("/api/signin-portal", loginRouter);
+    app.use("/api/signin-portal", AccountRecoveryRouter);
+
+    //routes auth required
     app.get("/api/auth-check", AuthService.isAuthenticated, (req, res) => {
         res.status(200).json({
             code: "AUTHENTICATED",
@@ -38,7 +42,6 @@ try {
         });
     });
 
-    //routes auth required
     app.use("/api/account", AuthService.isAuthenticated, accountRouter);
     app.use("/api/account", AuthService.isAuthenticated, canvasManagementRouter);
     app.use("/api/account", AuthService.isAuthenticated, singleDynamiCanvaDataGroupRouter);

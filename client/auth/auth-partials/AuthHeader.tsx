@@ -1,6 +1,6 @@
 import Header from "../../src/components/Header";
 import { DivClass } from "../../src/ui/Div";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import RouteLink from "../../src/components/ProductSection/RouteLink";
 import "../auth-header.css";
 import SVG from "../../src/SVG";
@@ -9,6 +9,7 @@ import SVG from "../../src/SVG";
 
 const AuthHeader = () => {
   const { userid } = useParams();
+  const navigate = useNavigate();
   if (!userid) return;
   const logout = async () => {
     const logoutRes = await fetch(
@@ -23,7 +24,8 @@ const AuthHeader = () => {
     if (!logoutRes.ok) {
       new Notification("Could not log you out, try again");
     } else {
-      window.location.reload();
+      // window.location.reload();
+      navigate("/signin-portal");
     }
   };
   return (
