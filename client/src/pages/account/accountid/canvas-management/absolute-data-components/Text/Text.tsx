@@ -8,14 +8,17 @@ import { SpanFragment } from "../../../../../../ui/spanElement";
 import "../../DataComponents/text/text.css";
 import "../i-note.css";
 import "./text-data-styling.css";
+import { useState } from "react";
+// import { useCanvasContext } from "../../DataComponents/canva-data-provider/CanvasDataContextProvider";
 
 //This component is used to display already create info TextInput is the one that creates text
 export const Text = ({ data }: { data: any }) => {
   //extract _id from data object
   const { _id } = data;
 
-  const { modificationState, selectedComp, editState, mouseClick } =
+  const { modificationState, selectedComp, editState, ReOrganizeFragment } =
     useModificationContext();
+
   return (
     <>
       {/* UI code implementation works in reverse but the css still displays 
@@ -28,7 +31,13 @@ export const Text = ({ data }: { data: any }) => {
         <TextFragment id={`${data._id}`} className={"text-fragment"}>
           <SpanFragment
             id={`${data._id}`}
-            onClick={mouseClick}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              ReOrganizeFragment(e);
+              //   style={{
+              //   problem with below line: once toggle all would be fixed. Id ref require dto make fixed position
+              //   position: `${pinnedText === true ? "fixed" : "absolute"}`,
+              // }}
+            }}
             className="i-note-drop-down"
           >
             i

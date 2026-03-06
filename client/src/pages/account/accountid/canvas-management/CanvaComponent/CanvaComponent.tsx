@@ -18,7 +18,7 @@ import { AuthLogoutProvider } from "../../logout/logoutContext";
 const fetchWorkspaceData = async (
   userid: string,
   // workspacename: string,
-  canvaid: string
+  canvaid: string,
 ) => {
   const response = await fetch(
     `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
@@ -28,7 +28,7 @@ const fetchWorkspaceData = async (
       headers: {
         "x-active-user": userid,
       },
-    }
+    },
   );
 
   if (!response.ok) {
@@ -136,10 +136,10 @@ const CanvaComponent = () => {
                     </DivClass>
                   </DivStylingAndClassName>
                   <DivClass className={"work-workspace-management-container"}>
-                    <IIconContextProvider>
-                      {/* Data appeaers in here */}
-                      <CanvaContainer />
-                    </IIconContextProvider>
+                    {/* <IIconContextProvider> */}
+                    {/* Data appeaers in here */}
+                    <CanvaContainer />
+                    {/* </IIconContextProvider> */}
                   </DivClass>
                   <DeleteCanvas />
                 </CanvasContextDeletionProvider>

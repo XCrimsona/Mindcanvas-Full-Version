@@ -62,11 +62,11 @@ const RepositionLiveData = () => {
     // set boundaries so draggables dont go outside the drag frame
     const newPosX = Math.max(
       0,
-      Math.min(newXElementLeft, boardRect.width - textInputElementRect.width)
+      Math.min(newXElementLeft, boardRect.width - textInputElementRect.width),
     );
     const newPosY = Math.max(
       0,
-      Math.min(newYElementTop, boardRect.height - textInputElementRect.height)
+      Math.min(newYElementTop, boardRect.height - textInputElementRect.height),
     );
 
     mediaInputCompPosRef.current = {
@@ -106,12 +106,11 @@ const RepositionLiveData = () => {
     document.addEventListener<any>("mouseup", processMediaMouseUp);
   };
 
-  const elementId = mediaCanvaDataFragment.clickedElement;
+  const elementId = mediaCanvaDataFragment.dataFragmentId;
 
   let text = null;
-  if (mediaCanvaDataFragment.clickedElement) {
-    text = (mediaCanvaDataFragment.clickedElementValues as HTMLElement)
-      .parentElement?.childNodes[1].textContent;
+  if (mediaCanvaDataFragment.fragmentText) {
+    text = mediaCanvaDataFragment.fragmentText;
   }
 
   const mediaCanvaDataFragmentLeft = mediaCanvaDataFragment.left;
@@ -127,7 +126,7 @@ const RepositionLiveData = () => {
 
   //submit text Data
   const updateMediaFragmentCoordinates = async (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
 
@@ -163,7 +162,7 @@ const RepositionLiveData = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(mediaData),
-        }
+        },
       );
       if (mediaUpdateResponse.ok) {
         //notification ok response

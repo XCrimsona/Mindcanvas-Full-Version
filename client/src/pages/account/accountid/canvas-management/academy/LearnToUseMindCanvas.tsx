@@ -14,14 +14,7 @@ const Steps = (stepData: any) => {
       key={stepData.id}
       className="block mr-auto ml-auto bg-[#3338] h-auto w-auto m-2"
     >
-      <span className="text-white">Step: {stepData.id}</span>
-      <img
-        style={{ objectFit: "contain" }}
-        // width={400}
-        // height={80}
-        src={stepData.src}
-        alt={stepData.alt}
-      />
+      <span className="text-white">Step {stepData.id}</span>
       <p className="text-white">{stepData.description}</p>
     </div>
   );

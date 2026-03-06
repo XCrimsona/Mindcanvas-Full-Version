@@ -15,6 +15,13 @@
   transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
   overflow-y: auto;
 }
+.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .canva-management-heading-one {
+  color: #ffffff;
+  margin: 0px auto 0px auto;
+  padding: 10px 0px 0px 0px;
+  text-align: center;
+  font-size: 32px;
+}
 .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper {
   border-radius: 10px;
   display: block;
@@ -22,13 +29,6 @@
   position: relative;
   margin: 0px auto 0px auto;
   transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
-}
-.main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .canva-management-heading-one {
-  color: #ffffff;
-  margin: 0px auto 0px auto;
-  padding: 10px 0px 0px 0px;
-  text-align: center;
-  font-size: 32px;
 }
 .main-workspace-management-container .workspace-dashboard .workspace-sheets-wrapper .workspace-sheets {
   overflow-x: hidden;

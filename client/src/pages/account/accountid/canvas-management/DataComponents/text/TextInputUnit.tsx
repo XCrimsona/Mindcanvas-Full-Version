@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Button from "../../../../../../components/form-elements/Button";
 import { DivClass } from "../../../../../../ui/Div";
 import { EnabledTextAreaInput } from "../../../../../../components/media-retrieved-components/MediaInputComponents";
@@ -17,11 +17,62 @@ const TextInputUnit = () => {
       dataScrollBoardRef,
       globalDraggingRef,
       textInputOffSet,
+
+      //useref used to control the element's left with x and top with y canvas coordinates
       textInputCompPosRef,
       textInputCompRef,
+      hasInitializedPositionRef,
       textToggleState,
       updateCanvasData,
     } = useCanvasContext();
+
+    //Determines the web app width and height as perceived on screen and centers this exact file's UI in the middle of the screen.
+    //It also re-centers by collraborating with another useEffect function which checks the boolean value to toggle the UI.
+    useLayoutEffect(() => {
+      if (
+        !textToggleState ||
+        hasInitializedPositionRef.current ||
+        !dataScrollBoardRef.current ||
+        !textInputCompRef.current
+      )
+        return;
+
+      const boardRect = dataScrollBoardRef.current.getBoundingClientRect();
+      const textInputElementRect =
+        textInputCompRef.current.getBoundingClientRect();
+
+      const viewportCenterX = window.innerWidth / 2;
+      const viewportCenterY = window.innerHeight / 2;
+
+      const canvasX =
+        viewportCenterX - boardRect.left - textInputElementRect.width / 2;
+      const canvasY =
+        viewportCenterY - boardRect.top - textInputElementRect.height / 2;
+
+      //clamp to keep the elements inside the canvas
+      const boundedX = Math.max(
+        0,
+        Math.min(canvasX, boardRect.width - textInputElementRect.width)
+      );
+      const boundedY = Math.max(
+        0,
+        Math.min(canvasY, boardRect.height - textInputElementRect.height)
+      );
+
+      const textInputElement = textInputCompRef.current as HTMLDivElement;
+
+      //center textInputUnit
+      if (textInputElement) {
+        textInputElement.style.left = `${boundedX}px`;
+        textInputElement.style.top = `${boundedY}px`;
+      }
+      // textInputOffSet.current = {
+      //   x: 0,
+      //   y: 0,
+      // };
+
+      hasInitializedPositionRef.current = true;
+    }, [textToggleState]);
 
     // const { newTextComponent, setNewTextComponent } = useNewTextComponent();
     const [newTextComponent, setNewTextComponent] = useState<any>({
@@ -154,12 +205,16 @@ const TextInputUnit = () => {
       document.addEventListener<any>("mouseup", processTextMouseUp);
     };
 
+    //pin feature here has a double toggle bug, issue is not the end of the world altough its irritating
+
     return (
       textToggleState && (
+        // add the pin true false feature
         <div
           className={"data-text-component"}
           ref={textInputCompRef}
           style={{
+            //DO NOT PUT THE PIN FEATURE HERE
             position: "absolute",
             left: `${textInputCompPosRef.current.x}px`,
             top: `${textInputCompPosRef.current.y}px`,

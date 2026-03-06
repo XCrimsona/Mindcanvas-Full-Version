@@ -3,6 +3,7 @@ import {
   MutableRefObject,
   ReactNode,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -32,6 +33,7 @@ type TypeCanvasInputContext = string | null;
 type TypeMediaContext = true | false;
 
 interface ICanvasContextType {
+  hasInitializedPositionRef: MutableRefObject<boolean>;
   dataScrollBoardRef: MutableRefObject<HTMLDivElement | null>;
   globalDraggingRef: MutableRefObject<TypeGlobalDragRefContext>;
 
@@ -89,7 +91,7 @@ interface ICanvasContextType {
 }
 
 const CanvasContextType = createContext<ICanvasContextType | undefined>(
-  undefined
+  undefined,
 );
 
 const CanvasDataContextProvider = ({
@@ -99,6 +101,7 @@ const CanvasDataContextProvider = ({
   // source: any;
   children: ReactNode;
 }) => {
+  const hasInitializedPositionRef = useRef(false);
   //globally assigned window
   const dataScrollBoardRef = useRef<HTMLDivElement>(null);
   //used as failsafe to prevent accidental drags====this one may not be necessary
@@ -113,6 +116,12 @@ const CanvasDataContextProvider = ({
   const toggleTextState = () => {
     setTextToggleState((prev) => (prev === false ? true : false));
   };
+
+  useEffect(() => {
+    if (textToggleState === false) {
+      hasInitializedPositionRef.current = false;
+    }
+  }, [textToggleState]);
 
   //find text input component's dom reference and x,y position under the
   //data-scroll-board component as absolute value
@@ -190,7 +199,7 @@ const CanvasDataContextProvider = ({
           "x-active-user": userid,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     const response: any = await routeResponse.json();
     // console.log("from updateCanvasData data reload ccomponent ", response);
@@ -230,11 +239,6 @@ const CanvasDataContextProvider = ({
       };
       setCanvasData(latestData);
     }
-
-    // return {
-    //   status: "success",
-    //   data: response.data,
-    // };
   };
 
   //Canvas height and width above Canvas Size Properties
@@ -244,22 +248,24 @@ const CanvasDataContextProvider = ({
 
   const toggleCanvasSizePropertiesState = () => {
     setCanvasSizePropertiesToggleState((prev) =>
-      prev === false ? true : false
+      prev === false ? true : false,
     );
   };
 
+  /////////////////HEIGHT + WIDTH/////////////////////////////
   //to adjust the data-scroll-board div element's width
+  //both fields must be filled to update the canvas size
   const [canvasHeight, setCanvasSizeHeight] =
-    useState<TypeCanvasInputContext>(""); //800
+    useState<TypeCanvasInputContext>(""); //updates in real time per user request
   const updateDataBoardCanvasHeight = (height: string) => {
     setCanvasSizeHeight((prev) =>
-      prev === canvasHeight ? height : canvasHeight
+      prev === canvasHeight ? height : canvasHeight,
     );
   };
 
-  //to adjust the data-scroll-board div element's height
+  //to adjust the canvas-board div element's height
   const [canvasWidth, setCanvasSizeWidth] =
-    useState<TypeCanvasInputContext>(""); //1600
+    useState<TypeCanvasInputContext>(""); //updates in real time per user request
   const updateDataBoardCanvasWidth = (width: string) => {
     setCanvasSizeWidth((prev) => (prev === canvasWidth ? width : canvasWidth));
   };
@@ -293,7 +299,6 @@ const CanvasDataContextProvider = ({
   const [mediaCanvaDataFragment, setMediaCanvaDataFragment] = useState<{}>({});
   const updateMediaCanvaDataFragment = (source: any) => {
     setMediaCanvaDataFragment(source);
-    // console.log("source from setMediaCanvaDataFragment function: ", source);
     return;
   };
   const mediaInputOffSet = useRef<any>({ x: 0, y: 0 });
@@ -305,6 +310,7 @@ const CanvasDataContextProvider = ({
   return (
     <CanvasContextType.Provider
       value={{
+        hasInitializedPositionRef,
         dataScrollBoardRef,
         //draggable boolean failsafe unit to prevent accidental drag event through
         // mouse all components that use mouseevents
@@ -373,7 +379,7 @@ export const useCanvasContext = () => {
   const context = useContext(CanvasContextType);
   if (!context)
     throw new Error(
-      "useCanvasContext must be used inside CanvasDataContextProvider"
+      "useCanvasContext must be used inside CanvasDataContextProvider",
     );
   return context;
 };
