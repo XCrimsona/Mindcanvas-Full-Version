@@ -8,11 +8,11 @@ import {
   useState,
 } from "react";
 import { useCanvasContext } from "../DataComponents/canva-data-provider/CanvasDataContextProvider";
-import canvaNotification_Edit from "../notifications/fragment-updates/CanvaNotification_Edit";
-import canvaNotification_EditFailed from "../notifications/fragment-updates/CanvaNotification_EditFailed";
-// import canvaNotification_Delete from "../notifications/canva-deletes/CanvaNotification_Delete";
-import canvaNotification_TextFragmentDeleted from "../notifications/fragment-deletes/CanvaNotification_TextFragmentDeleted";
-import canvaNotification_TextFragmentDeletedFailed from "../notifications/fragment-deletes/CanvaNotification_TextFragmentDeleteFailed";
+// import canvaNotification_Edit from "../notifications/fragment-updates/CanvaNotification_Edit";
+// import canvaNotification_EditFailed from "../notifications/fragment-updates/CanvaNotification_EditFailed";
+// // import canvaNotification_Delete from "../notifications/canva-deletes/CanvaNotification_Delete";
+// import canvaNotification_TextFragmentDeleted from "../notifications/fragment-deletes/CanvaNotification_TextFragmentDeleted";
+// import canvaNotification_TextFragmentDeletedFailed from "../notifications/fragment-deletes/CanvaNotification_TextFragmentDeleteFailed";
 import { toast } from "react-toastify";
 
 type TypeModificationContext = true | false;
@@ -20,7 +20,7 @@ interface IModificationUseStateContextType {
   //state being toggled. This toggles the modification window that carries the edit and
   //delete component which is activated when a live db tsx component is double clicked in the browser
   modificationState: TypeModificationContext;
-
+  updateModificationState: (value: boolean) => void;
   //toggle modification window
   toggleModificationState: () => void;
 
@@ -33,8 +33,9 @@ interface IModificationUseStateContextType {
   selectedComp: string | undefined;
   setSelectedComp: (componentId: any) => void;
 
-  mouseClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  mouseClickDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  PinToScreen: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  ReOrganizeFragment: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  DeleteDataFragment: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   //state being toggled
   editState: TypeModificationContext;
@@ -51,7 +52,7 @@ interface IModificationUseStateContextType {
     userid: string,
     canvaid: string,
     type: string,
-    text: string
+    text: string,
   ) => void;
 
   deleteLiveDataElement: (
@@ -59,7 +60,7 @@ interface IModificationUseStateContextType {
     _id: string,
     canvaid: string,
     // workspacename: string,
-    componentType: string
+    componentType: string,
   ) => void;
 
   updateComponentData: (data: string) => void;
@@ -67,6 +68,23 @@ interface IModificationUseStateContextType {
   antiDeleteLock: boolean;
   setAntiDeleteLock: React.Dispatch<React.SetStateAction<boolean>>;
   toggleDeleteLock: () => void;
+
+  //Pin feature to mount below data-fragments onto the canvas
+  pinnedText: boolean;
+  setPinnedText: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleTextPin: () => void;
+
+  // pinnedAudio: Record<string, boolean>;
+  // setPinnedAudio: React.Dispatch<React.SetStateAction<string>>;
+  // toggleAudioPin: (id: string) => void;
+
+  // pinnedImage: Record<string, boolean>;
+  // setPinnedImage: React.Dispatch<React.SetStateAction<string>>;
+  // toggleImagePin: (id: string) => void;
+
+  // pinnedVideo: Record<string, boolean>;
+  // setPinnedVideo: React.Dispatch<React.SetStateAction<string>>;
+  // toggleVideoPin: (id: string) => void;
 }
 
 const ModificationContext = createContext<
@@ -81,6 +99,12 @@ const InfoModificationContextProvider = ({
   //modification state controller. context boolean state determines when the modification window appear by user interaction
   const [modificationState, setModificationState] =
     useState<TypeModificationContext>(false);
+
+  //update the boolean value of the modificationState to improve selection flow of the live data component and the modification window
+  const updateModificationState = (value: boolean) => {
+    setModificationState(value);
+  };
+
   const toggleModificationState = () => {
     setModificationState((prev) => (prev === false ? true : false));
   };
@@ -93,7 +117,7 @@ const InfoModificationContextProvider = ({
 
   //above component needs an updating function
   const [dataComponent, setDataComponent] = useState<Record<string, number>>(
-    {}
+    {},
   );
 
   //live data component's element id is stored inside and updated based on the double click
@@ -111,7 +135,7 @@ const InfoModificationContextProvider = ({
     _id: string,
     canvaid: string,
     type: string,
-    text: string
+    text: string,
   ) => {
     try {
       const updateType = "Text";
@@ -134,7 +158,7 @@ const InfoModificationContextProvider = ({
             updateType: updateType,
             text: text,
           }),
-        }
+        },
       );
       if (editedRequest.ok) {
         toast.warning("A data text fragment has been updated!");
@@ -167,7 +191,7 @@ const InfoModificationContextProvider = ({
     userid: string,
     _id: string,
     canvaid: string,
-    type: string
+    type: string,
   ) => {
     try {
       const deleteRequest = await fetch(
@@ -186,7 +210,7 @@ const InfoModificationContextProvider = ({
             //component type
             type,
           }),
-        }
+        },
       );
       if (deleteRequest.ok) {
         toast.success("Attention: Text fragment has been deleted!");
@@ -207,41 +231,102 @@ const InfoModificationContextProvider = ({
     return;
   };
 
+  //PIN FEATURES
+  const [mainFragmentXYCoorindates, setMainFragmentXYCoorindates] = useState<{
+    x: number;
+    y: number;
+  }>({ x: 0, y: 0 });
+  // const [mainFragmentXYCoorindates, setmainFragmentXYCoorindates] = useState<{
+  //   x: number;
+  //   y: number;
+  // }>({ x: 0, y: 0 });
+  function updateOriginalFragmentXYCoorindates(x: number, y: number) {
+    setMainFragmentXYCoorindates({ x, y });
+  }
+  const [pinnedText, setPinnedText] = useState<boolean>(false);
+  const toggleTextPin = () => {
+    setPinnedText((prev) => (prev === false ? true : false));
+  };
+
+  const PinToScreen = (e: React.MouseEvent<HTMLButtonElement>) => {
+    //you need to create conditional code to add a pin feature here
+    const sourceOfClickedId = (e.target as HTMLElement).id;
+    const dataComponentDiv = (e.target as HTMLElement).closest(
+      ".data-component",
+    ) as HTMLDivElement;
+
+    //you need to create conditional code to add a pin feature here
+    // console.log(
+    //   "mainFragmentContainer2: ",
+    //   parseFloat(dataComponentDiv.style.left),
+    // );
+    localStorage.setItem("ComponentId", sourceOfClickedId);
+    localStorage.setItem("Value", sourceOfClickedId);
+    localStorage.setItem("Pinned", "true");
+    // console.log(
+    //   "mainFragmentContainer2: ",
+    //   parseFloat(dataComponentDiv.style.top),
+    // );
+    updateOriginalFragmentXYCoorindates(
+      parseFloat(dataComponentDiv.style.left),
+      parseFloat(dataComponentDiv.style.top),
+    );
+    //^save pin feature original xy values befor the click overwrites the current values^^^^
+
+    if (dataComponentDiv) {
+      console.log("dataComponentDiv: ", dataComponentDiv);
+      if (pinnedText === false) {
+        console.log(dataComponentDiv.style.position);
+        dataComponentDiv.style.position = "fixed";
+        dataComponentDiv.style.left = "70px";
+        dataComponentDiv.style.top = "100px";
+        dataComponentDiv.style.zIndex = "20";
+        setPinnedText(true);
+      } else {
+        dataComponentDiv.style.left = `${mainFragmentXYCoorindates.x}px`;
+        dataComponentDiv.style.top = `${mainFragmentXYCoorindates.y}px`;
+        dataComponentDiv.style.position = "absolute";
+        setPinnedText(false);
+      }
+    }
+    return;
+  };
+
   //this mouse click event is fired when selected by the user using the i icon and stores
   //the found data element's id in selectedComp
-  const mouseClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const clickedElement = (e.target as HTMLElement).id;
-    const clickedElementValues = e.target as HTMLElement;
-    setSelectedComp((prev: any) => {
-      if (prev === clickedElement) {
-        return "";
-      } else {
-        return clickedElement;
-      }
-    });
-    //left and top value of the double clicked element
-    const left =
-      clickedElementValues.parentElement?.parentElement?.parentElement?.style
-        .left;
-    const top =
-      clickedElementValues.parentElement?.parentElement?.parentElement?.style
-        .top;
+  const ReOrganizeFragment = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const dataFragmentId = String((e.target as HTMLElement).id);
+    const fragmentText = (e.target as HTMLElement).parentElement?.childNodes[1]
+      .textContent;
+
+    //to update the xy values of a live ui component
+    setSelectedComp(dataFragmentId);
+    const dataComponentValues = (e.target as HTMLElement).closest(
+      ".data-component",
+    ) as HTMLDivElement;
+
+    const left = dataComponentValues.style.left;
+    const top = dataComponentValues.style.top;
 
     //provides the elemtn id to capture data and pass references
     updateMediaCanvaDataFragment({
-      clickedElementValues,
-      clickedElement,
+      fragmentText,
+      dataFragmentId,
       left,
       top,
     });
-    toggleModificationState();
+
+    //enables the menu and bring up forward
+    updateModificationState(true);
+
     return;
+    // }
   };
 
   //this mouse click event is fired when a live data element is already selected
   // and then removed from the selectedComp that has been stored when the mouse
   // double click event was fired.
-  const mouseClickDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const DeleteDataFragment = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedElement = (e.target as HTMLElement).id;
     if (clickedElement) {
       setSelectedComp("");
@@ -258,18 +343,25 @@ const InfoModificationContextProvider = ({
         setDataComponent,
         newComponentData,
         setComponentData,
+
+        updateModificationState,
         modificationState,
         toggleModificationState,
+
         editLiveDataElement,
         deleteLiveDataElement,
         updateComponentData,
         selectedComp,
         setSelectedComp,
-        mouseClick,
-        mouseClickDelete,
+        PinToScreen,
+        ReOrganizeFragment,
+        DeleteDataFragment,
         antiDeleteLock,
         setAntiDeleteLock,
         toggleDeleteLock,
+        pinnedText,
+        setPinnedText,
+        toggleTextPin,
       }}
     >
       {children}
@@ -282,7 +374,7 @@ export const useModificationContext = () => {
   const context = useContext(ModificationContext);
   if (!context) {
     throw new Error(
-      "useModificationContext must be used within ModificationContext"
+      "useModificationContext must be used within ModificationContext",
     );
   }
   return context;

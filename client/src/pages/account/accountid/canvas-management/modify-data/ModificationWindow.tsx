@@ -3,7 +3,7 @@ import { useModificationContext } from "./InfoModificationContextProvider";
 import "./modification-window.css";
 import Button from "../../../../../components/form-elements/Button";
 import { useCanvasContext } from "../DataComponents/canva-data-provider/CanvasDataContextProvider";
-import React from "react";
+import React, { useState } from "react";
 // import { ToastContainer } from "react-toastify";
 
 //When the i round button on the left of a data fragment is clicked, ModificationWindow is an options box
@@ -11,15 +11,58 @@ export const ModificationWindow = ({ componentData }: any) => {
   const {
     toggleEditStateFunc,
     toggleModificationState,
-    mouseClickDelete,
+    updateModificationState,
+    DeleteDataFragment,
     deleteLiveDataElement,
     antiDeleteLock,
     toggleDeleteLock,
+    // PinToScreen,
+    // toggleTextPin,
+    // pinnedText,
   } = useModificationContext();
+
   const { toggleMediaWindowState } = useCanvasContext();
   const { owner, _id, workspaceId, type } = componentData;
+  // console.log(owner, _id, workspaceId, type);
+
   return (
     <div className={"modifications-window-container"}>
+      {/* <Button
+        className={"edit-button"}
+        id={`pin-button-${_id}`}
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+          toggleTextPin();
+          PinToScreen(e);
+          // toggleModificationState();
+          // toggleEditStateFunc();
+        }}
+      >
+        {pinnedText === false ? "Pin" : "Unpin"}
+      </Button> */}
+      {/* <hr
+        style={{
+          width: "94%",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      /> */}
+      <Button
+        className={"edit-button"}
+        id="edit-button"
+        onClick={() => {
+          updateModificationState(false);
+          // toggleModificationState();
+        }}
+      >
+        Close
+      </Button>
+      <hr
+        style={{
+          width: "94%",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      />
       <Button
         className={"edit-button"}
         id="edit-button"
@@ -95,7 +138,7 @@ export const ModificationWindow = ({ componentData }: any) => {
           disabled={antiDeleteLock}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
-            mouseClickDelete(e);
+            DeleteDataFragment(e);
             deleteLiveDataElement(owner, _id, workspaceId, type);
             // return;
           }}

@@ -205,7 +205,7 @@ singleDynamicCanvaDataGroupRouter
             const { _id, type, updateType, text, x, y, newHeight, newWidth } = req.body;
             //text  will be null for xy updates 
             //text will be present for text updates
-            console.log(newHeight, newWidth);
+            // console.log(newHeight, newWidth);
 
 
             if (sub && canvaid) {
@@ -319,12 +319,12 @@ singleDynamicCanvaDataGroupRouter
                             }
 
                             if (type === "Canvaspace") {
-                                console.log("type: ", type);
+                                // console.log("type: ", type);
 
                                 if (updateType === "size") {
-                                    console.log("updateType: ", updateType);
-                                    console.log("height: ", newHeight);
-                                    console.log("width: ", newWidth);
+                                    // console.log("updateType: ", updateType);
+                                    // console.log("height: ", newHeight);
+                                    // console.log("width: ", newWidth);
 
                                     //create checkpoint to ensure field
                                     if (!newHeight && !newWidth) {
@@ -369,11 +369,11 @@ singleDynamicCanvaDataGroupRouter
                                             message: "Updating canvas argument is blank",
                                         });
                                     }
-                                    console.log("size: ", size);
+                                    // console.log("size: ", size);
 
                                     if (size) {
-                                        console.log("user:", user);
-                                        console.log(canvaspace.size);
+                                        // console.log("user:", user);
+                                        // console.log(canvaspace.size);
 
                                         const reqToResizeCanvas = await canvaspaceModel.updateOne(
                                             {
@@ -389,7 +389,7 @@ singleDynamicCanvaDataGroupRouter
                                             // { new: true }
                                             // { runValidators: true }
                                         );
-                                        console.log(reqToResizeCanvas);
+                                        // console.log(reqToResizeCanvas);
 
                                         if (reqToResizeCanvas.modifiedCount === 1) {
                                             console.log(reqToResizeCanvas);
@@ -401,7 +401,7 @@ singleDynamicCanvaDataGroupRouter
                                             });
 
                                         } else {
-                                            console.log(reqToResizeCanvas);
+                                            // console.log(reqToResizeCanvas);
                                             return res.status(400).json({
                                                 success: false,
                                                 code: "CANVASPACE_NOT_UPDATED",

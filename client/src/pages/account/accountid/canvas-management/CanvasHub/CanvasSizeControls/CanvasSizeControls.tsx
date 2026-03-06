@@ -22,12 +22,13 @@ const CanvasSizeControls = () => {
       toggleCanvasSizePropertiesState,
       canvasSizePropertiesToggleState,
     } = useCanvasContext();
-    const { canvasData, updateCanvasData } = useCanvasContext();
 
+    const { canvasData, updateCanvasData } = useCanvasContext();
     const [updatedHeight, setUpdatedHeight] = useState<string>("");
     const [updatedWidth, setUpdatedWidth] = useState<string>("");
     const { userid, canvaid } = useParams();
     if (!userid) return;
+
     const sendcanvasPropertyUpdate = async () => {
       if (!updatedHeight || !updatedWidth) {
         toast.info("Update at least the heigh/width/both");
@@ -49,15 +50,12 @@ const CanvasSizeControls = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(newData),
-          }
+          },
         );
         if (response.ok) {
-          // toast.success("canvas properties updated.");
           updateCanvasData();
         } else {
           const error = await response.json();
-          console.log(error);
-
           toast.warning(`canvas properties NOT updated: ${error.message}`);
         }
       }
@@ -73,8 +71,6 @@ const CanvasSizeControls = () => {
           } else {
             sendcanvasPropertyUpdate();
           }
-          // save width and height to db
-          // use comm notification lib to communicate
         }}
       >
         <LongText className={"canvas-controls-text"}>Resize Canvas</LongText>
@@ -165,13 +161,19 @@ const CanvasSizeControls = () => {
           <InputSubmit
             isdisabled={false}
             id="update"
-            style={{
-              cursor:
-                canvasWidth?.length === 0 || canvasHeight?.length === 0
-                  ? "cursor-not-allowed"
-                  : "cursor-pointer",
-            }}
-            className={"update-spacing-btn "}
+            // style={{
+            //   cursor:
+            //     canvasWidth?.length === 0 || canvasHeight?.length === 0
+            //       ? "cursor-not-allowed"
+            //       : "cursor-pointer",
+            // }}
+            className={`update-spacing-btn ${
+              canvasSizePropertiesToggleState === false ||
+              canvasWidth?.length === 0 ||
+              canvasHeight?.length === 0
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
             value="Update"
           />
         </DivClass>
@@ -180,7 +182,7 @@ const CanvasSizeControls = () => {
   } catch (err: any) {
     console.warn(
       "Something went wrong inside canvasSizeControls: ",
-      err.message
+      err.message,
     );
   }
 };

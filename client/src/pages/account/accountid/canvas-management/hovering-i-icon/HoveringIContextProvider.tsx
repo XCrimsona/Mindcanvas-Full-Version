@@ -7,30 +7,29 @@ type TypeIICONContext = Record<string, boolean>;
 interface IIconContextType {
   //This toggles the modification window that carries the edit and
   //delete component which is activated when a tsx component that carries the persisted data is clicked
-  iIconState: TypeIICONContext;
-
+  // iIconState: TypeIICONContext;
   //toggle modification window
-  updateIIconState: (fragmentId: string) => void;
+  // updateIIconState: (fragmentId: string) => void;
 }
 
 const IIconContext = createContext<IIconContextType | undefined>(undefined);
 
 export const IIconContextProvider = ({ children }: { children: ReactNode }) => {
   //modification state controller. context boolean state determines when the modification window appear by user interaction
-  const [iIconState, setIIconState] = useState<Record<string, boolean>>({});
+  // const [iIconState, setIIconState] = useState<Record<string, boolean>>({});
   //   console.log("iIconState unchanged: ", iIconState);
   const updateIIconState = (fragmentId: string) => {
-    setIIconState((prev: any) => ({
-      ...prev,
-      [fragmentId]: !prev[fragmentId],
-    }));
+    // setIIconState((prev: any) => ({
+    //   ...prev,
+    //   [fragmentId]: !prev[fragmentId],
+    // }));
     // console.log("iIconState changed:", iIconState);
   };
 
   return (
     <IIconContext.Provider
       value={{
-        iIconState,
+        // iIconState,
         updateIIconState,
       }}
     >
