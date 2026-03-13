@@ -27,22 +27,6 @@ const AuthHeader = () => {
   };
   return (
     <Header id="auth-header" className={"auth-header"}>
-      {/* <DivClass className={"auth-route"}>
-        <RouteLink
-          href={`/account/${userid}/canvas-management`}
-          className={"auth-go-back-route"}
-        >
-          Back
-          <i className={"auth-route-icon"}>
-            // color of icons will chagen depending on the theme chosen later on
-            <SVG
-              src={"/house-white-solid.svg"}
-              className={"backward-icon"}
-              alt="backward-icon"
-            />
-          </i>
-        </RouteLink>
-      </DivClass> */}
       <DivClass className={"account-dashboard-content"}>
         <DivClass className={`${"dashboard-link-component"}`}>
           <RouteLink
