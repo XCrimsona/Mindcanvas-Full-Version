@@ -1,9 +1,8 @@
 //File currently has no purpose in app
-import React from "react";
 import "../../../../../../style-files/zoom-controls.css";
-import { DivClass } from "../../../../../ui/Div";
-import { LongText } from "../../../../../ui/LongText";
-import SVG from "../../../../../SVG";
+import { DivClass } from "../../../../../../ui/Div";
+import { LongText } from "../../../../../../ui/LongText";
+import SVG from "../../../../../../SVG";
 
 const ZoomControls = () => {
   return (

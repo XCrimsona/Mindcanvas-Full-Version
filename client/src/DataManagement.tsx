@@ -7,7 +7,6 @@ import {
   InputDisabledText,
   InputSubmit,
   InputText,
-  InputTextReadOnly,
 } from "./components/form-elements/dry-InputFormComponents";
 import RouteLink from "./components/ProductSection/RouteLink";
 import React, { useEffect, useState } from "react";
@@ -35,7 +34,7 @@ const DataManagement = ({ source }: { source: any }) => {
           "x-active-user": userid,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (response.ok) {
@@ -71,8 +70,8 @@ const DataManagement = ({ source }: { source: any }) => {
       prev.map((workspace: any) =>
         workspace._id === id
           ? { ...workspace, viewMode: !workspace.viewMode }
-          : workspace
-      )
+          : workspace,
+      ),
     );
   };
 
@@ -133,7 +132,7 @@ const DataManagement = ({ source }: { source: any }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updateFields),
-        }
+        },
       );
 
       if (response.ok) {
@@ -217,7 +216,7 @@ const DataManagement = ({ source }: { source: any }) => {
   //remember to implement a boolean lock to avoid the CtrlKey + Enter multi-submission spam looking affect. (not good for scaling up cpu)
   //send data to cloud
   const saveWorkspace = async (
-    e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent
+    e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent,
   ): Promise<any> => {
     e.preventDefault();
     setNewWorkspace({
@@ -252,7 +251,7 @@ const DataManagement = ({ source }: { source: any }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
-        }
+        },
       );
 
       if (response.ok) {
@@ -323,7 +322,7 @@ const DataManagement = ({ source }: { source: any }) => {
                             workspaceEdits[canvaSpace._id]?.workspacename || ""
                           }
                           onChange={(
-                            e: React.ChangeEvent<HTMLInputElement>
+                            e: React.ChangeEvent<HTMLInputElement>,
                           ) => {
                             e.preventDefault();
                             // updating a specific workspace description
@@ -362,7 +361,7 @@ const DataManagement = ({ source }: { source: any }) => {
                             workspaceEdits[canvaSpace._id]?.description || ""
                           }
                           onChange={(
-                            e: React.ChangeEvent<HTMLInputElement>
+                            e: React.ChangeEvent<HTMLInputElement>,
                           ) => {
                             // updating a specific workspace description
                             setCurrentWorkspacePreEdits((previous: any) => ({

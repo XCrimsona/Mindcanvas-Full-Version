@@ -1,5 +1,4 @@
 //CanvaContainer line 135
-
 import { DivClass, DivStylingAndClassName } from "../../../../../ui/Div";
 import "./CanvaComponent.css";
 import AuthCanvasHeader from "../header/AuthCanvasHeader";
@@ -12,7 +11,6 @@ import DeleteCanvas from "../CanvasDeletion/DeleteCanvas";
 import PrimaryControlsAndDetails from "../CanvasHub/PrimaryControlsAndDetails/PrimaryControlsAndDetails";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { IIconContextProvider } from "../hovering-i-icon/HoveringIContextProvider";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthLogoutProvider } from "../../logout/logoutContext";
 const fetchWorkspaceData = async (
@@ -136,10 +134,8 @@ const CanvaComponent = () => {
                     </DivClass>
                   </DivStylingAndClassName>
                   <DivClass className={"work-workspace-management-container"}>
-                    {/* <IIconContextProvider> */}
                     {/* Data appeaers in here */}
                     <CanvaContainer />
-                    {/* </IIconContextProvider> */}
                   </DivClass>
                   <DeleteCanvas />
                 </CanvasContextDeletionProvider>

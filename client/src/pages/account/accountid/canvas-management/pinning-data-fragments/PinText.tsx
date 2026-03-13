@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 // //Pin feature to mount below data-fragments onto the canvas
 
 // const [pinnedText, setPinnedText] = useState<boolean>(false);

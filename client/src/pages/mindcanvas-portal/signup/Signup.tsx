@@ -9,7 +9,6 @@ import {
   InputEmail,
   InputPassword,
   InputSelect,
-  InputSubmit,
   InputText,
 } from "../../../components/form-elements/dry-InputFormComponents";
 
@@ -18,7 +17,6 @@ import Button from "../../../../src/components/form-elements/Button";
 import RouteLink from "../../../../src/components/ProductSection/RouteLink";
 // import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 const Signup = () => {
@@ -72,7 +70,7 @@ const Signup = () => {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(formData),
-            }
+            },
           );
 
           //want to try a new feature: socket.io
