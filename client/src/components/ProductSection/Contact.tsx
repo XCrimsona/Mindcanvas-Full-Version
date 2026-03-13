@@ -11,7 +11,7 @@ const Contact = ({
   children: ReactNode;
 }) => {
   return (
-    <Link className={className} href={href}>
+    <Link className={className} to={href}>
       {children}
     </Link>
   );
