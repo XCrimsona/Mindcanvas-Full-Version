@@ -3,9 +3,6 @@ import { DivClass } from "../../src/ui/Div";
 import { useNavigate, useParams } from "react-router-dom";
 import RouteLink from "../../src/components/ProductSection/RouteLink";
 import "../auth-header.css";
-import SVG from "../../src/SVG";
-// import HeadingTwo from "../../src/ui/HeadingTwo";
-// import AuthCanvasHeader from "../../src/pages/account/accountid/canvas-management/canvasid/(header)/AuthCanvasHeader";
 
 const AuthHeader = () => {
   const { userid } = useParams();
@@ -18,7 +15,7 @@ const AuthHeader = () => {
         method: "POST",
         credentials: "include",
         headers: { "x-active-user": userid },
-      }
+      },
     );
 
     if (!logoutRes.ok) {

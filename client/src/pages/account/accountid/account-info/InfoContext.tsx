@@ -1,11 +1,4 @@
-import { response } from "express";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -31,7 +24,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
         method: "GET",
         credentials: "include",
         headers: { "x-active-user": userid },
-      }
+      },
     );
     if (response.ok) {
       const resData: any = await response.json();
@@ -52,7 +45,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
           "x-active-user": userid,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     if (response.ok) {
       const response2 = await response.json();

@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import Button from "../../../../../../components/form-elements/Button";
 import { DivClass } from "../../../../../../ui/Div";
 import { EnabledTextAreaInput } from "../../../../../../components/media-retrieved-components/MediaInputComponents";
@@ -52,11 +52,11 @@ const TextInputUnit = () => {
       //clamp to keep the elements inside the canvas
       const boundedX = Math.max(
         0,
-        Math.min(canvasX, boardRect.width - textInputElementRect.width)
+        Math.min(canvasX, boardRect.width - textInputElementRect.width),
       );
       const boundedY = Math.max(
         0,
-        Math.min(canvasY, boardRect.height - textInputElementRect.height)
+        Math.min(canvasY, boardRect.height - textInputElementRect.height),
       );
 
       const textInputElement = textInputCompRef.current as HTMLDivElement;
@@ -83,7 +83,7 @@ const TextInputUnit = () => {
 
     //submit text Data
     const textComponentFormData = async (
-      event: React.FormEvent<HTMLFormElement>
+      event: React.FormEvent<HTMLFormElement>,
     ) => {
       event.preventDefault();
 
@@ -123,7 +123,7 @@ const TextInputUnit = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(textFormData),
-          }
+          },
         );
         if (text.ok) {
           toast.success("Text data fragment created");
@@ -166,11 +166,14 @@ const TextInputUnit = () => {
       // set boundaries so draggables dont go outside the drag frame
       const newPosX = Math.max(
         0,
-        Math.min(newXElementLeft, boardRect.width - textInputElementRect.width)
+        Math.min(newXElementLeft, boardRect.width - textInputElementRect.width),
       );
       const newPosY = Math.max(
         0,
-        Math.min(newYElementTop, boardRect.height - textInputElementRect.height)
+        Math.min(
+          newYElementTop,
+          boardRect.height - textInputElementRect.height,
+        ),
       );
 
       textInputCompPosRef.current = {

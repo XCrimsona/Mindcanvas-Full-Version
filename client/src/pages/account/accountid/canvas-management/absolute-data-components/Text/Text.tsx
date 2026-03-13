@@ -8,7 +8,6 @@ import { SpanFragment } from "../../../../../../ui/spanElement";
 import "../../DataComponents/text/text.css";
 import "../i-note.css";
 import "./text-data-styling.css";
-import { useState } from "react";
 // import { useCanvasContext } from "../../DataComponents/canva-data-provider/CanvasDataContextProvider";
 
 //This component is used to display already create info TextInput is the one that creates text

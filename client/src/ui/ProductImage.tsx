@@ -1,5 +1,3 @@
-import Div from "./Div";
-
 const ProductImage = ({
   className,
   imgClassName,
@@ -16,17 +14,16 @@ const ProductImage = ({
   height: number;
 }) => {
   return (
-    <Div className={`${className}`}>
-      <Image
+    <div className={`${className}`}>
+      <img
         className={imgClassName}
         width={width}
         height={height}
         src={`${src}`}
         alt={`${alt}`}
         style={{ objectFit: "contain" }}
-        priority
       />
-    </Div>
+    </div>
   );
 };
 

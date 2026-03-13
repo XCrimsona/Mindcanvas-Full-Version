@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 //DRY Component for FAQ on Academy page
 const Div = ({ children }: { children: ReactNode }) => {

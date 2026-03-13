@@ -1,5 +1,3 @@
-import Div from "./Div";
-
 const Image_ = ({
   className,
   imgClassName,
@@ -16,18 +14,17 @@ const Image_ = ({
   height: number;
 }) => {
   return (
-    <Div className={`${className}`}>
-      <Image_
+    <div className={`${className}`}>
+      <img
         className={imgClassName}
         width={width}
         height={height}
         src={`${src}`}
         alt={`${alt}`}
         style={{ width: "auto", height: "auto", objectFit: "cover" }}
-        priority
         loading="lazy"
       />
-    </Div>
+    </div>
   );
 };
 

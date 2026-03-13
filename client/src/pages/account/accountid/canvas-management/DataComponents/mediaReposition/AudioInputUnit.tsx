@@ -33,7 +33,7 @@ const AudioInputUnit = ({ params }: any) => {
 
     //submit audio Data
     const audioComponentFormData = async (
-      event: React.FormEvent<HTMLFormElement>
+      event: React.FormEvent<HTMLFormElement>,
     ) => {
       event.preventDefault();
 
@@ -76,7 +76,7 @@ const AudioInputUnit = ({ params }: any) => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(audioFormData),
-          }
+          },
         );
         if (audio.ok) {
           //notification ok response
@@ -125,7 +125,7 @@ const AudioInputUnit = ({ params }: any) => {
         audioInputComp.style.transform = `translate(${newValueX}px, ${newValueY}px)`;
       }
     };
-    const processAudioMouseUp = (event: React.MouseEvent) => {
+    const processAudioMouseUp = () => {
       globalDraggingRef.current = false;
       document.removeEventListener<any>("mousemove", processAudioMouseMove);
       document.removeEventListener<any>("mouseup", processAudioMouseUp);

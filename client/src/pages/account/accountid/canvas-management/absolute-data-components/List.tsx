@@ -1,4 +1,3 @@
-import React from "react";
 import { DivClass } from "../../../../../../src/ui/Div";
 
 export const ImmutableList = ({ data }: any) => {

@@ -3,7 +3,7 @@ import { useModificationContext } from "./InfoModificationContextProvider";
 import "./modification-window.css";
 import Button from "../../../../../components/form-elements/Button";
 import { useCanvasContext } from "../DataComponents/canva-data-provider/CanvasDataContextProvider";
-import React, { useState } from "react";
+import React from "react";
 // import { ToastContainer } from "react-toastify";
 
 //When the i round button on the left of a data fragment is clicked, ModificationWindow is an options box
