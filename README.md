@@ -1,3 +1,4 @@
+# BE ADVISED THIS DOCUMENT IS OUTDATED
 # What is MindCanvas? 
 <p>For non-tech users: MindCanvas helps users organize information, tasks, and ideas with a visually appealing interface, and powerful layout features.</p>
 <p>For tech users: A full-stack productivity app built with the MERN stack. </p>
