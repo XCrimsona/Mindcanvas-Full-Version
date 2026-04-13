@@ -2,16 +2,18 @@ import { useModificationContext } from "./InfoModificationContextProvider";
 // import StyleDiv from "../../../../../../../src/ui/StylerDiv";
 import "./modification-window.css";
 import Button from "../../../../../components/form-elements/Button";
-import { useCanvasContext } from "../DataComponents/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
 import React from "react";
+import ShortText from "../../../../../ui/ShortText";
 // import { ToastContainer } from "react-toastify";
 
 //When the i round button on the left of a data fragment is clicked, ModificationWindow is an options box
 export const ModificationWindow = ({ componentData }: any) => {
   const {
-    toggleEditStateFunc,
-    toggleModificationState,
-    updateModificationState,
+    // toggleEditStateFunc,
+    // toggleModificationState,
+    setModificationWindow,
+    setEditWindow,
     DeleteDataFragment,
     deleteLiveDataElement,
     antiDeleteLock,
@@ -21,9 +23,9 @@ export const ModificationWindow = ({ componentData }: any) => {
     // pinnedText,
   } = useModificationContext();
 
-  const { toggleMediaWindowState } = useCanvasContext();
+  const { setRepositionWindow } = useCanvasContext();
   const { owner, _id, workspaceId, type } = componentData;
-  // console.log(owner, _id, workspaceId, type);
+  console.log(owner, _id, workspaceId, type);
 
   return (
     <div className={"modifications-window-container"}>
@@ -50,8 +52,7 @@ export const ModificationWindow = ({ componentData }: any) => {
         className={"edit-button"}
         id="edit-button"
         onClick={() => {
-          updateModificationState(false);
-          // toggleModificationState();
+          setModificationWindow(false);
         }}
       >
         Close
@@ -67,8 +68,8 @@ export const ModificationWindow = ({ componentData }: any) => {
         className={"edit-button"}
         id="edit-button"
         onClick={() => {
-          toggleModificationState();
-          toggleEditStateFunc();
+          setModificationWindow(false);
+          setEditWindow(true);
         }}
       >
         Edit
@@ -85,15 +86,14 @@ export const ModificationWindow = ({ componentData }: any) => {
         id="component-reposition-button"
         onClick={() => {
           //Collapse the button options window
-          toggleModificationState();
-
-          //We dont want to display the edit window as we are toggling
+          setModificationWindow(false);
 
           //Open the interface to move the selected component data to a new x y postion bas on it dragging
-          toggleMediaWindowState();
+          setRepositionWindow(true);
+          //We dont want to display the edit window as we are toggling
         }}
       >
-        Reorganize data fragment
+        Move Fragment
       </Button>
       <hr
         style={{
@@ -105,7 +105,6 @@ export const ModificationWindow = ({ componentData }: any) => {
       <div className="delete-container ml-auto mr-auto flex flex-wrap items-center justify-around">
         <div
           className={"toggle-delete flex"}
-          // id={`${_id}`}
           onClick={(e: React.FormEvent<HTMLDivElement>) => {
             e.preventDefault();
             toggleDeleteLock();
@@ -145,6 +144,14 @@ export const ModificationWindow = ({ componentData }: any) => {
         >
           Delete
         </button>
+        {/* <hr
+          style={{
+            width: "94%",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        /> */}
+        <ShortText className="mt-1 mb-2">{type} Fragment</ShortText>
       </div>
     </div>
   );

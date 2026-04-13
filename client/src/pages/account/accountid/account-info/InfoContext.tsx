@@ -23,7 +23,6 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
       {
         method: "GET",
         credentials: "include",
-        headers: { "x-active-user": userid },
       },
     );
     if (response.ok) {
@@ -41,10 +40,6 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
       {
         method: "DELETE",
         credentials: "include",
-        headers: {
-          "x-active-user": userid,
-          "Content-Type": "application/json",
-        },
       },
     );
     if (response.ok) {

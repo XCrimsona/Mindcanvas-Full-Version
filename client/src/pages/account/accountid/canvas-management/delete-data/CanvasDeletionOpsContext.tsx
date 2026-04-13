@@ -43,13 +43,9 @@ export const CanvasContextDeletionProvider = ({
       {
         method: "DELETE",
         credentials: "include",
-        headers: {
-          "x-active-user": userid,
-          "Content-Type": "application/json",
-        },
 
         body: JSON.stringify(deleteWorkspace),
-      }
+      },
     );
     if (response.ok) {
       setCanvasName("");
@@ -81,7 +77,7 @@ export const useCanvasDeletionContext = () => {
   const context = useContext(CanvasContextDeletionType);
   if (!context) {
     throw new Error(
-      "useCanvasDeletionContext must be used within a CanvasContextDeletionProvider"
+      "useCanvasDeletionContext must be used within a CanvasContextDeletionProvider",
     );
   }
   return context;

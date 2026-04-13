@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useCanvasContext } from "../DataComponents/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
 // import canvaNotification_Edit from "../notifications/fragment-updates/CanvaNotification_Edit";
 // import canvaNotification_EditFailed from "../notifications/fragment-updates/CanvaNotification_EditFailed";
 // // import canvaNotification_Delete from "../notifications/canva-deletes/CanvaNotification_Delete";
@@ -19,40 +19,58 @@ type TypeModificationContext = true | false;
 interface IModificationUseStateContextType {
   //state being toggled. This toggles the modification window that carries the edit and
   //delete component which is activated when a live db tsx component is double clicked in the browser
-  modificationState: TypeModificationContext;
-  updateModificationState: (value: boolean) => void;
+  modificationWindow: TypeModificationContext;
+  setModificationWindow: React.Dispatch<
+    React.SetStateAction<TypeModificationContext>
+  >;
   //toggle modification window
-  toggleModificationState: () => void;
 
   //tracks which component is being double clciked and
   //its is designed to pass objects of data to other functions that compile different pieces of
   //data and is used the component hub built in components that enables dynamic data creation
   dataComponent: Record<string, number>;
-  setDataComponent: (componentData: any) => void;
+  setDataComponent: React.Dispatch<
+    React.SetStateAction<Record<string, number>>
+  >;
 
-  selectedComp: string | undefined;
-  setSelectedComp: (componentId: any) => void;
+  //this component has three items and acts as an object-useState
+  // selectedComp: object;
+  selectedComp: { dataFragmentId: string; type: string; info: string };
+  //so how do i define this?
+  setSelectedComp: React.Dispatch<
+    React.SetStateAction<{ dataFragmentId: string; type: string; info: string }>
+  >;
+  updateSelectedComp: (id: any, type: any, info: any) => void;
+  // { id: string; type: string; info: string }
+
+  // updateMovingMedia: () => void;
+  moveFragment: (
+    e: React.MouseEvent<HTMLButtonElement>,
+    // top: string,
+    // left: string,
+  ) => void;
+  DeleteDataFragment: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   PinToScreen: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  ReOrganizeFragment: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  DeleteDataFragment: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   //state being toggled
   editState: TypeModificationContext;
-
-  //toggle edit window
-  toggleEditStateFunc: () => void;
+  setEditWindow: React.Dispatch<React.SetStateAction<TypeModificationContext>>;
 
   //tracks which component is being double clciked and
   // only work with the toggled element for editing data
-  newComponentData: string;
-  setComponentData: (text: string) => void;
+  newComponentData: { text: string; link: string };
+  setComponentData: React.Dispatch<
+    React.SetStateAction<{ text: string; link: string }>
+  >;
+
   editLiveDataElement: (
     _id: string,
     userid: string,
     canvaid: string,
     type: string,
     text: string,
+    link: string,
   ) => void;
 
   deleteLiveDataElement: (
@@ -63,8 +81,9 @@ interface IModificationUseStateContextType {
     componentType: string,
   ) => void;
 
-  updateComponentData: (data: string) => void;
+  updateComponentData: (text: string, link: string) => void;
 
+  //prevents accidental deletion of data fragments by locking the delete button in the modification window until the user clicks the delete button a second time to unlock it and allow deletion of the data fragment
   antiDeleteLock: boolean;
   setAntiDeleteLock: React.Dispatch<React.SetStateAction<boolean>>;
   toggleDeleteLock: () => void;
@@ -97,36 +116,42 @@ const InfoModificationContextProvider = ({
   children: ReactNode;
 }) => {
   //modification state controller. context boolean state determines when the modification window appear by user interaction
-  const [modificationState, setModificationState] =
+  const [modificationWindow, setModificationWindow] =
     useState<TypeModificationContext>(false);
-
   //update the boolean value of the modificationState to improve selection flow of the live data component and the modification window
-  const updateModificationState = (value: boolean) => {
-    setModificationState(value);
-  };
-
-  const toggleModificationState = () => {
-    setModificationState((prev) => (prev === false ? true : false));
-  };
 
   //edit context
-  const [editState, setEditState] = useState<TypeModificationContext>(false);
-  const toggleEditStateFunc = () => {
-    setEditState((prev) => (prev === false ? true : false));
-  };
+  const [editState, setEditWindow] = useState<TypeModificationContext>(false);
 
   //above component needs an updating function
   const [dataComponent, setDataComponent] = useState<Record<string, number>>(
     {},
   );
 
-  //live data component's element id is stored inside and updated based on the double click
+  //live data component's element id is stored inside and updated based on the click
   // to set it and reset its value is empty string when the user clicks delete inside the
   // InfoModification window that deletes the component
-  const [selectedComp, setSelectedComp] = useState<string>("");
+  const [selectedComp, setSelectedComp] = useState<{
+    dataFragmentId: string;
+    type: string;
+    info: string;
+  }>({
+    dataFragmentId: "",
+    type: "",
+    info: "",
+  });
+  const updateSelectedComp = (id: string, type: string, info: string) => {
+    setSelectedComp({
+      ...selectedComp,
+      dataFragmentId: id,
+      type: type,
+      info: info,
+    });
+  };
   //From the WorkspaceContextProvider, it refreshes the displayed data after
   // data has been deleted using deleteLiveDataElement.
-  const { updateCanvasData, updateMediaCanvaDataFragment } = useCanvasContext();
+  // const { updateCanvasData, updateMediaCanvaDataFragment } = useCanvasContext();
+  const { updateCanvasData, setRepositionData } = useCanvasContext();
 
   // const { updateWorkspaceData } = useWorkspaceContext();
   //find the double clicked element and modify data
@@ -136,6 +161,7 @@ const InfoModificationContextProvider = ({
     canvaid: string,
     type: string,
     text: string,
+    link: string,
   ) => {
     try {
       const updateType = "Text";
@@ -145,7 +171,6 @@ const InfoModificationContextProvider = ({
         {
           method: "PATCH",
           headers: {
-            "x-active-user": userid,
             "Content-Type": "application/json",
           },
 
@@ -154,9 +179,10 @@ const InfoModificationContextProvider = ({
           body: JSON.stringify({
             // _id is the information component primary key
             _id: _id,
-            type: type,
-            updateType: updateType,
-            text: text,
+            type,
+            updateType,
+            text,
+            link,
           }),
         },
       );
@@ -180,10 +206,10 @@ const InfoModificationContextProvider = ({
 
   //lock fail safe
   useEffect(() => {
-    if (antiDeleteLock === false && modificationState === false) {
+    if (antiDeleteLock === false && modificationWindow === false) {
       setAntiDeleteLock(true);
     }
-  }, [antiDeleteLock, modificationState]);
+  }, [antiDeleteLock, modificationWindow]);
 
   //deleteLiveDataElement deletes data by finding the id of the
   //data stored in the database
@@ -194,18 +220,19 @@ const InfoModificationContextProvider = ({
     type: string,
   ) => {
     try {
+      console.log("deletion trying chart: ");
+
       const deleteRequest = await fetch(
         `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
         {
           method: "DELETE",
           credentials: "include",
           headers: {
-            "x-active-user": userid,
             "Content-Type": "application/json",
           },
 
           body: JSON.stringify({
-            // _id is the information component displayed from the database which the user created
+            // _id is the id information of the component
             _id,
             //component type
             type,
@@ -213,21 +240,32 @@ const InfoModificationContextProvider = ({
         },
       );
       if (deleteRequest.ok) {
-        toast.success("Attention: Text fragment has been deleted!");
+        const succMessage = await deleteRequest.json();
+        toast.success(`Attention: ${succMessage.message}`);
         updateCanvasData();
       } else {
-        toast.error("Text fragment deletetion failed!");
+        const err = await deleteRequest.json();
+        toast.error(err.message, { autoClose: 4000 });
       }
     } catch (error: any) {
-      console.warn("edit error: ", error.message);
+      console.warn("Delete error: ", error.message);
       return;
     }
   };
 
-  const [newComponentData, setComponentData] = useState<string>("");
-
-  const updateComponentData = (data: string) => {
-    setComponentData(data);
+  const [newComponentData, setComponentData] = useState<{
+    text: string;
+    link: string;
+  }>({
+    text: "",
+    link: "",
+  });
+  const updateComponentData = (text: string, link: string = "") => {
+    setComponentData({
+      ...newComponentData,
+      text,
+      link,
+    });
     return;
   };
 
@@ -236,13 +274,10 @@ const InfoModificationContextProvider = ({
     x: number;
     y: number;
   }>({ x: 0, y: 0 });
-  // const [mainFragmentXYCoorindates, setmainFragmentXYCoorindates] = useState<{
-  //   x: number;
-  //   y: number;
-  // }>({ x: 0, y: 0 });
   function updateOriginalFragmentXYCoorindates(x: number, y: number) {
     setMainFragmentXYCoorindates({ x, y });
   }
+
   const [pinnedText, setPinnedText] = useState<boolean>(false);
   const toggleTextPin = () => {
     setPinnedText((prev) => (prev === false ? true : false));
@@ -292,35 +327,52 @@ const InfoModificationContextProvider = ({
     return;
   };
 
-  //this mouse click event is fired when selected by the user using the i icon and stores
-  //the found data element's id in selectedComp
-  const ReOrganizeFragment = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const dataFragmentId = String((e.target as HTMLElement).id);
+  // const { mediaInputCompPosRef } = useCanvasContext();
+  // let toppx: string;
+  // let leftpx: string;
+  // console.log("mediaCanvaDataFragment: ", mediaCanvaDataFragment);
+  // function updateMovingMedia(top: string, left: string) {
+  //   // const mediaCanvaDataFragmentLeft = mediaCanvaDataFragment.left;
+  //   // const mediaCanvaDataFragmentTop = mediaCanvaDataFragment.top;
+  //   toppx = top;
+  //   leftpx = left;
+  //   mediaInputCompPosRef.current.x = Number(top);
+  //   mediaInputCompPosRef.current.y = Number(left);
+  //   console.log("toppx: ", toppx);
+  //   return;
+  // }
+  // console.log("toppx: ", toppx);
+
+  //executes when the user interacts with the i icon and passes data to the next function
+  const moveFragment = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    // left: string,
+    // top: string,
+  ) => {
+    // const dataFragmentId = String((e.target as HTMLElement).id);
+    const dataFragmentId = String(selectedComp.dataFragmentId);
     const fragmentText = (e.target as HTMLElement).parentElement?.childNodes[1]
       .textContent;
 
     //to update the xy values of a live ui component
-    setSelectedComp(dataFragmentId);
+    // setSelectedComp(dataFragmentId);
     const dataComponentValues = (e.target as HTMLElement).closest(
       ".data-component",
     ) as HTMLDivElement;
-
-    const left = dataComponentValues.style.left;
-    const top = dataComponentValues.style.top;
+    console.log("media id: ", dataComponentValues);
+    // const left = dataComponentValues.style.left;
+    // const top = dataComponentValues.style.top;
 
     //provides the elemtn id to capture data and pass references
-    updateMediaCanvaDataFragment({
-      fragmentText,
+    setRepositionData({
       dataFragmentId,
-      left,
-      top,
+      fragmentText,
+      selectedComp: dataFragmentId,
     });
 
     //enables the menu and bring up forward
-    updateModificationState(true);
-
+    // updateModificationState(true);
     return;
-    // }
   };
 
   //this mouse click event is fired when a live data element is already selected
@@ -329,36 +381,46 @@ const InfoModificationContextProvider = ({
   const DeleteDataFragment = (e: React.MouseEvent<HTMLButtonElement>) => {
     const clickedElement = (e.target as HTMLElement).id;
     if (clickedElement) {
-      setSelectedComp("");
+      setSelectedComp({ dataFragmentId: "", type: "", info: "" });
     }
-    toggleModificationState();
+    setModificationWindow(false);
   };
 
   return (
     <ModificationContext.Provider
       value={{
         editState,
-        toggleEditStateFunc,
+        // updateEditStateFunc,
+        setEditWindow,
+
         dataComponent,
         setDataComponent,
+
         newComponentData,
         setComponentData,
 
-        updateModificationState,
-        modificationState,
-        toggleModificationState,
+        modificationWindow,
+        setModificationWindow,
+        // toggleModificationWindow,
 
         editLiveDataElement,
+
         deleteLiveDataElement,
         updateComponentData,
+
         selectedComp,
         setSelectedComp,
+        updateSelectedComp,
+
         PinToScreen,
-        ReOrganizeFragment,
+
+        moveFragment,
         DeleteDataFragment,
+
         antiDeleteLock,
         setAntiDeleteLock,
         toggleDeleteLock,
+
         pinnedText,
         setPinnedText,
         toggleTextPin,

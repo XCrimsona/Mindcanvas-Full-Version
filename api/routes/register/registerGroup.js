@@ -1,7 +1,7 @@
 import UserModel from "../../../models/userModel.js";
 import getDB from "../../../lib/connnections/Connections.js";
-import AuthService from "../../../lib/Auth.js";
 import { Router } from "express";
+import { PasswordService } from "../../../lib/PasswordService.js";
 const registrationRouter = Router();
 
 registrationRouter.get("/", async (req, res) => {
@@ -20,56 +20,44 @@ registrationRouter.get("/", async (req, res) => {
 })
   .post("/", async (req, res) => {
     try {
-      console.log("post register route");
-
       await getDB();
-      // const body = await request.json();
+      console.log("post register route");
       const { firstname, lastname, gender, dob, email, password } = req.body;
-      // console.log(firstname, lastname, gender, dob, email, password);
 
       const user = await UserModel.findOne({ email });
-
-      if (!email || !password) {
+      if (!firstname || !lastname || !email || !password) {
         return res.status(400).json(
           { message: "Please fill required fields!", status: 400 }
         );
       }
-      if (user) {
+      if (user.email) {
         return res.status(409).json({ message: "Account Name Already Exists", status: 409 })
       }
       else {
-
-        // return res.json(
-        //   { error: "Enter email doesn't exist!", status: 404 }
-        // );
-        //sign user and redirect
         const data = {};
+        const passwordService = new PasswordService();
+        const hashpassword = await passwordService.hashPassword(password);
         if (firstname) data.firstname = firstname;
         if (lastname) data.lastname = lastname;
         if (gender) data.gender = gender;
         if (dob) data.dob = dob;
         if (email) data.email = email;
         if (password) {
-          data.password = password;
+          data.password = hashpassword;
         }
+        data.role = "user"
 
-        const authService = new AuthService();
-        await authService.signup(data);
-        // console.log("formattedUserData : ", formattedUserData);
-
-        // const returnData = {
-        //   _id: user._id,
-        //   data: authResponse,
-        // };
-        // console.log("return data from register group: ", returnData.data);
-
-        return res.status(200).json({ message: "Account created", status: 200 });
+        const newUserData = await UserModel.create(data);
+        if (newUserData._id) {
+          return res.status(200).json({ message: "Account created" });
+        }
+        else {
+          return res.status(500).json({ message: "Something went wrong, please try again" });
+        }
       }
     } catch (err) {
       return res.status(500).json(
-        { error: err.message || "Unexpected server error" },
-        { status: 500 }
-      );
+        { error: err.message || "Unexpected server error" });
     }
   })
 

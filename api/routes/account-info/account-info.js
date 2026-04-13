@@ -1,9 +1,9 @@
 import UserModel from "../../../models/userModel.js";
 import getDB from "../../../lib/connnections/Connections.js";
 import bcrypt from "bcryptjs";
-import { PasswordService } from "../../../lib/Hashing.js";
+import { PasswordService } from "../../../lib/PasswordService.js";
 import Router from "express";
-import textModel from "../../../models/textModel.js";
+import textModel from "../../../models/multi-media/textModel.js";
 import workspaceModel from "../../../models/CanvaspaceModel.js";
 
 const accountRouter = Router();

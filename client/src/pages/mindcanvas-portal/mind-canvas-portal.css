@@ -48,13 +48,26 @@
   color: #FFFFFF;
   margin: 0px auto 0px auto;
 }
-.sign-in-page .sign-in-block .form-sign-in .form-data-container .sign-in-label .sign-in-label,
-.sign-in-page .sign-up-block .form-sign-in .form-data-container .sign-in-label .sign-in-label,
-.sign-up-page .sign-in-block .form-sign-in .form-data-container .sign-in-label .sign-in-label,
-.sign-up-page .sign-up-block .form-sign-in .form-data-container .sign-in-label .sign-in-label {
+.sign-in-page .sign-in-block .form-sign-in .form-data-container .label-wrapper,
+.sign-in-page .sign-up-block .form-sign-in .form-data-container .label-wrapper,
+.sign-up-page .sign-in-block .form-sign-in .form-data-container .label-wrapper,
+.sign-up-page .sign-up-block .form-sign-in .form-data-container .label-wrapper {
+  display: inline;
+}
+.sign-in-page .sign-in-block .form-sign-in .form-data-container .label-wrapper .sign-in-label,
+.sign-in-page .sign-up-block .form-sign-in .form-data-container .label-wrapper .sign-in-label,
+.sign-up-page .sign-in-block .form-sign-in .form-data-container .label-wrapper .sign-in-label,
+.sign-up-page .sign-up-block .form-sign-in .form-data-container .label-wrapper .sign-in-label {
   position: relative;
   display: block;
-  margin: 2px auto 2px auto;
+  margin: 2px auto 2px 0px;
+}
+.sign-in-page .sign-in-block .form-sign-in .form-data-container .label-wrapper .reset-password,
+.sign-in-page .sign-up-block .form-sign-in .form-data-container .label-wrapper .reset-password,
+.sign-up-page .sign-in-block .form-sign-in .form-data-container .label-wrapper .reset-password,
+.sign-up-page .sign-up-block .form-sign-in .form-data-container .label-wrapper .reset-password {
+  font-size: var(--font14);
+  margin: 2px 0px 2px auto;
 }
 .sign-in-page .sign-in-block .form-sign-in .form-data-container .input-wrapper .email-input,
 .sign-in-page .sign-in-block .form-sign-in .form-data-container .input-wrapper .password-input,
@@ -102,7 +115,7 @@
 .sign-in-page .sign-up-block .form-sign-in .submit-btn-wrapper,
 .sign-up-page .sign-in-block .form-sign-in .submit-btn-wrapper,
 .sign-up-page .sign-up-block .form-sign-in .submit-btn-wrapper {
-  margin: 0px auto 0px auto;
+  margin: 0px auto;
   display: flex;
   background-clip: box;
 }
@@ -306,7 +319,7 @@
 .sign-up-page .sign-up-block .may-need-account .no-account {
   margin: 20px auto 15px auto;
   text-align: center;
-  font-size: 12px;
+  font-size: var(--font12);
 }
 .sign-in-page .sign-in-block .may-need-account .register-for-access,
 .sign-in-page .sign-up-block .may-need-account .register-for-access,
@@ -415,20 +428,20 @@
 .sign-in-page .sign-up-block .cancel-btn-wrapper,
 .sign-up-page .sign-in-block .cancel-btn-wrapper,
 .sign-up-page .sign-up-block .cancel-btn-wrapper {
-  margin: 0px auto 0px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  margin: 5px auto 0px;
 }
 .sign-in-page .sign-in-block .cancel-btn-wrapper .cancel-verification,
 .sign-in-page .sign-up-block .cancel-btn-wrapper .cancel-verification,
 .sign-up-page .sign-in-block .cancel-btn-wrapper .cancel-verification,
 .sign-up-page .sign-up-block .cancel-btn-wrapper .cancel-verification {
+  display: block;
   border-radius: 20px;
   cursor: pointer;
-  margin: 5px auto 10px auto;
+  padding: 8px 0px;
+  font-size: var(--font14);
+  margin: 5px auto 0px;
   background-color: rgba(0, 0, 0, 0.6);
-  padding: 10px 0px;
   border: none;
   border-right: 1px solid #FABB00;
   border-left: 1px solid #FABB00;

@@ -1,9 +1,9 @@
 import getDB from "../../../lib/connnections/Connections.js";
-import audioModel from "../../../models/audioModel.js";
-import imageModel from "../../../models/imageModel.js";
-import textModel from "../../../models/textModel.js";
+// import audioModel from "../../../models/multi-media/audioModel.js";
+// import imageModel from "../../../models/multi-media/imageModel.js";
+// import textModel from "../../../models/multi-media/textModel.js";
 import UserModel from "../../../models/userModel.js";
-import videoModel from "../../../models/videoModel.js";
+// import videoModel from "../../../models/multi-media/videoModel.js";
 import workspaceModel from "../../../models/CanvaspaceModel.js";
 import Router, { response } from "express";
 
@@ -25,6 +25,7 @@ canvasManagementRouter
                 });
             } else {
                 const [workspaces] = await Promise.all([
+                    //may need slight updates???
                     await workspaceModel.find({ createdBy: user._id }),
                 ]);
 
@@ -55,7 +56,8 @@ canvasManagementRouter
             }
             );
         }
-    }).post("/:userid/canvas-management", async (request, response) => {
+    })
+    .post("/:userid/canvas-management", async (request, response) => {
         try {
             await getDB();
             const sub = request.user?.sub;

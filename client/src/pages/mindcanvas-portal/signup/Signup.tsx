@@ -1,3 +1,4 @@
+"use client";
 import { DivClass } from "../../../../src/ui/Div";
 import Section from "../../../../src/ui/Section";
 import Label from "../../../../src/components/form-elements/Label";
@@ -32,6 +33,7 @@ const Signup = () => {
       password: string;
       confirmpassword: string;
     }
+
     const [formData, setFormData] = useState<formDataInterface>({
       firstname: "",
       lastname: "",

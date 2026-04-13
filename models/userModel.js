@@ -11,6 +11,17 @@ const userschema = new mongoose.Schema(
     },
     gender: {
       type: String,
+      required: [true, "User's gender is required"],
+      enum: [
+        "Agender",
+        "Female",
+        "Genderfluid",
+        "Male",
+        "Non-binary",
+        "Other",
+        "Transgender Woman",
+        "Transgender Man"
+      ]
     },
     dob: {
       type: String,

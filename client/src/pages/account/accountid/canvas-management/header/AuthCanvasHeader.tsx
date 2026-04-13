@@ -15,11 +15,7 @@ const AuthCanvasHeader = () => {
       {
         method: "POST",
         credentials: "include",
-        headers: {
-          "x-active-user": userid,
-          "Content-Type": "application/json",
-        },
-      }
+      },
     );
 
     if (!logoutRes.ok) {

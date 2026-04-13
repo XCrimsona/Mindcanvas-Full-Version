@@ -11,7 +11,6 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
     fetch("http://localhost:5000/api/auth-check", {
       method: "GET",
       credentials: "include", //allow cookies to be sent
-      headers: { "x-active-user": userid },
     })
       .then((response: any) => response.json())
       .then((data) => {

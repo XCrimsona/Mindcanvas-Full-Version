@@ -1,27 +1,30 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 //for toggling
-type VisibilityContext = true | false;
+type animationStateContext = true | false;
 interface IComponentHubContextType {
-  visbilityState: VisibilityContext;
+  visbilityState: animationStateContext;
   toggleVisbilityState: () => void;
-  animationState: VisibilityContext;
+  animationState: animationStateContext;
   toggleAnimationState: () => void;
+  setAnimationState: React.Dispatch<
+    React.SetStateAction<animationStateContext>
+  >;
 }
 
 // Context for managing shared state across components
 const ComponentHubContext = createContext<IComponentHubContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const ComponentHubProvider = ({ children }: { children: ReactNode }) => {
   const [visbilityState, setToggleVisbilityState] =
-    useState<VisibilityContext>(false);
+    useState<animationStateContext>(false);
   const toggleVisbilityState = () => {
     setToggleVisbilityState((prev) => (prev === false ? true : false));
   };
   const [animationState, setAnimationState] =
-    useState<VisibilityContext>(false);
+    useState<animationStateContext>(false);
   const toggleAnimationState = () => {
     setAnimationState((prev) => (prev === false ? true : false));
   };
@@ -33,6 +36,7 @@ export const ComponentHubProvider = ({ children }: { children: ReactNode }) => {
         toggleVisbilityState,
         animationState,
         toggleAnimationState,
+        setAnimationState,
       }}
     >
       {children}
@@ -44,7 +48,7 @@ export const useComponentHub = () => {
   const context = useContext(ComponentHubContext);
   if (!context) {
     throw new Error(
-      "ComponentHubContext must be used within ComponentHubProvider "
+      "ComponentHubContext must be used within ComponentHubProvider ",
     );
   }
   return context;

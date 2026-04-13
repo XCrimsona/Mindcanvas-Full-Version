@@ -23,10 +23,7 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
       {
         method: "GET",
         credentials: "include",
-        headers: {
-          "x-active-user": userid,
-        },
-      }
+      },
     );
     if (response.ok) {
       const data = await response.json();
@@ -48,18 +45,14 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
   const fetchWorkspaceData = async (
     userid: string,
     // workspacename: string,
-    workspaceid: string
+    workspaceid: string,
   ) => {
     const response = await fetch(
       `http://localhost:5000/api/account/${userid}/canvas-management/${workspaceid}`,
       {
         method: "GET",
         credentials: "include",
-        headers: {
-          "x-active-user": userid,
-          "Content-Type": "application/json",
-        },
-      }
+      },
     );
     if (!response.ok) {
       const data = await response.json();
@@ -109,7 +102,7 @@ export const useFetchCanvaContext = () => {
   const context = useContext(CanvaDataContext);
   if (!context) {
     throw new Error(
-      "useFetchCanvaContext must be used within CanvaDataProvider "
+      "useFetchCanvaContext must be used within CanvaDataProvider ",
     );
   }
   return context;

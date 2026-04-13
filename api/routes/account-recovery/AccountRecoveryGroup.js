@@ -1,7 +1,7 @@
 import UserModel from "../../../models/userModel.js";
 import getDB from "../../../lib/connnections/Connections.js";
 import Router from "express";
-import { PasswordService } from "../../../lib/Hashing.js";
+import { PasswordService } from "../../../lib/PasswordService.js";
 
 const AccountRecoveryRouter = Router();
 AccountRecoveryRouter
