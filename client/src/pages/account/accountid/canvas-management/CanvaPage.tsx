@@ -1,5 +1,5 @@
 import CanvaComponent from "./CanvaComponent/CanvaComponent";
-import CanvasDataContextProvider from "./DataComponents/canva-data-provider/CanvasDataContextProvider";
+import CanvasDataContextProvider from "./form-components/canva-data-provider/CanvasDataContextProvider";
 
 const CanvaPage = () => {
   return (

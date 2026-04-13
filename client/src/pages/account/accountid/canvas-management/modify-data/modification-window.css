@@ -5,7 +5,7 @@
   z-index: 11;
   background-color: #000000;
   top: 0;
-  left: 30px;
+  left: 0px;
   width: 200px;
   height: -moz-fit-content;
   height: fit-content;
@@ -56,7 +56,7 @@
   cursor: default;
   top: 0px;
   z-index: 11;
-  left: 6.2%;
+  left: 0px;
   height: -moz-fit-content;
   height: fit-content;
   background-color: #000000;
@@ -69,7 +69,6 @@
   justify-content: center;
   align-content: flex-start;
   padding-bottom: 0px;
-  height: 272px;
   width: 600px;
 }
 .edit-window-container .update-box .box-one {
@@ -79,7 +78,48 @@
   margin-right: 15px;
   text-align: left;
   padding-bottom: 4px;
-  border-bottom: 1px solid #79674E;
+  width: 250px;
+}
+.edit-window-container .update-box .box-one .dual-data .box-one-enabled-linkdescription-input-field {
+  background-color: #000000;
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: none;
+  cursor: text;
+  height: 20px;
+  white-space: pre-wrap;
+  width: 240px;
+}
+.edit-window-container .update-box .box-one .dual-data .pulled-link {
+  background-color: #000000;
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: none;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 0px;
+  cursor: text;
+  height: 30px;
+  white-space: pre-wrap;
+  width: 250px;
+}
+.edit-window-container .update-box .box-one .dual-data .pulled-text {
+  resize: none;
+  height: 136px;
+  width: 250px;
+  white-space: pre-wrap;
+}
+.edit-window-container .update-box .box-one .pulled-text-data {
+  background-color: #000000;
+  color: white;
+  resize: none;
+  outline: none;
+  margin-bottom: 4px;
+  padding: 0px 0px 0px 0px;
+  cursor: text;
+  height: 148px;
+  white-space: pre-wrap;
   width: 250px;
 }
 .edit-window-container .update-box .box-one .pulled-data {
@@ -120,7 +160,6 @@
 }
 .edit-window-container .update-box .style-div {
   width: 1px;
-  height: 190px;
   background-color: #79674E;
 }
 .edit-window-container .update-box .box-two {
@@ -129,35 +168,60 @@
   margin-left: 15px;
   margin-right: 4px;
   padding-bottom: 4px;
-  border-bottom: 1px solid #79674E;
 }
-.edit-window-container .update-box .box-two .new-text .new-data {
+.edit-window-container .update-box .box-two .new-linktext .dual-data .box-two-enabled-linkdescription-input-field,
+.edit-window-container .update-box .box-two .new-text .dual-data .box-two-enabled-linkdescription-input-field {
+  background-color: #000000;
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: none;
+  cursor: text;
+  height: 20px;
+  white-space: pre-wrap;
+  width: 240px;
+}
+.edit-window-container .update-box .box-two .new-linktext .dual-data .new-data,
+.edit-window-container .update-box .box-two .new-text .dual-data .new-data {
   background-color: #000000;
   color: white;
   width: 250px;
   resize: none;
-  font-size: 12px;
+  font-size: 10px;
+  overflow-y: auto;
   outline: none;
-  margin-bottom: 4px;
   padding: 0px 0px 0px 0px;
   cursor: text;
-  height: 148px;
+  white-space: pre-wrap;
+  height: 136px;
+}
+.edit-window-container .update-box .box-two .new-linktext .new-data,
+.edit-window-container .update-box .box-two .new-text .new-data {
+  height: 152px;
+  background-color: #000000;
+  color: white;
+  width: 250px;
+  resize: none;
+  font-size: 10px;
+  outline: none;
+  padding: 0px 0px 0px 0px;
+  cursor: text;
   white-space: pre-wrap;
 }
-.edit-window-container .update-box .box-two .new-text .new-data::-moz-placeholder {
+.edit-window-container .update-box .box-two .new-data::-moz-placeholder {
   color: #ccc;
 }
-.edit-window-container .update-box .box-two .new-text .new-data::placeholder {
+.edit-window-container .update-box .box-two .new-data::placeholder {
   color: #ccc;
 }
-.edit-window-container .update-box .box-two .new-text .new-data:focus {
+.edit-window-container .update-box .box-two .new-data:focus {
   outline: none;
 }
-.edit-window-container .update-box .box-two .new-text .new-data::-moz-selection {
+.edit-window-container .update-box .box-two .new-data::-moz-selection {
   background-color: #79674E;
   color: white;
 }
-.edit-window-container .update-box .box-two .new-text .new-data::selection {
+.edit-window-container .update-box .box-two .new-data::selection {
   background-color: #79674E;
   color: white;
 }

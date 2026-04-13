@@ -28,10 +28,9 @@ export const AuthLogoutProvider = ({ children, userid }: AuthLogoutProps) => {
           method: "POST",
           credentials: "include",
           headers: {
-            "x-active-user": userid,
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       if (!logoutRes.ok) {

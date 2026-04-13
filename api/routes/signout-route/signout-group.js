@@ -1,21 +1,18 @@
 import getDB from "../../../lib/connnections/Connections.js";
-import audioModel from "../../../models/audioModel.js";
-import imageModel from "../../../models/imageModel.js";
-import textModel from "../../../models/textModel.js";
+import sessionModel from "../../../models/sessionModel.js";
 import UserModel from "../../../models/userModel.js";
-import videoModel from "../../../models/videoModel.js";
-import workspaceModel from "../../../models/CanvaspaceModel.js";
 import Router from "express";
 
 
 //loads all canva data depending on id access
 const signOut = Router();
 signOut
-    .post("/:userid/logout", async (req, response) => {
+    .post("/:userid/logout", async (req, res) => {
         try {
+            await getDB();
             const userid = req.user?.sub;
             if (!userid) {
-                response.json({
+                res.status(401).json({
                     success: false,
                     code: "NOT_AUTHORIZED",
                     status: 401,
@@ -24,7 +21,7 @@ signOut
             } else {
                 const user = await UserModel.findById(String(userid));
                 if (!user) {
-                    response.json({
+                    res.status(401).json({
                         success: false,
                         code: "USER_NOT_AUTHORIZED",
                         status: 401,
@@ -32,16 +29,18 @@ signOut
                     });
                 }
                 else {
-                    const userid = req.headers["x-active-user"];
-                    const foundCookie = req.cookies?.[`authtoken${userid}`];
-                    if (foundCookie) {
-                        response.clearCookie(`authtoken${user._id}`, {
+                    await sessionModel.deleteOne({ tokenId: req.user.tokenId });
+                    if (sessionModel) {
+                        console.log("cookie route works");
+
+                        res.clearCookie("mc_authtoken", {
                             secure: process.env.SECURE,
                             httpOnly: true,
                             sameSite: "lax",
-                            maxAge: 2 * 60 * 60 * 1000,
+                            maxAge: 1 * 60 * 60 * 1000,
                         })
-                        response.json({
+
+                        res.status(200).json({
                             success: true,
                             code: "USER_LOGOUT_SUCCESS",
                             status: 200,
@@ -50,7 +49,7 @@ signOut
                     }
 
                     else {
-                        response.json({
+                        res.status(404).json({
                             success: false,
                             code: "REQUESTED_COOKIE_NOT_FOUND",
                             status: 404,
@@ -62,7 +61,7 @@ signOut
         } catch (err) {
             console.log("err: ", err.message);
 
-            response.status(500).json({
+            res.status(500).json({
 
                 success: false,
                 code: "SERVER_WORKSPACE_ERROR",

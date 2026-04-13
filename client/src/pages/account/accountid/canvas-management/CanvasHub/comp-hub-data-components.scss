@@ -1,13 +1,13 @@
 //Comonent Hub child component functionality properties
-.comp-hub-data-component-container {
+.comp-hub-data-fragment-container {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     top: 0px;
     left: 0px;
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 350px;
     background-color: #000000;
     margin: 0px auto 0px auto;
     z-index: 4;
@@ -20,8 +20,8 @@
 
     .center-comp-hub-component {
         position: relative;
-        height: 200px;
-        width: 200px;
+        height: 300px;
+        width: 330px;
         margin: 0px auto 0px auto;
         display: flex;
         justify-content: center;
@@ -49,24 +49,47 @@
             }
         }
 
-        .comp-hub-data-creation-components {
+        .comp-hub-data-fragment-components {
+            .fragment-heading-text {
+                display: block;
+                font-size: 14px;
+                color: #fff;
+            }
 
+            .textlink-comp,
             .text-comp,
             .audio-comp,
             .image-comp,
-            .video-comp {
-
+            .video-comp,
+            .doughnut-chart-comp {
 
                 width: 150px;
-                margin: 5px auto 5px auto;
+                margin-left: auto;
+                margin-right: auto;
                 background-color: #141414B3;
                 color: #ffffff;
                 border-top: 2px solid #000000B3;
-                border-bottom: 2px solid #00BFA0B3;
+                border-bottom: 2px solid #FABB00B3;
                 border-left: 2px solid #000000B3;
                 border-right: 2px solid #000000B3;
                 border-radius: 4px;
-                cursor: grab;
+                font-size: 13px;
+                cursor: pointer;
+            }
+
+            // .textlink-comp,
+            .text-comp {
+                margin-top: 10px;
+                // margin-bottom: 5px;
+                margin-bottom: 20px;
+
+            }
+
+            //for now text will be the first and last element in the hub under multi media until the video element is complete
+            .video-comp {
+                // margin-top: 5px;
+                // margin-bottom: 10px;
+
             }
         }
     }

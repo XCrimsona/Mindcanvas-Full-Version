@@ -27,16 +27,6 @@
   text-align: center;
   border-radius: 4px;
 }
-.work-workspace-management-main-container .work-workspace-management-container-wrapper .canva-properties-wrapper .work-workspace-management-container .media-fragment-hub-toggle-icon {
-  cursor: pointer;
-}
-.work-workspace-management-main-container .work-workspace-management-container-wrapper .canva-properties-wrapper .work-workspace-management-container .media-fragment-hub-toggle-icon img {
-  display: block;
-  width: 30px;
-  height: 30px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
 .work-workspace-management-main-container .work-workspace-management-container-wrapper .canva-properties-wrapper .work-workspace-management-container:nth-child(1) {
   width: auto;
 }

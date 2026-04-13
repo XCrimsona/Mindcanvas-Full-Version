@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { LongText } from "../../ui/LongText";
 
 interface ITextProps {
@@ -6,23 +7,50 @@ interface ITextProps {
   placeholder: string;
   value: string;
   onChange?: React.ReactEventHandler;
-  onDoubleClick?: React.ReactEventHandler;
+  onClick?: React.ReactEventHandler;
   children?: React.ReactNode;
+}
+
+interface ILinkProps {
+  id: string;
+  className: string;
+  href: string;
+  text: string;
+  onChange?: React.ReactEventHandler;
 }
 
 //Text Component
 export const DisabledTextAreaInput = ({
   className,
-  onDoubleClick,
+  onClick,
   children,
 }: ITextProps) => {
   return (
-    <LongText onDoubleClick={onDoubleClick} className={className}>
+    <LongText onClick={onClick} className={className}>
       {children}
     </LongText>
   );
 };
 
+export const TextLinkInput = ({
+  id,
+  className,
+  href,
+  text,
+  onChange,
+}: ILinkProps) => {
+  return (
+    <Link
+      target="_blank"
+      id={id}
+      className={className}
+      to={href}
+      onChange={onChange}
+    >
+      {text}
+    </Link>
+  );
+};
 export const EnabledTextAreaInput = ({
   id,
   className,

@@ -14,14 +14,8 @@ type TypeGlobalDragRefContext = true | false;
 type TypeWorkspaceSizeContext = true | false;
 
 //component hub button toggling core definitions
-//component hub text button toggler values
-type TypeTextContext = true | false;
-//component hub Audio button toggler values
-type TypeAudioContext = true | false;
-//component hub Image button toggler values
-type TypeImageContext = true | false;
-//component hub text button toggler values
-type TypeVideoContext = true | false;
+//component hub toggler boolean values
+type TypeBooleanContext = true | false;
 
 type TypeWorkspaceData = any | null;
 //workspace data text input component types
@@ -33,28 +27,28 @@ interface IWorkspaceContextType {
 
   //Global Text Component for data input
   textInputOffSet: RefObject<{ x: number; y: number }>;
-  textToggleState: TypeTextContext;
+  textToggleState: TypeBooleanContext;
   toggleTextState: () => void;
   textInputCompRef: RefObject<HTMLDivElement | null>;
   textInputCompPosRef: RefObject<{ x: number; y: number }>;
 
   //Global Audio Component for data input
   audioInputOffSet: RefObject<{ x: number; y: number }>;
-  audioToggleState: TypeAudioContext;
+  audioToggleState: TypeBooleanContext;
   toggleAudioState: () => void;
   audioInputCompPosRef: RefObject<{ x: number; y: number }>;
   audioInputCompRef: RefObject<HTMLDivElement | null>;
 
   //Global Image Component for data input
   imageInputOffSet: RefObject<{ x: number; y: number }>;
-  imageToggleState: TypeImageContext;
+  imageToggleState: TypeBooleanContext;
   toggleImageState: () => void;
   imageInputCompPosRef: RefObject<{ x: number; y: number }>;
   imageInputCompRef: RefObject<HTMLDivElement | null>;
 
   //Global Video Component for data input
   videoInputOffSet: RefObject<{ x: number; y: number }>;
-  videoToggleState: TypeVideoContext;
+  videoToggleState: TypeBooleanContext;
   toggleVideoState: () => void;
   videoInputCompPosRef: RefObject<{ x: number; y: number }>;
   videoInputCompRef: RefObject<HTMLDivElement | null>;
@@ -74,7 +68,7 @@ interface IWorkspaceContextType {
 }
 
 const WorkspaceContextType = createContext<IWorkspaceContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const WorkspaceContextProvider = ({
@@ -94,7 +88,7 @@ export const WorkspaceContextProvider = ({
   const textInputOffSet = useRef<any>({ x: 0, y: 0 });
 
   const [textToggleState, setTextToggleState] =
-    useState<TypeTextContext>(false);
+    useState<TypeBooleanContext>(false);
   const toggleTextState = () => {
     setTextToggleState((prev) => (prev === false ? true : false));
   };
@@ -110,7 +104,7 @@ export const WorkspaceContextProvider = ({
   const audioInputOffSet = useRef<any>({ x: 0, y: 0 });
 
   const [audioToggleState, setAudioToggleState] =
-    useState<TypeAudioContext>(false);
+    useState<TypeBooleanContext>(false);
   const toggleAudioState = () => {
     setAudioToggleState((prev) => (prev === false ? true : false));
   };
@@ -126,7 +120,7 @@ export const WorkspaceContextProvider = ({
   const imageInputOffSet = useRef<any>({ x: 0, y: 0 });
 
   const [imageToggleState, setImageToggleState] =
-    useState<TypeImageContext>(false);
+    useState<TypeBooleanContext>(false);
   const toggleImageState = () => {
     setImageToggleState((prev) => (prev === false ? true : false));
   };
@@ -142,7 +136,7 @@ export const WorkspaceContextProvider = ({
   const videoInputOffSet = useRef<any>({ x: 0, y: 0 });
 
   const [videoToggleState, setVideoToggleState] =
-    useState<TypeVideoContext>(false);
+    useState<TypeBooleanContext>(false);
   const toggleVideoState = () => {
     setVideoToggleState((prev) => (prev === false ? true : false));
   };
@@ -159,7 +153,7 @@ export const WorkspaceContextProvider = ({
 
   const updateWorkspaceData = async () => {
     const routeResponse = await fetch(
-      `http://localhost:3000/api/account/${params.accountid}/dashboard/workspace-management/workspace/${params.workspaceid}/${params.workspacename}`
+      `http://localhost:3000/api/account/${params.accountid}/dashboard/workspace-management/workspace/${params.workspaceid}/${params.workspacename}`,
     );
     if (routeResponse.ok) {
       const response = await routeResponse.json();
@@ -181,7 +175,7 @@ export const WorkspaceContextProvider = ({
 
   const toggleWorkspaceSizePropertiesState = () => {
     setWorkspaceSizePropertiesToggleState((prev) =>
-      prev === false ? true : false
+      prev === false ? true : false,
     );
   };
 
@@ -190,7 +184,7 @@ export const WorkspaceContextProvider = ({
     useState<TypeWorkspaceInputContext>("");
   const updateDataBoardWorkspaceHeight = (height: string) => {
     setWorkspaceSizeHeight((prev) =>
-      prev === workspaceHeight ? height : workspaceHeight
+      prev === workspaceHeight ? height : workspaceHeight,
     );
   };
 
@@ -199,7 +193,7 @@ export const WorkspaceContextProvider = ({
     useState<TypeWorkspaceInputContext>("");
   const updateDataBoardWorkspaceWidth = (width: string) => {
     setWorkspaceSizeWidth((prev) =>
-      prev === workspaceWidth ? width : workspaceWidth
+      prev === workspaceWidth ? width : workspaceWidth,
     );
   };
 
@@ -261,7 +255,7 @@ export const useWorkspaceContext = () => {
   const context = useContext(WorkspaceContextType);
   if (!context)
     throw new Error(
-      "useWorkspaceContext must be used inside WorkspaceContextProvider"
+      "useWorkspaceContext must be used inside WorkspaceContextProvider",
     );
   return context;
 };

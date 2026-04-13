@@ -164,11 +164,10 @@ const Info = ({ params }: any) => {
               method: "PATCH",
               credentials: "include",
               headers: {
-                "x-active-user": userid,
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(updateAccountData),
-            }
+            },
           );
           if (updatedData.ok) {
             toast.success("Account Info Has Been Changed", {
@@ -209,7 +208,7 @@ const Info = ({ params }: any) => {
       if (islocked === false) {
         toast.warning(
           "Once you click on Delete account, all your Canvaspaces and account itself will be deleted! This operation 'Cannot' be reversed.",
-          { autoClose: 12000 }
+          { autoClose: 12000 },
         );
       }
     }, [islocked]);

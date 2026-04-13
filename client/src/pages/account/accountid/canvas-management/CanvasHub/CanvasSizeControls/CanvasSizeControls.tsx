@@ -6,7 +6,7 @@ import {
 import { DivClass } from "../../../../../../ui/Div";
 import "./canva-controls.css";
 import { LongText } from "../../../../../../ui/LongText";
-import { useCanvasContext } from "../../DataComponents/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,15 +15,15 @@ import { toast } from "react-toastify";
 const CanvasSizeControls = () => {
   try {
     const {
+      canvasData,
+      updateCanvasData,
       canvasHeight,
       canvasWidth,
-      updateDataBoardCanvasHeight,
-      updateDataBoardCanvasWidth,
-      toggleCanvasSizePropertiesState,
-      canvasSizePropertiesToggleState,
+      setCanvasSizeHeight,
+      setCanvasSizeWidth,
+      canvasSizePropertiesToggle,
+      setCanvasSizePropertiesToggle,
     } = useCanvasContext();
-
-    const { canvasData, updateCanvasData } = useCanvasContext();
     const [updatedHeight, setUpdatedHeight] = useState<string>("");
     const [updatedWidth, setUpdatedWidth] = useState<string>("");
     const { userid, canvaid } = useParams();
@@ -46,7 +46,6 @@ const CanvasSizeControls = () => {
             credentials: "include",
 
             headers: {
-              "x-active-user": userid,
               "Content-Type": "application/json",
             },
             body: JSON.stringify(newData),
@@ -76,7 +75,7 @@ const CanvasSizeControls = () => {
         <LongText className={"canvas-controls-text"}>Resize Canvas</LongText>
         {/* make height and width editable and immutable */}
         <DivClass className={"height-container"}>
-          {canvasSizePropertiesToggleState ? (
+          {canvasSizePropertiesToggle ? (
             <>
               <span className="y-label">Height:</span>
               <InputEnabledText
@@ -84,7 +83,7 @@ const CanvasSizeControls = () => {
                 className={"mutable-height"}
                 value={canvasHeight ? canvasHeight : ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  updateDataBoardCanvasHeight(event.target.value);
+                  setCanvasSizeHeight(event.target.value);
                   setUpdatedHeight(event.target.value);
                 }}
                 placeholder="Update height"
@@ -109,7 +108,7 @@ const CanvasSizeControls = () => {
           )}
         </DivClass>
         <DivClass className={"width-container"}>
-          {canvasSizePropertiesToggleState ? (
+          {canvasSizePropertiesToggle ? (
             <>
               <label className="x-label">Width:</label>
               <InputEnabledText
@@ -118,7 +117,7 @@ const CanvasSizeControls = () => {
                 value={canvasWidth ? canvasWidth : ""}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   event.preventDefault();
-                  updateDataBoardCanvasWidth(event.target.value);
+                  setCanvasSizeWidth(event.target.value);
                   setUpdatedWidth(event.target.value);
                 }}
                 placeholder="Update width"
@@ -148,12 +147,10 @@ const CanvasSizeControls = () => {
             className={"toggle-visual-ops"}
             onClick={(e) => {
               e.preventDefault();
-              toggleCanvasSizePropertiesState(canvasSizePropertiesToggleState);
+              setCanvasSizePropertiesToggle(!canvasSizePropertiesToggle);
             }}
           >
-            {canvasSizePropertiesToggleState
-              ? "View Properies"
-              : "Edit Properies"}
+            {canvasSizePropertiesToggle ? "View Properies" : "Edit Properies"}
           </div>
         </DivClass>
         <DivClass className={"update-spacing-btn-wrapper opacity-80"}>
@@ -168,7 +165,7 @@ const CanvasSizeControls = () => {
             //       : "cursor-pointer",
             // }}
             className={`update-spacing-btn ${
-              canvasSizePropertiesToggleState === false ||
+              canvasSizePropertiesToggle === false ||
               canvasWidth?.length === 0 ||
               canvasHeight?.length === 0
                 ? "cursor-not-allowed"

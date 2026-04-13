@@ -9,32 +9,40 @@ import accountRouter from "./api/routes/account-info/account-info.js";
 import canvasManagementRouter from "./api/routes/canvas-management/canvas-management.js";
 import singleDynamiCanvaDataGroupRouter from "./api/routes/canvas-management/single-dynamic-canva-data-group.js";
 import cors from "cors"
-import AuthService from "./lib/Auth.js";
+import helmet from "helmet";
+import { isAuthenticated } from "./lib/Auth.js";
 import cookieParser from "cookie-parser";
 import signOut from "./api/routes/signout-route/signout-group.js";
 import AccountRecoveryRouter from "./api/routes/account-recovery/AccountRecoveryGroup.js";
+import morgan from "morgan";
+import searchRouter from "./api/routes/canvas-management/canvas-search.js";
+import videoLoader from "./api/routes/canvas-management/videoLoader.js";
+import imageLoader from "./api/routes/canvas-management/imageLoader.js";
 const app = express();
 
 try {
-
+    const allowedOrigins = process.env.LOCAL_URL || process.env.CLOUD_URL;//the frontend port location
     //allow frontend communication
-    app.use(cookieParser());
+    app.set("trust proxy", 1);
+    app.use(cookieParser())
+    app.use(morgan('dev'))
+    app.use(helmet())
     app.use(cors({
-        origin: "http://localhost:5176",//the frontend port location
+        origin: allowedOrigins,
         credentials: true//allow cookies to be sent
-    }));
+    }))
 
     //enable submissions
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json())
+    app.use(express.urlencoded({ extended: true }))
 
     //routes no auth
-    app.use("/api/signup-portal", registerRouter);
-    app.use("/api/signin-portal", loginRouter);
+    app.use("/api/signup-portal", registerRouter)
+    app.use("/api/signin-portal", loginRouter)
     app.use("/api/signin-portal", AccountRecoveryRouter);
 
     //routes auth required
-    app.get("/api/auth-check", AuthService.isAuthenticated, (req, res) => {
+    app.get("/api/auth-check", isAuthenticated, (req, res) => {
         res.status(200).json({
             code: "AUTHENTICATED",
             userid: req.user.sub,
@@ -42,12 +50,19 @@ try {
         });
     });
 
-    app.use("/api/account", AuthService.isAuthenticated, accountRouter);
-    app.use("/api/account", AuthService.isAuthenticated, canvasManagementRouter);
-    app.use("/api/account", AuthService.isAuthenticated, singleDynamiCanvaDataGroupRouter);
-    app.use("/api/account", AuthService.isAuthenticated, signOut);
+    app.use("/api/account", isAuthenticated, accountRouter);
+    app.use("/api/account", isAuthenticated, canvasManagementRouter);
+    app.use("/api/account", isAuthenticated, searchRouter);
+    app.use("/api/account", isAuthenticated, singleDynamiCanvaDataGroupRouter);
+    //router endpoint called loader for simplicity
+    app.use("/api/account", isAuthenticated, videoLoader);//router endpoint called loader for simplicity
+    app.use("/api/account", isAuthenticated, imageLoader);//router endpoint called loader for simplicity
+    app.use("/api/account", isAuthenticated, signOut);
 
-    app.listen(port, () => console.log(`http://localhost:${port}`));
+    //becomes dynamic when deployed to a backend node hosting service and when offlines it switches to localhost
+    if (allowedOrigins === process.env.LOCAL_URL) {
+        app.listen(port, () => console.log(`http://localhost:${port}`));
+    }
 }
 catch (err) {
     console.warn("server anomaly message: ", err.message);

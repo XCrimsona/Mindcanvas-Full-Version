@@ -1,9 +1,5 @@
 @use '../styles/index' as style;
 
-:root {
-    background: linear-gradient(90deg, style.$darkAsdhBlack 20%, style.$Gold, style.$darkAsdhBlack 80%);
-}
-
 .main-workspace-management-container {
     @include style.margin-x-y(style.$space-0, style.$auto, style.$space-0 , style.$auto );
 
@@ -22,12 +18,47 @@
         //for screen orientation landscape mode
 
         .workspace-sheets-wrapper {
-            .canva-management-heading-one {
+
+            .page-info-container {
+                display: inline-flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin: 4px 0 0 20px;
                 color: #ffffff;
-                margin: 0px auto 0px auto;
-                padding: 10px 0px 0px 0px;
-                text-align: center;
-                font-size: 32px;
+                gap: 16px;
+                /*spacing between items */
+
+                .canva-management-heading-one {
+                    text-align: center;
+                    font-size: 32px;
+                    width: fit-content;
+                }
+
+                .add-canvaspace {
+                    cursor: help;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 240px;
+                    border-radius: 10px;
+                    border: 1px solid var(--Gold);
+                    font-size: var(--font12);
+                    height: 30px;
+                    background-color: #0008;
+                }
+
+                .new-canvaspace {
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 180px;
+                    border-radius: 10px;
+                    border: 1px solid var(--Gold);
+                    font-size: var(--font12);
+                    height: 30px;
+                    background-color: #0008;
+                }
             }
 
             border-radius: 10px;
@@ -149,7 +180,7 @@
 
                 .workspace-sheets {
                     width: 620px;
-                    height: 670px;
+                    height: 740px;
                     width: 98%;
                 }
             }
@@ -174,7 +205,7 @@
 
                 .workspace-sheets {
                     width: 620px;
-                    height: 670px;
+                    height: 760px;
                     width: 98%;
                 }
             }

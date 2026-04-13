@@ -1,3 +1,12 @@
+:root {
+    --darkAsdhBlack: #000000;
+    --Gold: #fabb00;
+    background: linear-gradient(90deg, var(--darkAsdhBlack) 20%, var(--Gold), var(--darkAsdhBlack) 80%);
+    --font10: 10px;
+    --font12: 12px;
+    --font14: 14px
+}
+
 html,
 body {
     margin: 0;

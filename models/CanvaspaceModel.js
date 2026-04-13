@@ -65,41 +65,15 @@ const workspaceSchema = new mongoose.Schema(
 const canvaspaceModel = mongoose.model("workspaces", workspaceSchema);
 export default canvaspaceModel;
 
-// OPTIONAL FEATURE for sharing workspaces
-// isPublic: {
-//     type: Boolean,
-//     default: false
-//   }
+workspaceSchema.pre("save", function (next) {
+  if (this.name) this.nameLower = this.name.toLowerCase();
+  if (this.workspacename) this.workspacenameLower = this.workspacename.toLowerCase();
+  if (this.description) this.descriptionLower = this.description.toLowerCase();
+  next();
+});
 
-// workspaceSchema.pre("save", function (next) {
-//   if (!this.isModified("owner")) {
-//     return next(
-//       new Error(
-//         "The 'owner' field data is immutable and cannot be changed once set."
-//       )
-//     );
-//   }
-//   next();
-// });
-
-// workspaceSchema.pre("save", function (next) {
-//   if (!this.isModified("createdBy")) {
-//     return next(
-//       new Error(
-//         "The 'createdBy' field data is immutable and cannot be changed once set."
-//       )
-//     );
-//   }
-//   next();
-// });
-
-// workspaceSchema.pre("save", function (next) {
-//   if (!this.isModified("dateCreated")) {
-//     return next(
-//       new Error(
-//         "The 'createdBy' field data is immutable and cannot be changed once set."
-//       )
-//     );
-//   }
-//   next();
-// });
+workspaceSchema.index({ name: "text", workspacename: "text", description: "text" })
+workspaceSchema.index({ nameLower: 1 })
+workspaceSchema.index({ owner: 1 })
+workspaceSchema.index({ workspacenameLower: 1 })
+workspaceSchema.index({ descriptionLower: 1 })

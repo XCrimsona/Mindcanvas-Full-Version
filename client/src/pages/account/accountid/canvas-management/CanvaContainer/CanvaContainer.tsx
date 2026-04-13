@@ -1,34 +1,37 @@
 import { DivClass } from "../../../../../ui/Div";
 import "./data-container.css";
-import TextInputUnit from "../DataComponents/text/TextInputUnit";
-import { useCanvasContext } from "../DataComponents/canva-data-provider/CanvasDataContextProvider";
+import TextInputUnit from "../form-components/text/TextInputUnit";
+import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
 import CanvasData from "../canvas-data/CanvasData";
-import RepositionLiveData from "../DataComponents/mediaReposition/RepositionLiveData";
-// import AudioInputUnit from "./DataComponents/audio/AudioInputUnit";
-// import ImageInputUnit from "../DataComponents/image/ImageInputUnit";
-// import VideoInputUnit from "./DataComponents/video/VideoInputUnit";
+import RepositionLiveData from "../form-components/mediaReposition/RepositionLiveData";
+// import AudioInputUnit from "./form-components/audio/AudioInputUnit";
+import DoughnutChartInputUnit from "../form-components/chart/DoughnutChartInputUnit";
+import TextLinkInputUnit from "../form-components/link/LinkInputUnit";
+import VideoInputUnit from "../form-components/video/VideoInputUnit";
+import ImageInputUnit from "../form-components/image/ImageInputUnit";
 const CanvaContainer = () => {
   const { dataScrollBoardRef, canvasData } = useCanvasContext();
-
+  const canvaspaceSize = canvasData.data?.workspaceNameData?.canvaspace?.size;
   return (
     <DivClass className={"data-container"}>
       <div
         className={"data-scroll-board"}
         ref={dataScrollBoardRef}
         style={{
-          width: `${canvasData.data?.workspaceNameData?.canvaspace?.size?.width}px`,
-          height: `${canvasData.data?.workspaceNameData?.canvaspace?.size?.height}px`,
+          width: `${canvaspaceSize?.width}px`,
+          height: `${canvaspaceSize?.height}px`,
           transition: "height .2s ease-in-out, width .2s ease-in-out",
         }}
       >
         {/* Below InputUnits used for multi media submits */}
         <TextInputUnit />
+        <DoughnutChartInputUnit />
+        <TextLinkInputUnit />
         {/* <AudioInputUnit params={params} /> */}
-        {/* <ImageInputUnit /> */}
-        {/* <VideoInputUnit params={params} /> */}
-        {/* display cloud data below */}
-        <RepositionLiveData />
+        <ImageInputUnit />
+        <VideoInputUnit />
 
+        <RepositionLiveData />
         <CanvasData />
       </div>
     </DivClass>

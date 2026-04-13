@@ -30,7 +30,7 @@ const AuthHeader = () => {
       <DivClass className={"account-dashboard-content"}>
         <DivClass className={`${"dashboard-link-component"}`}>
           <RouteLink
-            className={"auth-link-component-built-in-app"}
+            className={"auth-link-component-built-in-app underline"}
             href={`/account/${userid}/account-info`}
           >
             Account Info

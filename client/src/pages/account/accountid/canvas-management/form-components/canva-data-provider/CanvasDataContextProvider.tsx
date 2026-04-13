@@ -1,0 +1,445 @@
+import {
+  createContext,
+  MutableRefObject,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useParams } from "react-router-dom";
+
+//component hub button toggling core definitions
+//component hub text button toggler values
+type TypeBooleanContext = true | false;
+
+type TypeCanvasData = any | null;
+//Canvas data text input component types
+type TypeCanvasInputContext = string | null;
+
+interface ICanvasContextType {
+  hasInitializedPositionRef: MutableRefObject<boolean>;
+  dataScrollBoardRef: MutableRefObject<HTMLDivElement | null>;
+  globalDraggingRef: MutableRefObject<TypeBooleanContext>;
+
+  //Global Text Component for data input
+  textInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  textToggle: TypeBooleanContext;
+  setTextToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+  //??above
+  textInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  textInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //Global Text Component for data input
+  textLinkInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  textLinkToggle: TypeBooleanContext;
+  setTextLinkToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+
+  //??above
+  textLinkInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  textLinkInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //Global Doughnut Chart Component for data input
+  doughnutChartInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  doughnutChartToggle: TypeBooleanContext;
+  setDoughnutChartToggle: React.Dispatch<
+    React.SetStateAction<TypeBooleanContext>
+  >;
+  //componenthub toggler
+  doughnutChartInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  doughnutChartInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //upcoming list feature
+  //Global Doughnut Chart Component for data input
+  listInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  listToggle: TypeBooleanContext;
+  setListToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+  //componenthub toggler
+  listInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  listInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //Global Doughnut Chart Component for data input
+  listItemInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  listItemToggle: TypeBooleanContext;
+  setListItemToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+  //componenthub toggler
+  listItemInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  listItemInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //Global Audio Component for data input
+  audioInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  audioToggle: TypeBooleanContext;
+  setAudioToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+  //componenthub toggler
+  audioInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  audioInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //Global Image Component for data input
+  imageInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  imageToggle: TypeBooleanContext;
+  setImageToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+  //componenthub toggler
+  imageInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+  imageInputCompRef: MutableRefObject<HTMLDivElement | null>;
+
+  //Global Video Component for data input
+  videoInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  videoToggle: TypeBooleanContext;
+  setVideoToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+  //componenthub toggler
+  videoInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  videoInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+
+  //Global Data Component
+  //Element used to carry database and responsible for mapping
+  canvasData: any | null;
+  setCanvasData: React.Dispatch<React.SetStateAction<any | null>>;
+  // setFreshCanvasData: (source: any) => void;
+  updateCanvasData: () => void;
+
+  //Canvas size, height and width
+  canvasSizePropertiesToggle: boolean;
+  setCanvasSizePropertiesToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  // toggleCanvasSizeProperties: () => void;
+  // toggleCanvasSizePropertiesState: (value: boolean) => void;
+  canvasWidth: string | null;
+  setCanvasSizeHeight: React.Dispatch<React.SetStateAction<string | null>>;
+  canvasHeight: string | null;
+  setCanvasSizeWidth: React.Dispatch<React.SetStateAction<string | null>>;
+  // updateDataBoardCanvasHeight: (height: string) => void;
+  // updateDataBoardCanvasWidth: (width: string) => void;
+
+  repositionInputOffSet: MutableRefObject<{ x: number; y: number }>;
+  // repositionWindowToggle: React.Dispatch<
+  //   React.SetStateAction<TypeBooleanContext>
+  // >;
+  repositionData: any;
+  setRepositionData: React.Dispatch<React.SetStateAction<{}>>;
+
+  repositionWindow: TypeBooleanContext;
+  setRepositionWindow: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
+
+  repositionInputCompRef: MutableRefObject<HTMLDivElement | null>;
+  repositionInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
+  //Global reposition Component for live data
+}
+
+const CanvasContextType = createContext<ICanvasContextType | undefined>(
+  undefined,
+);
+
+const CanvasDataContextProvider = ({
+  // source,
+  children,
+}: {
+  // source: any;
+  children: ReactNode;
+}) => {
+  const hasInitializedPositionRef = useRef<TypeBooleanContext>(false);
+  //globally assigned window
+  const dataScrollBoardRef = useRef<HTMLDivElement>(null);
+  //used as failsafe to prevent accidental drags====this one may not be necessary
+  const globalDraggingRef = useRef<TypeBooleanContext>(false);
+
+  //Text Component
+  //Canvas Text Button toggle logic on the ComponentHub popup box
+  const textInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [textToggle, setTextToggle] = useState<TypeBooleanContext>(false);
+  //find text input component's dom reference and x,y position under the
+  //data-scroll-board component as absolute value
+  const textInputCompRef = useRef<HTMLDivElement>(null);
+  //for position reference
+  let textInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //we are creating  link commponent where whole https links will open via a _blank page when clicked on.
+  //Canvas Text Button toggle logic on the ComponentHub popup box
+  const textLinkInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [textLinkToggle, setTextLinkToggle] =
+    useState<TypeBooleanContext>(false);
+  const textLinkInputCompRef = useRef<HTMLDivElement>(null);
+  let textLinkInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //Doughnut Chart Component
+  //Canvas Doughnut Chart Button toggle logic on the ComponentHub popup box
+  const doughnutChartInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [doughnutChartToggle, setDoughnutChartToggle] =
+    useState<TypeBooleanContext>(false);
+  const doughnutChartInputCompRef = useRef<HTMLDivElement>(null);
+  //for position reference
+  let doughnutChartInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //upcoming list feature
+  //List Component
+  const listInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [listToggle, setListToggle] = useState<TypeBooleanContext>(false);
+  const listInputCompRef = useRef<HTMLDivElement>(null);
+  let listInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //ListItem Component
+  const listItemInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [listItemToggle, setListItemToggle] =
+    useState<TypeBooleanContext>(false);
+  const listItemInputCompRef = useRef<HTMLDivElement>(null);
+  let listItemInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //Audio Component
+  //Canvas Audio Button toggle logic on the ComponentHub popup box
+  const audioInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [audioToggle, setAudioToggle] = useState<TypeBooleanContext>(false);
+
+  //find audio input component's dom reference and x,y position under the
+  //data-scroll-board component as absolute value
+  const audioInputCompRef = useRef<HTMLDivElement>(null);
+  //for position reference
+  const audioInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //IMAGE Component
+  //Canvas Image Button toggle logic on the ComponentHub popup box
+  const imageInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [imageToggle, setImageToggle] = useState<TypeBooleanContext>(false);
+  //find text input component's dom reference and x,y position under the
+  //data-scroll-board component as absolute value
+  const imageInputCompRef = useRef<HTMLDivElement>(null);
+  //for position reference
+  const imageInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //VIDEO Component
+  //Canvas Image Button toggle logic on the ComponentHub popup box
+  const videoInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const [videoToggle, setVideoToggle] = useState<TypeBooleanContext>(false);
+  //find text input component's dom reference and x,y position under the
+  //data-scroll-board component as absolute value
+  const videoInputCompRef = useRef<HTMLDivElement>(null);
+  //for position reference
+  let videoInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+
+  //Element used to carry database user data and responsible for mapping with an addtional
+  //'data' object to ensure the data is mappable from all fetches since the backend uses a
+  //data object when returning mutiple types of data that the frontend requires.
+  const [canvasData, setCanvasData] = useState<{}>({});
+
+  //have a backup copy
+  //////////ORGINAL BELOW -- the newer version was moved lower due due:
+  //Block-scoped variable 'doughnutChartToggleState' used before its declaration
+  // useEffect(() => {
+  //   if (textToggleState === false) {
+  //     hasInitializedPositionRef.current = false;
+  //   }
+  // }, [textToggleState]);
+  // ///////////////////ORGINAL ABOVE
+
+  const { userid, canvaid } = useParams();
+
+  const updateCanvasData = async () => {
+    if (!userid) return;
+    const routeResponse = await fetch(
+      `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
+      {
+        method: "GET",
+        credentials: "include",
+      },
+    );
+    const response: any = await routeResponse.json();
+    // console.log("from updateCanvasData data reload ccomponent ", response);
+
+    if (!response.success) {
+      switch (response.code) {
+        case "UNAUTHENTICATED":
+          window.location.reload();
+          break;
+        default:
+          console.log("route error");
+
+          return {
+            status: "error",
+            message: response.message || "Unhandled backend condition.",
+          };
+      }
+    } else {
+      const latestData = {
+        data: response,
+      };
+      setCanvasData(latestData);
+    }
+  };
+
+  //Canvas height and width above Canvas Size Properties
+  //toggle view and edit buttons
+  const [canvasSizePropertiesToggle, setCanvasSizePropertiesToggle] =
+    useState<TypeBooleanContext>(false);
+
+  /////////////////HEIGHT + WIDTH/////////////////////////////
+  //to adjust the data-scroll-board div element's width
+  //both fields must be filled to update the canvas size
+  const [canvasHeight, setCanvasSizeHeight] =
+    useState<TypeCanvasInputContext>(""); //updates in real time per user request
+  //to adjust the canvas-board div element's height
+  const [canvasWidth, setCanvasSizeWidth] =
+    useState<TypeCanvasInputContext>(""); //updates in real time per user request
+
+  //DO NOT REMOVE PRODUCT NOT COMPLETE
+  //backup
+  // dataScrollBoardRef,
+  // textInputOffSet,
+  // globalDraggingRef,
+  // textInputCompPosRef,
+  // textInputCompRef;
+
+  //Reposition Component
+  //Canvas Text Button toggle logic on the ComponentHub popup box
+  // const mediaInputOffSet = useRef<any>({ x: null, y: null });
+
+  //state manager
+  const [repositionWindow, setRepositionWindow] =
+    useState<TypeBooleanContext>(false);
+  // const updateRepositionWindow = (value: boolean) => {
+  // setRepositionWindow(value);
+  // };
+  const repositionInputOffSet = useRef<any>({ x: 0, y: 0 });
+  const repositionInputCompRef = useRef<HTMLDivElement>(null);
+  //for position reference
+  const repositionInputCompPosRef = useRef<any>({ x: 0, y: 0 });
+  //data-scroll-board component as absolute value and is used to update the position of a fragment.
+  //purpose of compoent??????? --carrie x amount of data for the media draggable
+  const [repositionData, setRepositionData] = useState<{}>({});
+
+  //latest version
+  //next time more draggables are added to create more dynamic content, be sure to add them below so they get recenter and dont break the while UI system that other components use.
+  useEffect(() => {
+    if (textToggle === false) {
+      hasInitializedPositionRef.current = false;
+    }
+    if (doughnutChartToggle === false) {
+      hasInitializedPositionRef.current = false;
+    }
+    if (textLinkToggle === false) {
+      hasInitializedPositionRef.current = false;
+    }
+    if (imageToggle === false) {
+      hasInitializedPositionRef.current = false;
+    }
+    if (videoToggle === false) {
+      hasInitializedPositionRef.current = false;
+    }
+    if (repositionWindow === false) {
+      hasInitializedPositionRef.current = false;
+    }
+  }, [
+    textToggle,
+    doughnutChartToggle,
+    textLinkToggle,
+    imageToggle,
+    videoToggle,
+    repositionWindow,
+  ]);
+  return (
+    <CanvasContextType.Provider
+      value={{
+        hasInitializedPositionRef,
+        dataScrollBoardRef,
+        //draggable boolean failsafe unit to prevent accidental drag event through
+        // mouse all components that use mouseevents
+        globalDraggingRef,
+
+        //Text Button toggle functions
+        textInputOffSet,
+        textToggle,
+        setTextToggle,
+
+        textInputCompPosRef,
+        textInputCompRef,
+
+        //Text Button toggle functions
+        textLinkInputOffSet,
+        textLinkToggle,
+        setTextLinkToggle,
+        textLinkInputCompPosRef,
+        textLinkInputCompRef,
+
+        //Doughnut Chart Button toggle functions
+        doughnutChartInputOffSet,
+        doughnutChartToggle,
+        setDoughnutChartToggle,
+        doughnutChartInputCompRef,
+        doughnutChartInputCompPosRef,
+
+        //upcoming list feature
+        listInputOffSet,
+        listToggle,
+        setListToggle,
+        listInputCompRef,
+        listInputCompPosRef,
+        //upcoming list item feature
+        listItemInputOffSet,
+        listItemToggle,
+        setListItemToggle,
+        listItemInputCompRef,
+        listItemInputCompPosRef,
+
+        //Audio Button toggle functions
+        audioInputOffSet,
+        audioToggle,
+        setAudioToggle,
+        audioInputCompRef,
+        audioInputCompPosRef,
+
+        //Image Button toggle functions
+        imageInputOffSet,
+        imageToggle,
+        setImageToggle,
+        imageInputCompRef,
+        imageInputCompPosRef,
+
+        //Video Button toggle functions
+        videoInputOffSet,
+        videoToggle,
+        setVideoToggle,
+        videoInputCompRef,
+        videoInputCompPosRef,
+
+        //data
+        canvasData,
+        setCanvasData,
+
+        updateCanvasData,
+        //Canvas size height and width
+        canvasSizePropertiesToggle,
+        setCanvasSizePropertiesToggle,
+
+        canvasHeight,
+        setCanvasSizeHeight,
+
+        canvasWidth,
+        setCanvasSizeWidth,
+        // updateDataBoardCanvasHeight,
+        // updateDataBoardCanvasWidth,
+
+        //reposition component
+        repositionData,
+        setRepositionData,
+        // repositionWindowToggle,
+        repositionWindow,
+        setRepositionWindow,
+
+        repositionInputOffSet,
+        repositionInputCompRef,
+        repositionInputCompPosRef,
+        // processTextMouseDown,
+      }}
+    >
+      {children}
+    </CanvasContextType.Provider>
+  );
+};
+
+export default CanvasDataContextProvider;
+
+export const useCanvasContext = () => {
+  const context = useContext(CanvasContextType);
+  if (!context)
+    throw new Error(
+      "useCanvasContext must be used inside CanvasDataContextProvider",
+    );
+  return context;
+};

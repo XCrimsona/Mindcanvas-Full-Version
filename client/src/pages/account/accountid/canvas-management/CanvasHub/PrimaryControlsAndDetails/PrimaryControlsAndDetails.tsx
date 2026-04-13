@@ -5,7 +5,7 @@ import Button from "../../../../../../components/form-elements/Button";
 import { InputDisabledText } from "../../../../../../components/form-elements/dry-InputFormComponents";
 import SVG from "../../../../../../SVG";
 import { useMaskSensitiveData } from "../../MaskSensitiveData";
-import { useCanvasContext } from "../../DataComponents/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 import { useCanvasDeletionContext } from "../../delete-data/CanvasDeletionOpsContext";
 import { useParams } from "react-router-dom";
 
@@ -53,7 +53,7 @@ const PrimaryControlsAndDetails = () => {
 
     //The complete sensitive data toggle features for events like screenshare data protetion
     const toggleSenstiveCanvasName = (
-      e: React.FormEvent<HTMLButtonElement>
+      e: React.FormEvent<HTMLButtonElement>,
     ) => {
       e.preventDefault();
       setToggleCanvasNameEye(!toggleCanvasNameEye);
@@ -79,7 +79,7 @@ const PrimaryControlsAndDetails = () => {
                         ? canvasData?.data?.workspaceNameData?.workspaceTextName
                         : maskSensitiveData(
                             canvasData?.data?.workspaceNameData
-                              ?.workspaceTextName
+                              ?.workspaceTextName,
                           )
                     }`
                   : "You need to login"

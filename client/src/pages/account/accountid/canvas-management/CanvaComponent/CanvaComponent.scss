@@ -31,17 +31,6 @@
                 @include style.flex-align(wrap);
                 @include style.align-text(center);
                 @include style.border-radius(4px);
-
-                .media-fragment-hub-toggle-icon {
-                    cursor: pointer;
-
-                    img {
-                        display: block;
-                        width: 30px;
-                        height: 30px;
-                        object-fit: cover;
-                    }
-                }
             }
 
 

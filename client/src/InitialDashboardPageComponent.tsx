@@ -1,5 +1,5 @@
 import { DivClass } from "./ui/Div";
-import DataManagement from "./DataManagement";
+import DataManagement from "./CanvasManagement";
 import AuthHeader from "../auth/auth-partials/AuthHeader";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -17,11 +17,7 @@ const InitialDashboardPageComponent = () => {
       {
         method: "GET",
         credentials: "include",
-        headers: {
-          "x-active-user": userid,
-          "Content-Type": "application/json",
-        },
-      }
+      },
     );
     if (response.ok) {
       const data = await response.json();

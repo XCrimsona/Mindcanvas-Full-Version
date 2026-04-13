@@ -3,7 +3,7 @@ import { useCanvasDeletionContext } from "../delete-data/CanvasDeletionOpsContex
 import Button from "../../../../../components/form-elements/Button";
 import "./deletecanva.css";
 import { LongText } from "../../../../../ui/LongText";
-import { useCanvasContext } from "../DataComponents/canva-data-provider/CanvasDataContextProvider";
+import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
 
 const DeleteCanvas = () => {
   const { canvasDeletionState, hitClickDelete, canvasDeletionToggle } =

@@ -1,12 +1,12 @@
-.comp-hub-data-component-container {
+.comp-hub-data-fragment-container {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 0px;
   left: 0px;
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 350px;
   background-color: #000000;
   margin: 0px auto 0px auto;
   z-index: 4;
@@ -17,16 +17,16 @@
   box-shadow: 0px 0px 4px 2px rgba(250, 187, 0, 0.2509803922);
   border-radius: 4px;
 }
-.comp-hub-data-component-container .center-comp-hub-component {
+.comp-hub-data-fragment-container .center-comp-hub-component {
   position: relative;
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 330px;
   margin: 0px auto 0px auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.comp-hub-data-component-container .center-comp-hub-component .close-icon-wrapper {
+.comp-hub-data-fragment-container .center-comp-hub-component .close-icon-wrapper {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -40,24 +40,37 @@
   transform: rotate(45deg);
   cursor: pointer;
 }
-.comp-hub-data-component-container .center-comp-hub-component .close-icon-wrapper .close-icon {
+.comp-hub-data-fragment-container .center-comp-hub-component .close-icon-wrapper .close-icon {
   display: block;
   width: 20px;
   height: 20px;
   border-radius: 8px;
 }
-.comp-hub-data-component-container .center-comp-hub-component .comp-hub-data-creation-components .text-comp,
-.comp-hub-data-component-container .center-comp-hub-component .comp-hub-data-creation-components .audio-comp,
-.comp-hub-data-component-container .center-comp-hub-component .comp-hub-data-creation-components .image-comp,
-.comp-hub-data-component-container .center-comp-hub-component .comp-hub-data-creation-components .video-comp {
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .fragment-heading-text {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+}
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .textlink-comp,
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .text-comp,
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .audio-comp,
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .image-comp,
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .video-comp,
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .doughnut-chart-comp {
   width: 150px;
-  margin: 5px auto 5px auto;
+  margin-left: auto;
+  margin-right: auto;
   background-color: rgba(20, 20, 20, 0.7019607843);
   color: #ffffff;
   border-top: 2px solid rgba(0, 0, 0, 0.7019607843);
-  border-bottom: 2px solid rgba(0, 191, 160, 0.7019607843);
+  border-bottom: 2px solid rgba(250, 187, 0, 0.7019607843);
   border-left: 2px solid rgba(0, 0, 0, 0.7019607843);
   border-right: 2px solid rgba(0, 0, 0, 0.7019607843);
   border-radius: 4px;
-  cursor: grab;
+  font-size: 13px;
+  cursor: pointer;
+}
+.comp-hub-data-fragment-container .center-comp-hub-component .comp-hub-data-fragment-components .text-comp {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }/*# sourceMappingURL=comp-hub-data-components.css.map */
