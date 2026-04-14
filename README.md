@@ -17,7 +17,7 @@
 <h2>Install MongoDB software to run a local database as a service.</h2>
 <div>  
 <p style="inline">MongoDB Community Server Download
-<a href="https://www.mongodb.com/try/download/community">www.mongodb.com/try/download/community</a> 
+<a target="_blank"  href="https://www.mongodb.com/try/download/community">www.mongodb.com/try/download/community</a> 
 </p>
 </div>
 
