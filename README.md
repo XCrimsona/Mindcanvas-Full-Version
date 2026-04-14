@@ -1,101 +1,81 @@
-# BE ADVISED THIS DOCUMENT IS OUTDATED
+# BE ADVISED THIS DOCUMENT IS BEING IMPROVED
 # What is MindCanvas? 
-<p>For non-tech users: MindCanvas helps users organize information, tasks, and ideas with a visually appealing interface, and powerful layout features.</p>
-<p>For tech users: A full-stack productivity app built with the MERN stack. </p>
-<p>Designed for large screens | Working on better solutions for small screens</p>
+<p>A private, offline multi purpose tool to explore, analysize, create, make sense of complex data. For example does A4 page content feel too bland for when it comes to opening 16 word documents which makes data comparison hard to read? </p>
+
+<p>This tool is an alternative and does not replace Word, Excel but this tool offers flexiblity that may be critized as not a clean, pure software. Yes you do require training to use it correctly but its simple compared to how a person would navigate others platforms.
+
+<p>MindCanvas has powerful features that permit you to bring image and video content inside the same canvas, making summaries, data extraction from past recorded videos easier than traditional platforms that promise simplicity over flexibility and strong ux/user experience.</p>
+
+<p>Designed for large screens | Working on better solution for small screens</p>
 
 ## Public Collaboration
-<p>Kind note: I won't grant others permission to push new features to the original code because</p> 
-<ul>
-  <li>Nr1: It a trial version.</li> 
-  <li>Nr2: You may modify it without breaking the trial code so on your machine go nuts, its a great app, seriously...</li>
-</ul>
+<p>Kind note: This is a private project and when public, users will not be given permission to push new features to the original code.</p> 
 
-(Instructions in development)
-## Missing config | You need to create this yourself since .env uploads are dangerous
-create a .env file some keys you can set. 
-STRICTLY FOLLOW THE GUIDE for stable oeprations:
+## (Instructions for local use)
+<p>STRICTLY FOLLOW THE GUIDE FOR STABLE OPERATIONS:</p>
 
-Install MongoDB software to run a local database as a service.
+<h2>Install MongoDB software to run a local database as a service.</h2>
+<div>  
+<p style="inline">MongoDB Community Server Download
+<a href="https://www.mongodb.com/try/download/community">www.mongodb.com/try/download/community</a> 
+</p>
+</div>
 
-SECURE= false 
-SESSION_SECRET & JWT is a 64 character string 
-Another repository will have a generator for that: 32-64-character-string-generator
-
-DB_CONNECTION_STRING | local mongodb string recomended because its designed for localhost use| 
-
-Cloud Based: If you want to do it via mongodb cloud then change all api routes' localhost to https endpoints.
-(This isnt recommended because you may havily struggle configuring the reoutes)
-If you wish to go the cloud route, In the next few months, I will have the trial built for local and cloud which will include a local and cloud separated folders. 
-
-The default api route will be configured as local 
-
-
-JWT server token security is set to 1 hour expiry
-PORT 5000 | backend
-
-Check cors in server.js file for the frontend port details
+### Missing config | You need to create this yourself since .env uploads are dangerous</p>
+<p>================================================================================</p>
+<p>Another repository will have a generator for that: 32-64-character-string-generator. The main page will have a 64 character string generator so you may enable your backend so run properly</p>
+<ol>
+  <li>
+    <p>Create a new .env file and put your own keys in it. DONT Share this file with anyone.</p>
+  </li>
+    
+  <li>
+    <p>SECURE = false</p>
+    <p>DB_CONNECTION_STRING = "mongodb://127.0.0.1:27017/mind-canvas?appName=mind-canvas"</p>
+    <p>SESSION_SECRET = 64 character string</p>
+    <p>LOCAL_URL = http://localhost:5176</p>
+    <p>PORT = 5000</p>
+  </li>
+</ol>
+<p>================================================================================</p>
 
 ## Automation
-<p>Currently working creating an automated startup using .bat files (CMD-Executable scripts) 
-<p>The .bat files don't touch OS files so don't worry</p>
+<p>Currently testing how the latest automated dual server startups function on different Operating systems.</p>
+<p>.ps1 files are config files to automate the start up of servers and have no malicous code. Feel free to use an AI to help you verify.</p>
 
-
-## personal note
-<p>NOTE: MindCanvas is </p>
+## personal notes
 <ul>
-  <li>One of many, but a powerful side project designed to demonstrate my <i>Software Development Engineer (SDE) skills</i> and <i>full-stack best practices</i></li>
-</ul>
-
-## Purpose
-<p>This is the trial version, however, MindCanvas enables users to:</p>
-<ul>
-  <li>
-  capture (Select), 
-  </li>
-  <li>structure (Move),</li>
-  <li>
-   and 
-    visualize (See) their:
-    <ul>
-      <li>
-       Thoughts
-      </li>
-      <li>
-       Tasks
-      </li>
-      <li>
-       And private project data efficiently.
-      </li>
-    </ul>
-  </li>
+  <li>MindCanvas is not some tool with AI. This doesnt have AI in it yet. </li>
+  <li>At first, April 2025, the app was designed to showcase my <i>Software Development/(Full stack) Engineer (SDE) skills which made me feel utterly useless</i>. After October 2025, I gained foresight to take it much further.</li>
 </ul>
 
 ## Features
 <ul> 
-  <li>Visual Dashboard: Modern, responsive UI for organizing and exploring complex information.</li>
-  <li>Personalization: User-specific boards and customizable workspace. (EgTotal privacy- no trackers, algorithms)</li>
-  <li>Task / Idea Management: Create, edit, delete tasks, notes. (I call these notes data fragments).</li>
-  <li>Project and Category organization: Group related notes, tasks, or ideas (if implemented).</li>
-  <li>Reliable Backend: Built with Node.js, Express, MongoDB, and strong TypeScript typing.</li>
+  <li>Smooth UX: Modern, responsive UI for organizing, creating and exploring complex data coming from the creator who uses it. The data is on your device including the database and no one else manages that data but the local creator of that data.</li>
+  
+  <li>Personalization: Limitless Canvaspaces. (Eg. Total privacy- no trackers, algorithms). Should there be later on, it may be a survey linked to google drive where mindcanvas creators fill the survey asked about how they are using it and which other/current features they would like to have/have improved) for better UX/User Experience.</li>
+  
+  <li>Fragment Management: Create, edit, delete data. (I call these pieces of data fragments).</li>
+  
+  <li>Reliable Backend: Built with Node.js, Express, MongoDB, and strong. (This is the first release and parts may still break.)</li>
+  
   <li>Responsive Design: Uses SCSS and CSS for smooth experience across devices.</li>
-  <li>Basic Authentication: User account creation and login powered by Bcrypt.js (MERN stack).</li>
+  
+  <li>Basic Authentication: User account creation and login powered by a library making it impossible to reverse password hashing which makes it harder to brute force for credentials. Bcrypt.js will be replaced by Argon2 for stronger login protection. The password reset feature is implemented but encryption is not yet integrated, passwords are still not physically readable even when stored in the database. </li>
 </ul>
 
-## Tests
-<p>The app is stable and all operation will work</p>
+## Tests / App status
+<p>The app is stable and all operations are functional</p>
 
-## Bugs
-<p>Final version will be on another repository, but this will will have its vulnerabilities patched when I discover them.</p>
+## Installs and Bugs
+<p>Installation and error log management guides are being improved over time. I thank you for your patience on this.</p>
+<p>The app's libraries will be updated when required to ensure vulnerabilities are patched before they get exploited.</p>
 
+## Status of the following features (Scheduled for development | Not yet started):
 <ul>
-  <li>I'm aware password reset isnt not avail yet, I have many other features im working on over time. I will have it done soon.</li>
-  <li>Status of the following features (Scheduled for development | Not yet started):</li>
-  <li>Level 2 Authentication</li>
-  <li>Data Backups: To prevent data loss</li>
+  <li>Data Backups: To minimize data loss</li>
 </ul>
 
-<p>Installation and error log management guides coming soon</p>
 
 ## Version
 **Current local version:** 2.1.1  
