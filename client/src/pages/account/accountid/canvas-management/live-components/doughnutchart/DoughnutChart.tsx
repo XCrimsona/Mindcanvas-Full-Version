@@ -16,7 +16,6 @@ import "../../form-components/chart/doughnutchart.css";
 ChartTsx.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChart = ({ data }: { data: any }) => {
-  // console.log("data: ", data);
   const dataset = data.datasets?.[0];
   const labelsAndDatasets = {
     labels: data.labels,
@@ -85,6 +84,7 @@ const DoughnutChart = ({ data }: { data: any }) => {
             }}
           ></span>
           <ShortText className={DoughnutChartClass.shortdescription}>
+            {/* custom legend UI will gain better ux input in the future */}
             {props.data}, Score: {props.label}
           </ShortText>
         </div>

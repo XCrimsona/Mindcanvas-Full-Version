@@ -1,3 +1,4 @@
+// feature not yet integrated---IN DEVELOPMENT
 import React, { useState } from "react";
 import Button from "../../../../../../components/form-elements/Button";
 import { DivClass, DivMouse } from "../../../../../../ui/Div";
@@ -8,7 +9,7 @@ import {
 import Label from "../../../../../../components/form-elements/Label";
 import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvider";
 import Select from "../../../../../../ui/selection/Select";
-import "./audio.css";
+import "../../../../../../../style-files/audio.css";
 
 const AudioInputUnit = ({ params }: any) => {
   try {
@@ -19,7 +20,7 @@ const AudioInputUnit = ({ params }: any) => {
       globalDraggingRef,
       audioInputCompPosRef,
       audioInputCompRef,
-      audioToggleState,
+      audioToggle,
       updateCanvasData,
     } = useCanvasContext();
 
@@ -80,12 +81,11 @@ const AudioInputUnit = ({ params }: any) => {
         );
         if (audio.ok) {
           //notification ok response
-          // alert("Your audio data has been saved!");
           updateCanvasData();
-          setNewAudioComponent({
-            ...newAudioComponent,
-            files: [],
-          });
+          // setNewAudioComponent({
+          //   ...newAudioComponent,
+          //   files: [],
+          // });
         } else {
           //notification failed response
           alert("Failed to save your audio data!");
@@ -148,7 +148,7 @@ const AudioInputUnit = ({ params }: any) => {
     };
 
     return (
-      audioToggleState && (
+      audioToggle && (
         <DivMouse
           className={"data-audio-component"}
           ref={audioInputCompRef}

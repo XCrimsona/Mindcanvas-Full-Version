@@ -1,0 +1,19 @@
+ {/* <Button
+        className={"edit-button"}
+        id={`pin-button-${_id}`}
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+          toggleTextPin();
+          PinToScreen(e);
+          // toggleModificationState();
+          // toggleEditStateFunc();
+        }}
+      >
+        {pinnedText === false ? "Pin" : "Unpin"}
+      </Button> */}
+      {/* <hr
+        style={{
+          width: "94%",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      /> */}

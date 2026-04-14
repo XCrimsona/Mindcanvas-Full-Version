@@ -44,8 +44,6 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
     );
     if (response.ok) {
       const response2 = await response.json();
-      //   toast.success(`${response2.message}`);
-      console.log(response2);
 
       if (response2.code === "SINGLE_USER_DATA_DELETED") {
         router("/");

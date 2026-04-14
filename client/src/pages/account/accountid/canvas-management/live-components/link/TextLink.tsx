@@ -11,10 +11,7 @@ import { useModificationContext } from "../../modify-data/InfoModificationContex
 import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
 
 const TextLink = ({ data }: { data: any }) => {
-  //extract _id from data object
   const { _id, type } = data;
-  // console.log(_id, type);
-
   const {
     modificationWindow,
     selectedComp,
@@ -30,7 +27,6 @@ const TextLink = ({ data }: { data: any }) => {
     setSelectedComp({
       dataFragmentId: dataFragmentId,
       type: type,
-      //this may break fetch data
       info: "",
     });
     moveFragment(e);
@@ -56,10 +52,6 @@ const TextLink = ({ data }: { data: any }) => {
               selectFragmentId(e);
               setRepositionWindow(false);
               setModificationWindow(true);
-              //style={{
-              //  problem with below line: once toggle all would be fixed. Id ref require dto make fixed position
-              //  position: `${pinnedText === true ? "fixed" : "absolute"}`,
-              //}}
             }}
             className="i-note-drop-down"
           >

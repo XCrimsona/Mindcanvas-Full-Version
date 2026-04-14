@@ -97,7 +97,6 @@ const DoughnutChartInputUnit = () => {
       event: React.FormEvent<HTMLFormElement>,
     ) => {
       event.preventDefault();
-      // if (type && x >= 0 && y >= 0 && label && labels && listOfBackgroundColors && listOfNumericValues && borderColor && borderWidth && hoverOffset && offset) {
 
       //Checks if doughnutChartInputCompPosRef,newDoughnutChartComponent and selectedType are not null
       const chartFormData: any = {};
@@ -175,7 +174,6 @@ const DoughnutChartInputUnit = () => {
         !chartFormData.type &&
         !chartFormData.x &&
         !chartFormData.y &&
-        // !chartFormData.name &&
         !chartFormData.labels &&
         !chartFormData.label &&
         !chartFormData.listOfBackgroundColors &&
@@ -185,8 +183,6 @@ const DoughnutChartInputUnit = () => {
         toast.success("DoughnutChart form must be filled with suffcient data");
         return;
       } else {
-        // console.log(chartFormData);
-        // console.log("source data from DoughnutChartInputUnit: ", source);
         const text = await fetch(
           `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
           {
@@ -201,15 +197,6 @@ const DoughnutChartInputUnit = () => {
         if (text.ok) {
           toast.success("DoughnutChart data fragment created");
           updateCanvasData();
-          // setNewDoughnutChartComponent({
-          //   ...newDoughnutChartComponent,
-          //   text: "",
-          //   name: "",
-          //   label: "",
-          //   listOfColors: "",
-          //   listOfValues: "",
-          // });
-          // setSelectedType((prev) => (prev === "DoughnutChart" ? "DoughnutChart" : "List"));
         } else {
           const errorData = await text.json();
           toast.success(
@@ -236,16 +223,12 @@ const DoughnutChartInputUnit = () => {
       //mouse position inside the board
       const mouseInsideBoardX = event.clientX - boardRect.left;
       const mouseInsideBoardY = event.clientY - boardRect.top;
-      // console.log("mouseInsideBoardX: ", mouseInsideBoardX);
-      // console.log("mouseInsideBoardY: ", mouseInsideBoardY);
 
       //When we first click down, we store how far from the element's left and top the mouse was (doughnutChartInputOffSet.current.x/y)
       const newXElementLeft =
         mouseInsideBoardX - doughnutChartInputOffSet.current.x;
       const newYElementTop =
         mouseInsideBoardY - doughnutChartInputOffSet.current.y;
-      // console.log("newXElementLeft: ", newXElementLeft);
-      // console.log("newYElementTop: ", newYElementTop);
 
       // set boundaries so draggables dont go outside the drag frame
       const newPosX = Math.max(
@@ -421,25 +404,6 @@ const DoughnutChartInputUnit = () => {
                     </Button>
                   </DivClass>
                   <DivClass className={"doughnutchart-selection-wrapper"}>
-                    {/* <Select
-                    id="select-doughnut-chart-type"
-                    className={"select-doughnut-chart-type"}
-                    value={selectedType}
-                    onChange={updateDoughnutChartSelectionType}
-                    >
-                    <option
-                    id="doughnut-chart-type-option-one"
-                    className={"doughnut-chart-type-option-one"}
-                    value={"Doughnut Chart"}
-                    >
-                    Doughnut Chart
-                    </option> */}
-                    {/* <Select
-                      id="select-doughnut-chart-type"
-                      className={"select-doughnut-chart-type"}
-                      value={selectedType}
-                      onChange={updateDoughnutChartSelectionType}
-                    > */}
                     <div className="radio-group">
                       <input
                         type="radio"
@@ -459,14 +423,6 @@ const DoughnutChartInputUnit = () => {
                         Doughnut Chart
                       </label>
                     </div>
-                    {/* <option
-                        id="text-type-option-two"
-                        className={"text-type-option-two"}
-                        value={"List"}
-                      >
-                        List
-                      </option> */}
-                    {/* </Select> */}
                   </DivClass>
                 </DivClass>
               </DivClass>

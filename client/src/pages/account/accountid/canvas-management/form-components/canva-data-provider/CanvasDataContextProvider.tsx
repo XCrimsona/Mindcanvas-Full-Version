@@ -2,7 +2,6 @@ import {
   createContext,
   MutableRefObject,
   ReactNode,
-  SetStateAction,
   useContext,
   useEffect,
   useRef,
@@ -14,7 +13,6 @@ import { useParams } from "react-router-dom";
 //component hub text button toggler values
 type TypeBooleanContext = true | false;
 
-type TypeCanvasData = any | null;
 //Canvas data text input component types
 type TypeCanvasInputContext = string | null;
 
@@ -27,7 +25,6 @@ interface ICanvasContextType {
   textInputOffSet: MutableRefObject<{ x: number; y: number }>;
   textToggle: TypeBooleanContext;
   setTextToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
-  //??above
   textInputCompRef: MutableRefObject<HTMLDivElement | null>;
   textInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
@@ -35,8 +32,6 @@ interface ICanvasContextType {
   textLinkInputOffSet: MutableRefObject<{ x: number; y: number }>;
   textLinkToggle: TypeBooleanContext;
   setTextLinkToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
-
-  //??above
   textLinkInputCompRef: MutableRefObject<HTMLDivElement | null>;
   textLinkInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
@@ -55,7 +50,6 @@ interface ICanvasContextType {
   listInputOffSet: MutableRefObject<{ x: number; y: number }>;
   listToggle: TypeBooleanContext;
   setListToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
-  //componenthub toggler
   listInputCompRef: MutableRefObject<HTMLDivElement | null>;
   listInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
@@ -63,7 +57,6 @@ interface ICanvasContextType {
   listItemInputOffSet: MutableRefObject<{ x: number; y: number }>;
   listItemToggle: TypeBooleanContext;
   setListItemToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
-  //componenthub toggler
   listItemInputCompRef: MutableRefObject<HTMLDivElement | null>;
   listItemInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
@@ -71,7 +64,6 @@ interface ICanvasContextType {
   audioInputOffSet: MutableRefObject<{ x: number; y: number }>;
   audioToggle: TypeBooleanContext;
   setAudioToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
-  //componenthub toggler
   audioInputCompRef: MutableRefObject<HTMLDivElement | null>;
   audioInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
@@ -79,7 +71,6 @@ interface ICanvasContextType {
   imageInputOffSet: MutableRefObject<{ x: number; y: number }>;
   imageToggle: TypeBooleanContext;
   setImageToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
-  //componenthub toggler
   imageInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
   imageInputCompRef: MutableRefObject<HTMLDivElement | null>;
 
@@ -87,7 +78,6 @@ interface ICanvasContextType {
   videoInputOffSet: MutableRefObject<{ x: number; y: number }>;
   videoToggle: TypeBooleanContext;
   setVideoToggle: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
-  //componenthub toggler
   videoInputCompRef: MutableRefObject<HTMLDivElement | null>;
   videoInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
 
@@ -95,34 +85,24 @@ interface ICanvasContextType {
   //Element used to carry database and responsible for mapping
   canvasData: any | null;
   setCanvasData: React.Dispatch<React.SetStateAction<any | null>>;
-  // setFreshCanvasData: (source: any) => void;
   updateCanvasData: () => void;
 
   //Canvas size, height and width
   canvasSizePropertiesToggle: boolean;
   setCanvasSizePropertiesToggle: React.Dispatch<React.SetStateAction<boolean>>;
-  // toggleCanvasSizeProperties: () => void;
-  // toggleCanvasSizePropertiesState: (value: boolean) => void;
   canvasWidth: string | null;
   setCanvasSizeHeight: React.Dispatch<React.SetStateAction<string | null>>;
   canvasHeight: string | null;
   setCanvasSizeWidth: React.Dispatch<React.SetStateAction<string | null>>;
-  // updateDataBoardCanvasHeight: (height: string) => void;
-  // updateDataBoardCanvasWidth: (width: string) => void;
 
   repositionInputOffSet: MutableRefObject<{ x: number; y: number }>;
-  // repositionWindowToggle: React.Dispatch<
-  //   React.SetStateAction<TypeBooleanContext>
-  // >;
   repositionData: any;
   setRepositionData: React.Dispatch<React.SetStateAction<{}>>;
-
   repositionWindow: TypeBooleanContext;
   setRepositionWindow: React.Dispatch<React.SetStateAction<TypeBooleanContext>>;
 
   repositionInputCompRef: MutableRefObject<HTMLDivElement | null>;
   repositionInputCompPosRef: MutableRefObject<{ x: number; y: number }>;
-  //Global reposition Component for live data
 }
 
 const CanvasContextType = createContext<ICanvasContextType | undefined>(
@@ -183,11 +163,10 @@ const CanvasDataContextProvider = ({
   const listItemInputCompRef = useRef<HTMLDivElement>(null);
   let listItemInputCompPosRef = useRef<any>({ x: 0, y: 0 });
 
-  //Audio Component
+  //Audio Component---PLANNED COMPONENT NOT INTEGRATED
   //Canvas Audio Button toggle logic on the ComponentHub popup box
   const audioInputOffSet = useRef<any>({ x: 0, y: 0 });
   const [audioToggle, setAudioToggle] = useState<TypeBooleanContext>(false);
-
   //find audio input component's dom reference and x,y position under the
   //data-scroll-board component as absolute value
   const audioInputCompRef = useRef<HTMLDivElement>(null);
@@ -219,20 +198,8 @@ const CanvasDataContextProvider = ({
   //data object when returning mutiple types of data that the frontend requires.
   const [canvasData, setCanvasData] = useState<{}>({});
 
-  //have a backup copy
-  //////////ORGINAL BELOW -- the newer version was moved lower due due:
-  //Block-scoped variable 'doughnutChartToggleState' used before its declaration
-  // useEffect(() => {
-  //   if (textToggleState === false) {
-  //     hasInitializedPositionRef.current = false;
-  //   }
-  // }, [textToggleState]);
-  // ///////////////////ORGINAL ABOVE
-
   const { userid, canvaid } = useParams();
-
   const updateCanvasData = async () => {
-    if (!userid) return;
     const routeResponse = await fetch(
       `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
       {
@@ -278,34 +245,18 @@ const CanvasDataContextProvider = ({
   const [canvasWidth, setCanvasSizeWidth] =
     useState<TypeCanvasInputContext>(""); //updates in real time per user request
 
-  //DO NOT REMOVE PRODUCT NOT COMPLETE
-  //backup
-  // dataScrollBoardRef,
-  // textInputOffSet,
-  // globalDraggingRef,
-  // textInputCompPosRef,
-  // textInputCompRef;
-
-  //Reposition Component
-  //Canvas Text Button toggle logic on the ComponentHub popup box
-  // const mediaInputOffSet = useRef<any>({ x: null, y: null });
-
-  //state manager
+  //Reposition Component state manager
   const [repositionWindow, setRepositionWindow] =
     useState<TypeBooleanContext>(false);
-  // const updateRepositionWindow = (value: boolean) => {
-  // setRepositionWindow(value);
-  // };
   const repositionInputOffSet = useRef<any>({ x: 0, y: 0 });
   const repositionInputCompRef = useRef<HTMLDivElement>(null);
-  //for position reference
   const repositionInputCompPosRef = useRef<any>({ x: 0, y: 0 });
   //data-scroll-board component as absolute value and is used to update the position of a fragment.
   //purpose of compoent??????? --carrie x amount of data for the media draggable
   const [repositionData, setRepositionData] = useState<{}>({});
 
   //latest version
-  //next time more draggables are added to create more dynamic content, be sure to add them below so they get recenter and dont break the while UI system that other components use.
+  //Center draggable Input and reposition UIs when they appear.
   useEffect(() => {
     if (textToggle === false) {
       hasInitializedPositionRef.current = false;
@@ -338,15 +289,12 @@ const CanvasDataContextProvider = ({
       value={{
         hasInitializedPositionRef,
         dataScrollBoardRef,
-        //draggable boolean failsafe unit to prevent accidental drag event through
-        // mouse all components that use mouseevents
         globalDraggingRef,
 
         //Text Button toggle functions
         textInputOffSet,
         textToggle,
         setTextToggle,
-
         textInputCompPosRef,
         textInputCompRef,
 
@@ -370,6 +318,7 @@ const CanvasDataContextProvider = ({
         setListToggle,
         listInputCompRef,
         listInputCompPosRef,
+
         //upcoming list item feature
         listItemInputOffSet,
         listItemToggle,
@@ -401,31 +350,24 @@ const CanvasDataContextProvider = ({
         //data
         canvasData,
         setCanvasData,
-
         updateCanvasData,
+
         //Canvas size height and width
         canvasSizePropertiesToggle,
         setCanvasSizePropertiesToggle,
-
         canvasHeight,
         setCanvasSizeHeight,
-
         canvasWidth,
         setCanvasSizeWidth,
-        // updateDataBoardCanvasHeight,
-        // updateDataBoardCanvasWidth,
 
         //reposition component
         repositionData,
         setRepositionData,
-        // repositionWindowToggle,
         repositionWindow,
         setRepositionWindow,
-
         repositionInputOffSet,
         repositionInputCompRef,
         repositionInputCompPosRef,
-        // processTextMouseDown,
       }}
     >
       {children}

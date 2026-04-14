@@ -41,17 +41,13 @@ interface IModificationUseStateContextType {
     React.SetStateAction<{ dataFragmentId: string; type: string; info: string }>
   >;
   updateSelectedComp: (id: any, type: any, info: any) => void;
-  // { id: string; type: string; info: string }
 
-  // updateMovingMedia: () => void;
   moveFragment: (
     e: React.MouseEvent<HTMLButtonElement>,
     // top: string,
     // left: string,
   ) => void;
   DeleteDataFragment: (e: React.MouseEvent<HTMLButtonElement>) => void;
-
-  PinToScreen: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   //state being toggled
   editState: TypeModificationContext;
@@ -88,10 +84,12 @@ interface IModificationUseStateContextType {
   setAntiDeleteLock: React.Dispatch<React.SetStateAction<boolean>>;
   toggleDeleteLock: () => void;
 
+  //pin feature- not yet integrated
   //Pin feature to mount below data-fragments onto the canvas
   pinnedText: boolean;
   setPinnedText: React.Dispatch<React.SetStateAction<boolean>>;
   toggleTextPin: () => void;
+  PinToScreen: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   // pinnedAudio: Record<string, boolean>;
   // setPinnedAudio: React.Dispatch<React.SetStateAction<string>>;
@@ -150,7 +148,6 @@ const InfoModificationContextProvider = ({
   };
   //From the WorkspaceContextProvider, it refreshes the displayed data after
   // data has been deleted using deleteLiveDataElement.
-  // const { updateCanvasData, updateMediaCanvaDataFragment } = useCanvasContext();
   const { updateCanvasData, setRepositionData } = useCanvasContext();
 
   // const { updateWorkspaceData } = useWorkspaceContext();
@@ -220,8 +217,6 @@ const InfoModificationContextProvider = ({
     type: string,
   ) => {
     try {
-      console.log("deletion trying chart: ");
-
       const deleteRequest = await fetch(
         `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
         {
@@ -309,7 +304,7 @@ const InfoModificationContextProvider = ({
     //^save pin feature original xy values befor the click overwrites the current values^^^^
 
     if (dataComponentDiv) {
-      console.log("dataComponentDiv: ", dataComponentDiv);
+      // console.log("dataComponentDiv: ", dataComponentDiv);
       if (pinnedText === false) {
         console.log(dataComponentDiv.style.position);
         dataComponentDiv.style.position = "fixed";
@@ -327,41 +322,12 @@ const InfoModificationContextProvider = ({
     return;
   };
 
-  // const { mediaInputCompPosRef } = useCanvasContext();
-  // let toppx: string;
-  // let leftpx: string;
-  // console.log("mediaCanvaDataFragment: ", mediaCanvaDataFragment);
-  // function updateMovingMedia(top: string, left: string) {
-  //   // const mediaCanvaDataFragmentLeft = mediaCanvaDataFragment.left;
-  //   // const mediaCanvaDataFragmentTop = mediaCanvaDataFragment.top;
-  //   toppx = top;
-  //   leftpx = left;
-  //   mediaInputCompPosRef.current.x = Number(top);
-  //   mediaInputCompPosRef.current.y = Number(left);
-  //   console.log("toppx: ", toppx);
-  //   return;
-  // }
-  // console.log("toppx: ", toppx);
-
   //executes when the user interacts with the i icon and passes data to the next function
-  const moveFragment = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    // left: string,
-    // top: string,
-  ) => {
+  const moveFragment = (e: React.MouseEvent<HTMLButtonElement>) => {
     // const dataFragmentId = String((e.target as HTMLElement).id);
     const dataFragmentId = String(selectedComp.dataFragmentId);
     const fragmentText = (e.target as HTMLElement).parentElement?.childNodes[1]
       .textContent;
-
-    //to update the xy values of a live ui component
-    // setSelectedComp(dataFragmentId);
-    const dataComponentValues = (e.target as HTMLElement).closest(
-      ".data-component",
-    ) as HTMLDivElement;
-    console.log("media id: ", dataComponentValues);
-    // const left = dataComponentValues.style.left;
-    // const top = dataComponentValues.style.top;
 
     //provides the elemtn id to capture data and pass references
     setRepositionData({
@@ -371,7 +337,6 @@ const InfoModificationContextProvider = ({
     });
 
     //enables the menu and bring up forward
-    // updateModificationState(true);
     return;
   };
 
@@ -390,7 +355,6 @@ const InfoModificationContextProvider = ({
     <ModificationContext.Provider
       value={{
         editState,
-        // updateEditStateFunc,
         setEditWindow,
 
         dataComponent,
@@ -401,7 +365,6 @@ const InfoModificationContextProvider = ({
 
         modificationWindow,
         setModificationWindow,
-        // toggleModificationWindow,
 
         editLiveDataElement,
 

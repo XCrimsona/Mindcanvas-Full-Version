@@ -10,44 +10,19 @@ import ShortText from "../../../../../ui/ShortText";
 //When the i round button on the left of a data fragment is clicked, ModificationWindow is an options box
 export const ModificationWindow = ({ componentData }: any) => {
   const {
-    // toggleEditStateFunc,
-    // toggleModificationState,
     setModificationWindow,
     setEditWindow,
     DeleteDataFragment,
     deleteLiveDataElement,
     antiDeleteLock,
     toggleDeleteLock,
-    // PinToScreen,
-    // toggleTextPin,
-    // pinnedText,
   } = useModificationContext();
 
   const { setRepositionWindow } = useCanvasContext();
   const { owner, _id, workspaceId, type } = componentData;
-  console.log(owner, _id, workspaceId, type);
-
+  //Pin features shuold appear in the sidebar  to access when complete
   return (
     <div className={"modifications-window-container"}>
-      {/* <Button
-        className={"edit-button"}
-        id={`pin-button-${_id}`}
-        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-          toggleTextPin();
-          PinToScreen(e);
-          // toggleModificationState();
-          // toggleEditStateFunc();
-        }}
-      >
-        {pinnedText === false ? "Pin" : "Unpin"}
-      </Button> */}
-      {/* <hr
-        style={{
-          width: "94%",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      /> */}
       <Button
         className={"edit-button"}
         id="edit-button"
@@ -85,12 +60,10 @@ export const ModificationWindow = ({ componentData }: any) => {
         className={"component-reposition-button"}
         id="component-reposition-button"
         onClick={() => {
-          //Collapse the button options window
+          //Collapse the options window
           setModificationWindow(false);
-
           //Open the interface to move the selected component data to a new x y postion bas on it dragging
           setRepositionWindow(true);
-          //We dont want to display the edit window as we are toggling
         }}
       >
         Move Fragment
@@ -133,24 +106,15 @@ export const ModificationWindow = ({ componentData }: any) => {
           className={`delete-button inline ${
             antiDeleteLock ? "cursor-not-allowed" : "cursor-pointer"
           } ${antiDeleteLock ? "opacity-80" : "opacity-100"}`}
-          // id={`${_id}`}
           disabled={antiDeleteLock}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             DeleteDataFragment(e);
             deleteLiveDataElement(owner, _id, workspaceId, type);
-            // return;
           }}
         >
           Delete
         </button>
-        {/* <hr
-          style={{
-            width: "94%",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        /> */}
         <ShortText className="mt-1 mb-2">{type} Fragment</ShortText>
       </div>
     </div>

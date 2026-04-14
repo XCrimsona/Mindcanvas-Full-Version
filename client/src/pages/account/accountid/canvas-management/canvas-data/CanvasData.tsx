@@ -14,14 +14,11 @@ const CanvasData = () => {
   const { canvasData } = useCanvasContext();
 
   const renderDataByComponentType = (data: any) => {
-    // console.log(data.type);
-
     switch (data.type) {
       case "Text":
         return <Text data={data} />;
       case "TextLink":
         return <TextLink data={data} />;
-
       // case "list":
       //   return <ImmutableList data={data} />;
       // case "listitem":
@@ -40,12 +37,6 @@ const CanvasData = () => {
             <DoughnutChart data={data} />
           </>
         );
-      // case "roundchart":
-      //   return <RoundChart data={data} />;
-      // case "graphchart":
-      //   return <GraphChart data={data} />;
-      // case "code":
-      //   return <CodeText data={data} />;
       default:
         return (
           <ShortText className={"unsupported-type-text"}>

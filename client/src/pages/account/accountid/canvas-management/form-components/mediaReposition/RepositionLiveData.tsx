@@ -16,7 +16,6 @@ const RepositionLiveData = () => {
     globalDraggingRef,
 
     repositionWindow,
-    // updateRepositionData,
     repositionInputOffSet,
     repositionInputCompPosRef,
     repositionInputCompRef,
@@ -35,10 +34,6 @@ const RepositionLiveData = () => {
   const { userid, canvaid } = useParams();
   if (!userid) return;
   const { setModificationWindow, selectedComp } = useModificationContext();
-
-  //repositionInputCompPosRef is repositionInputCompPosRef
-  //repositionInputCompRef is repositionInputCompRef;
-  //repositionInputComp is repositionInputComp
 
   useLayoutEffect(() => {
     if (
@@ -98,14 +93,10 @@ const RepositionLiveData = () => {
     //mouse position inside the board
     const mouseInsideBoardX = event.clientX - boardRect.left;
     const mouseInsideBoardY = event.clientY - boardRect.top;
-    // console.log("mouseInsideBoardX: ", mouseInsideBoardX);
-    // console.log("mouseInsideBoardY: ", mouseInsideBoardY);
 
     //When we first click down, we store how far from the element's left and top the mouse was (textInputOffSet.current.x/y)
     const newXElementLeft = mouseInsideBoardX - repositionInputOffSet.current.x;
     const newYElementTop = mouseInsideBoardY - repositionInputOffSet.current.y;
-    // console.log("newXElementLeft: ", newXElementLeft);
-    // console.log("newYElementTop: ", newYElementTop);
 
     // set boundaries so draggables dont go outside the drag frame
     const newPosX = Math.max(
@@ -154,28 +145,17 @@ const RepositionLiveData = () => {
     document.addEventListener<any>("mouseup", processMediaMouseUp);
   };
 
-  // const elementId = repositionCanvaDataFragment.dataFragmentId;
   const elementId = selectedComp.dataFragmentId;
-  console.log("elementId: ", elementId);
 
   let info: any = {};
   if (repositionData.fragmentText) {
     info.text = repositionData.fragmentText;
   }
-  // const repositionCanvaDataFragmentLeft = repositionCanvaDataFragment.left;
-  // const repositionCanvaDataFragmentTop = repositionCanvaDataFragment.top;
   const position: any = { x: 0, y: 0 };
-  // if (repositionInputCompPosRef.current.x >= 0) {
-  //   position.x = repositionInputCompPosRef.current.x;
-  // }
   if (repositionInputCompPosRef.current.x >= 0) {
-    console.log("medIPCPPRX: ", repositionInputCompPosRef.current.x);
-    console.log("medIPCPPRX: ", typeof repositionInputCompPosRef.current.x);
     position.x = Number(repositionInputCompPosRef.current.x);
   }
   if (repositionInputCompPosRef.current.y >= 0) {
-    console.log("medIPCPPRY: ", repositionInputCompPosRef.current.y);
-    console.log("medIPCPPRY: ", typeof repositionInputCompPosRef.current.y);
     position.y = Number(repositionInputCompPosRef.current.y);
   }
 
@@ -184,7 +164,6 @@ const RepositionLiveData = () => {
     event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
-    console.log("elementId: ", elementId);
 
     //Checks if textInputCompPosRef,newTextComponent and selectedType are not null
     const repositionData: any = {
@@ -195,19 +174,19 @@ const RepositionLiveData = () => {
       y: position.y,
     };
 
-    if (
+    if (repositionData.x === 0 && repositionData.y === 0) {
+      toast.info("Move your data to a new location inside the current canvas", {
+        autoClose: 10000,
+      });
+    } else if (
       !repositionData._id &&
       !repositionData.type &&
-      !repositionData.updateType &&
-      !repositionData.x &&
-      !repositionData.y
+      !repositionData.updateType
     ) {
       //fires if the logic is broken
       toast.warning("Media data is missing, investigate anomaly!");
       return;
     } else {
-      // console.log("repositionData: ", repositionData);
-
       const repositionUpdateResponse = await fetch(
         `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
         {
@@ -223,10 +202,6 @@ const RepositionLiveData = () => {
         //notification ok response
         updateCanvasData();
         //resets the element value
-        setMediaFragmentData({
-          ...repositionFragmentData,
-          text: "",
-        });
       } else {
         CanvaNotification_MoveXYFailed();
         return;
@@ -244,16 +219,12 @@ const RepositionLiveData = () => {
           color: "#fff",
           left: `${position.x}px`,
           top: `${position.y}px`,
-          //for future reference- this creates a new stacking context that overrides zindex,filter and opacity values,
-          // transform: `translate(${repositionInputCompPosRef.current.x}px,${repositionInputCompPosRef.current.y}px)`,
         }}
         onMouseDown={processMediaMouseDown}
       >
         <p id={elementId} className="reposition-fragment">
-          {/* <SpanFragment id={`${info._id}`} className="i-note-drop-down"> */}
           {info.text}
           {info.link}
-          {/* </SpanFragment> */}
         </p>
         <Button
           id={String(elementId)}
@@ -267,6 +238,8 @@ const RepositionLiveData = () => {
           onClick={() => {
             setRepositionWindow(false);
             hasInitializedPositionRef.current = false;
+            repositionInputCompPosRef.current.x = 0;
+            repositionInputCompPosRef.current.y = 0;
             setModificationWindow(true);
           }}
           className="reposition-fragment-button"

@@ -27,11 +27,11 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
     );
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
-      console.log("data from response: ", data);
+      // console.log(data);
+      // console.log("data from response: ", data);
 
       setCanvaData(data);
-      console.log("frontend dashboard initial user data: ", data);
+      // console.log("frontend dashboard initial user data: ", data);
     } else {
       const issue = await response.json();
       console.log(issue);
@@ -42,11 +42,7 @@ export const CanvaDataProvider = ({ children }: { children: ReactNode }) => {
 
   //find the canva data based on the selected canva space
 
-  const fetchWorkspaceData = async (
-    userid: string,
-    // workspacename: string,
-    workspaceid: string,
-  ) => {
+  const fetchWorkspaceData = async (userid: string, workspaceid: string) => {
     const response = await fetch(
       `http://localhost:5000/api/account/${userid}/canvas-management/${workspaceid}`,
       {
