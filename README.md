@@ -2,7 +2,7 @@
 # What is MindCanvas? 
 <p>A private, offline multi purpose tool to explore, analysize, create, make sense of complex data. For example does A4 page content feel too bland for when it comes to opening 16 word documents which makes data comparison hard to read? </p>
 
-<p>This tool is an alternative and does not replace Word, Excel but this tool offers flexiblity that may be critized as not a clean, pure software. Yes you do require training to use it correctly but its simple compared to how a person would navigate others platforms.
+<p>This tool is an alternative and does not replace Word, Excel but this tool offers flexiblity that may be critized as not a clean, pure software. Yes you do require training to use it correctly but its simple compared to how a person would navigate other apps out there.
 
 <p>MindCanvas has powerful features that permit you to bring image and video content inside the same canvas, making summaries, data extraction from past recorded videos easier than traditional platforms that promise simplicity over flexibility and strong ux/user experience.</p>
 
@@ -43,12 +43,6 @@
 <p>Currently testing how the latest automated dual server startups function on different Operating systems.</p>
 <p>.ps1 files are config files to automate the start up of servers and have no malicous code. Feel free to use an AI to help you verify.</p>
 
-## personal notes
-<ul>
-  <li>MindCanvas is not some tool with AI. This doesnt have AI in it yet. </li>
-  <li>At first, April 2025, the app was designed to showcase my <i>Software Development/(Full stack) Engineer (SDE) skills which made me feel utterly useless</i>. After October 2025, I gained foresight to take it much further.</li>
-</ul>
-
 ## Features
 <ul> 
   <li>Smooth UX: Modern, responsive UI for organizing, creating and exploring complex data coming from the creator who uses it. The data is on your device including the database and no one else manages that data but the local creator of that data.</li>
@@ -76,6 +70,12 @@
   <li>Data Backups: To minimize data loss</li>
 </ul>
 
+## personal notes
+<ul>
+  <li>MindCanvas is not some tool with AI. This doesnt have AI in it yet. </li>
+  <li>At first, April 2025, the app was designed to showcase my <i>Software Development/(Full stack) Engineer (SDE) skills which made me feel utterly useless</i>. After October 2025, I gained foresight to take it much further.</li>
+  <li>I've never had got the opportunity to actively showcase my potential anywhere, thus i decided to build software that levels me up and provides flexiblity to content that other may want.</li>7 apps... failed, the 8th one... is this app. I've had many tears... but this surely is an app that will bring ease to minds and hearts. I hope this brings changes to your life, whether for work, research, or others, it's your data, be responsible for it even when i don't know what the heck you store in it. Be ethical with it... I do understand that this may also be abused in ways i dont fully see but i designed it to do good.
+</ul>
 
 ## Version
 **Current local version:** 2.1.1  
