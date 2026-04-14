@@ -9,14 +9,10 @@ import "../../form-components/text/text.css";
 import "../i-note.css";
 import "./text-data-styling.css";
 import { useCanvasContext } from "../../form-components/canva-data-provider/CanvasDataContextProvider";
-// import { useCanvasContext } from "../../live-components/canva-data-provider/CanvasDataContextProvider";
 
 //This component is used to display already create info TextInput is the one that creates text
 export const Text = ({ data }: { data: any }) => {
-  //extract _id from data object
   const { _id, type } = data;
-  // console.log(_id, type);
-
   const {
     modificationWindow,
     selectedComp,
@@ -32,14 +28,8 @@ export const Text = ({ data }: { data: any }) => {
     setSelectedComp({
       dataFragmentId: dataFragmentId,
       type: type,
-      //this may break fetch data
       info: "",
     });
-    // const el = (e.target as HTMLDivElement).closest(
-    //   ".data-component",
-    // ) as HTMLDivElement;
-    // const TopVal = el.style.left;
-    // const leftVal = el.style.left;
     moveFragment(e);
     return;
   };
@@ -62,10 +52,6 @@ export const Text = ({ data }: { data: any }) => {
               selectFragmentId(e);
               setRepositionWindow(false);
               setModificationWindow(true);
-              //style={{
-              //  problem with below line: once toggle all would be fixed. Id ref require dto make fixed position
-              //  position: `${pinnedText === true ? "fixed" : "absolute"}`,
-              //}}
             }}
             className="i-note-drop-down"
           >

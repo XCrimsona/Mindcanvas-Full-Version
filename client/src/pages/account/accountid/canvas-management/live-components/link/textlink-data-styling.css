@@ -2,7 +2,7 @@
   display: block;
   min-width: 200px;
   max-width: 450px;
-  padding: 0px 0px 0px 30px;
+  padding: 0px;
   max-height: 250px;
   overflow-y: hidden;
 }

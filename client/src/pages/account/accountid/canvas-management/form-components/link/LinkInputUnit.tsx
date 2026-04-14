@@ -132,12 +132,7 @@ const TextLinkInputUnit = () => {
             const response = await link.json();
             toast.success(response.message, { autoClose: 4000 });
             updateCanvasData();
-            // setNewTextLinkComponent({
-            //   ...newTextLinkComponent,
-            //   link: "",
-            // });
           } else {
-            // toast.success("Http Link fragment not added!");
             const response = await link.json();
             toast.error(response.message, { autoClose: 4000 });
           }
@@ -302,25 +297,6 @@ const TextLinkInputUnit = () => {
                     </Button>
                   </DivClass>
                   <DivClass className={"link-selection-wrapper"}>
-                    {/* <Select
-                    id="select-link-type"
-                    className={"select-link-type"}
-                    value={selectedType}
-                    onChange={updateTextSelectionType}
-                    >
-                    <option
-                    id="link-type-option-one"
-                    className={"link-type-option-one"}
-                    value={"Text"}
-                    >
-                    Text
-                    </option> */}
-                    {/* <Select
-                      id="select-link-type"
-                      className={"select-link-type"}
-                      value={selectedType}
-                      onChange={updateTextSelectionType}
-                    > */}
                     <div className="radio-group">
                       <input
                         type="radio"

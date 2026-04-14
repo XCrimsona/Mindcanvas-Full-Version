@@ -4,9 +4,13 @@ import { useCanvasContext } from "../canva-data-provider/CanvasDataContextProvid
 
 export const AudioButton = () => {
   //Toggles Audio state true or false to display or hide audio component in DataContainer component.
-  const { toggleAudioState } = useCanvasContext();
+  const { setAudioToggle } = useCanvasContext();
   return (
-    <Button id="audio-comp" onClick={toggleAudioState} className={"audio-comp"}>
+    <Button
+      id="audio-comp"
+      onClick={() => setAudioToggle(true)}
+      className={"audio-comp"}
+    >
       Audio
     </Button>
   );

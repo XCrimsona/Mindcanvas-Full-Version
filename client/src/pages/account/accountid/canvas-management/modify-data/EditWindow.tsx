@@ -1,7 +1,4 @@
 import { DivClass } from "../../../../../ui/Div";
-import StylerDiv from "../../../../../ui/StylerDiv";
-
-//css file contain the edit styling
 import "./modification-window.css";
 import ShortText from "../../../../../ui/ShortText";
 import Button from "../../../../../components/form-elements/Button";
@@ -14,12 +11,11 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
   const { owner, _id, workspaceId, type, text, link } = componentData;
   //context constants from InfoModificationContextProvider
   const {
-    updateEditStateFunc,
-    updateModificationState,
+    setEditWindow,
+    setModificationWindow,
     newComponentData,
     setComponentData,
     editLiveDataElement,
-    // updateComponentData,
   } = useModificationContext();
 
   const copyToTextClipboard = async (text: string) => {
@@ -90,8 +86,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
       <ShortText className={"window-heading"}>You are editing:</ShortText>
       <DivClass className={"update-box"}>
         <DivClass className={"box-one"}>
-          {/* this area needs to check for links when using the textlink component and use the appropriate ui for updating that content */}
-          {/* golden rule: KEEP IT SIMPLE */}
           <>
             {type === "TextLink" && link && (
               <>
@@ -160,9 +154,8 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
           <Button
             id="change-windows"
             onClick={() => {
-              updateEditStateFunc(false);
-              updateModificationState(true);
-              return;
+              setEditWindow(false);
+              setModificationWindow(true);
             }}
             className={"change-windows"}
           >
@@ -189,7 +182,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                     ...newComponentData,
                     text: e.target.value,
                   });
-                  return;
                 }}
                 placeholder="Your new data"
               />
@@ -197,7 +189,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                 id="change-windows"
                 onClick={() => {
                   pasteTextToClipboard();
-                  return;
                 }}
                 className={"paste-clipboard-button"}
               >
@@ -214,7 +205,7 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                   autoCapitalize="off"
                   autoSave="off"
                   id={`${_id}-enabled-link-input-field`}
-                  placeholder="https://..."
+                  placeholder="http:// or https://"
                   className={"box-two-enabled-linkdescription-input-field"}
                   value={newComponentData.link}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -228,7 +219,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                   id="change-windows"
                   onClick={() => {
                     pasteLinkToClipboard();
-                    return;
                   }}
                   className={"paste-clipboard-button"}
                 >
@@ -245,7 +235,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                       ...newComponentData,
                       text: e.target.value,
                     });
-                    return;
                   }}
                   placeholder="Your new data"
                 />
@@ -253,7 +242,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                   id="change-windows"
                   onClick={() => {
                     pasteTextToClipboard();
-                    return;
                   }}
                   className={"paste-clipboard-button"}
                 >
@@ -285,7 +273,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                   id="change-windows"
                   onClick={() => {
                     pasteLinkToClipboard();
-                    return;
                   }}
                   className={"paste-clipboard-button"}
                 >
@@ -302,7 +289,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                       ...newComponentData,
                       text: e.target.value,
                     });
-                    return;
                   }}
                   placeholder="Your new data"
                 />
@@ -310,7 +296,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                   id="change-windows"
                   onClick={() => {
                     pasteTextToClipboard();
-                    return;
                   }}
                   className={"paste-clipboard-button"}
                 >
@@ -328,7 +313,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                 toast.info("Enter new data to update the present text");
               } else {
                 // _id is the componont being edited
-                //newComponentData === text
                 editLiveDataElement(
                   owner,
                   _id,

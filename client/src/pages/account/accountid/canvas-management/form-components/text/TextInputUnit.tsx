@@ -105,8 +105,6 @@ const TextInputUnit = () => {
         toast.success("Text input block must be filled with suffcient data");
         return;
       } else {
-        // console.log(textFormData);
-        // console.log("source data from TextInputUnit: ", source);
         const text = await fetch(
           `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
           {
@@ -125,7 +123,6 @@ const TextInputUnit = () => {
             ...newTextComponent,
             text: "",
           });
-          // setSelectedType((prev) => (prev === "Text" ? "Text" : "List"));
         } else {
           toast.success("Text fragment was not added!");
         }
@@ -224,6 +221,7 @@ const TextInputUnit = () => {
                 text="Create Text"
               />
             </DivClass>
+            <div></div>
             <DivClass className={"text-container"}>
               <DivClass className={"text-input-wrapper"}>
                 {/* {selectedType === "Text" ? ( */}

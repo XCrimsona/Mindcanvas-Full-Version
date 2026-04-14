@@ -75,39 +75,6 @@ const ComponentHub = () => {
             </motion.div>
           </DivClass>
         </motion.div>
-        {/* )  */}
-        {/* ( */}
-        {/* <motion.div
-          initial={{ left: 366, opacity: 1 }}
-          animate={{ left: 0, opacity: 0 }}
-          exit={{ left: 0, opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className={"comp-hub-data-component-container"}
-        >
-          <DivClass className={"center-comp-hub-component"}>
-            <Button id="close-icon-wrapper" className={"close-icon-wrapper"}>
-              <SVG
-                className={"close-icon"}
-                src="/close-icon.svg"
-                alt="Close Icon"
-                onClick={toggleVisbilityState}
-              />
-            </Button>
-
-            <motion.div
-              initial={{ x: 0, opacity: 0 }}
-              animate={{ x: 366, opacity: 1 }}
-              exit={{ left: 366, opacity: 1 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className={"comp-hub-data-creation-components"}
-            >
-              <TextButton />
-              <AudioButton />
-              <ImageButton />
-              <VideoButton />
-            </motion.div>
-          </DivClass>
-        </motion.div> */}
       </>
     )
   );

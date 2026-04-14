@@ -21,7 +21,7 @@ const VideoInputUnit = () => {
       videoInputCompPosRef,
       videoInputCompRef,
       hasInitializedPositionRef,
-      videoToggleState,
+      videoToggle,
       updateCanvasData,
     } = useCanvasContext();
 
@@ -29,7 +29,7 @@ const VideoInputUnit = () => {
     //It also re-centers by collraborating with another useEffect function which checks the boolean value to toggle the UI.
     useLayoutEffect(() => {
       if (
-        !videoToggleState ||
+        !videoToggle ||
         hasInitializedPositionRef.current ||
         !dataScrollBoardRef.current ||
         !videoInputCompRef.current
@@ -67,7 +67,7 @@ const VideoInputUnit = () => {
       }
 
       hasInitializedPositionRef.current = true;
-    }, [videoToggleState]);
+    }, [videoToggle]);
 
     // const { newVideoComponent, setNewVideoComponent } = useNewVideoComponent();
     const [newVideoComponent, setNewVideoComponent] = useState<any>({
@@ -204,7 +204,7 @@ const VideoInputUnit = () => {
     //pin feature here has a double toggle bug, issue is not the end of the world altough its irritating
 
     return (
-      videoToggleState && (
+      videoToggle && (
         // add the pin true false feature
         <div
           className={"data-video-component"}

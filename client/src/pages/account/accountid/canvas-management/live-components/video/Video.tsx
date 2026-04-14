@@ -54,10 +54,6 @@ export const Video = ({ data }: { data: any }) => {
               selectFragmentId(e);
               setRepositionWindow(false);
               setModificationWindow(true);
-              //style={{
-              //  problem with below line: once toggle all would be fixed. Id ref require dto make fixed position
-              //  position: `${pinnedText === true ? "fixed" : "absolute"}`,
-              //}}
             }}
             className="i-note-drop-down"
           >
@@ -70,7 +66,6 @@ export const Video = ({ data }: { data: any }) => {
             preload="metadata"
             src={`http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}/video/${_id}`}
           />
-          {/* {data.text} */}
         </div>
       </DivClass>
     </>

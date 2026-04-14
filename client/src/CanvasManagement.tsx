@@ -473,7 +473,7 @@ const DataManagement = ({ source }: { source: any }) => {
             Canvas Management
           </HeadingOne>
 
-          <div className="add-canvaspace">Search your canvaspaces</div>
+          {/* <div className="add-canvaspace">Search your canvaspaces</div> */}
 
           <div className="new-canvaspace" onClick={addNewWorkspace}>
             New Canvaspace

@@ -108,8 +108,6 @@ const ImageInputUnit = () => {
         toast.success("Image input block must be filled with suffcient data");
         return;
       } else {
-        // console.log(imageFormData);
-        // console.log("source data from ImageInputUnit: ", source);
         const image = await fetch(
           `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
           {
@@ -128,7 +126,6 @@ const ImageInputUnit = () => {
             ...newImageComponent,
             image: "",
           });
-          // setSelectedType((prev) => (prev === "Image" ? "Image" : "List"));
         } else {
           toast.success("Image fragment was not added!");
         }
@@ -235,7 +232,6 @@ const ImageInputUnit = () => {
             </DivClass>
             <DivClass className={"image-container"}>
               <DivClass className={"image-input-wrapper"}>
-                {/* {selectedType === "Image" ? ( */}
                 <EnabledTextAreaInput
                   id="enabled-image-input-field"
                   className={"enabled-image-input-field"}

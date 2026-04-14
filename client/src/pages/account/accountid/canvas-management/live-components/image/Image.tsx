@@ -47,6 +47,7 @@ export const ImageCluster = ({ data }: { data: any }) => {
 
     moveFragment(e);
   };
+
   // ===============================
   // MANUAL LOAD HANDLER
   // ===============================
@@ -54,12 +55,14 @@ export const ImageCluster = ({ data }: { data: any }) => {
     // Prevent double-firing if already loading or loaded
     if (isClusterLoading || isLoaded) return;
 
-    console.log(`Starting manual I/O for Cluster: ${clusterId}`);
+    // console.log(`Starting manual I/O for Cluster: ${clusterId}`);
     setIsClusterLoading(true);
 
     const batchSize = 6;
     const items = [...imagecluster];
 
+    //CHECK POINT----media must first be shrinked before they get processed in the streams
+    //If is not not done, then browser load workers hit loading caps fast and throw errors in loading the videos and images
     try {
       for (let i = 0; i < items.length; i += batchSize) {
         const currentBatch = items.slice(i, i + batchSize);
@@ -86,28 +89,31 @@ export const ImageCluster = ({ data }: { data: any }) => {
     } catch (e: any) {
       console.log(e.message);
 
-      console.error("Manual load failed", e);
-      toast.error("Cluster load failed. Check disk path.");
+      console.error("Manual load failed", e.message);
+      toast.error("Cluster load failed: ", e.message);
     } finally {
       setIsClusterLoading(false);
     }
   };
   return (
     <>
-      {/* Modification + Edit Windows */}
+      {/* Modification*/}
       {modificationWindow && selectedComp.dataFragmentId === _id && (
         <ModificationWindow componentData={data} />
       )}
 
+      {/* Edit Windows */}
       {editState && selectedComp.dataFragmentId === _id && (
         <EditWindow componentData={data} />
       )}
-      {/* Fragment Container */}
 
+      {/* Fragment Container */}
       <DivClass className={"image-fragment-container"}>
         <div
           id={`${_id}`}
-          className={"image-fragment justify-start flex flex-wrap  gap-0.5"}
+          className={
+            "image-fragment justify-start flex flex-wrap  gap-0.5 rounded"
+          }
         >
           {/* FEATURE ADDED: Manual Trigger Overlay */}
           {/* Logic: If not loaded, show this layer. Inside, toggle between the Button and the Spinner */}
