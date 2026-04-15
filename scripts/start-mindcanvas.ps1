@@ -1,3 +1,4 @@
+Set-ExecutionPolicy Bypass -Scope Process -Force
 Write-Host "Launching MindCanvas Full App Pipelines..." -ForegroundColor Magenta
 
 $pwshExe = "pwsh"
