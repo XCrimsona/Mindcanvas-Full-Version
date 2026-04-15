@@ -120,7 +120,8 @@ const Signup = () => {
       "Prefer not to specify",
       "Female",
       "Male",
-      "Transgender",
+      "Transgender Woman",
+      "Transgender Man",
       "Non-binary",
       "Other",
     ];

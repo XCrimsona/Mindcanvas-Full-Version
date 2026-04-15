@@ -30,7 +30,7 @@ registrationRouter.get("/", async (req, res) => {
           { message: "Please fill required fields!", status: 400 }
         );
       }
-      if (user.email) {
+      else if (user) {
         return res.status(409).json({ message: "Account Name Already Exists", status: 409 })
       }
       else {
@@ -57,7 +57,7 @@ registrationRouter.get("/", async (req, res) => {
       }
     } catch (err) {
       return res.status(500).json(
-        { error: err.message || "Unexpected server error" });
+        { message: err.message || "Unexpected server error" });
     }
   })
 

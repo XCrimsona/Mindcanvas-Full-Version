@@ -150,6 +150,26 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                 </Button>
               </>
             )}
+            {type === "DoughnutChart" && (
+              <>
+                <textarea
+                  className={"pulled-text-data"}
+                  disabled
+                  value={text}
+                  readOnly
+                ></textarea>
+                <Button
+                  id="change-windows"
+                  onClick={() => {
+                    copyToTextClipboard(text);
+                    return;
+                  }}
+                  className={"copy-clipboard-button"}
+                >
+                  Copy Text
+                </Button>
+              </>
+            )}
           </>
           <Button
             id="change-windows"
@@ -192,7 +212,7 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
                 }}
                 className={"paste-clipboard-button"}
               >
-                Write link
+                Write Text
               </Button>
             </DivClass>
           )}

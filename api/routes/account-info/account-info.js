@@ -12,25 +12,18 @@ const accountRouter = Router();
 accountRouter
   .get("/:userid/account-info", async (req, res) => {
     await getDB();
-
     const userid = req.user?.sub;
-
     const user = await UserModel.findOne({ _id: userid });
-    console.log("user: ", user);
-
     if (!user) {
-      return res.status(404).json({ error: "Failed to retrieve", status: 404 });
+      return res.status(404).json({ message: "Failed to retrieve" });
     }
-    return res.status(200).json({ data: user, status: 200 });
+    return res.status(200).json({ data: user });
   })
   .patch("/:userid/account-info", async (req, res) => {
     try {
       //finds and updates user data
       await getDB();
       const userid = req.user?.sub;
-      console.log(userid);
-      console.log(req);
-
       const { firstname,
         lastname,
         gender,
@@ -54,7 +47,7 @@ accountRouter
 
       const user = await UserModel.findById(userid);
       if (!user) {
-        return res.status(404).json({ error: "Account ID not found.", status: 404 });
+        return res.status(404).json({ error: "Account ID not found." });
       } else {
         if (!currentPassword) {
           return res.status(400).json({ message: "Enter the currently used password with your new credentials to continue" })
@@ -67,7 +60,7 @@ accountRouter
         if (
           !checkPassword
         ) {
-          return res.status(403).json({ message: "Current password incorrect", status: 403 });
+          return res.status(403).json({ message: "Current password incorrect" });
         }
         else {
           const newAccountInfo = {};
@@ -76,17 +69,11 @@ accountRouter
           if (gender) newAccountInfo.gender = gender;
           if (dob) newAccountInfo.dob = dob;
           if (email) newAccountInfo.email = email;
-          // if (currentPassword) {
-          //   newAccountInfo.currentPassword = currentPassword;
-          // }
-          //these three work together
           if (newPassword && confirmNewPassword) {
             newAccountInfo.password = await bcrypt.hash(newPassword, 12);
           }
-          // if (confirmNewPassword) newAccountInfo.confirmNewPassword = confirmNewPassword;
-          //create a new hashed password
           if (newPassword !== confirmNewPassword) {
-            return res.status(400).json({ error: "New passwords don't match", status: 400 });
+            return res.status(400).json({ error: "New passwords don't match" });
           }
           await UserModel.updateOne(
             { _id: user._id },
@@ -97,7 +84,6 @@ accountRouter
           );
           return res.status(200).json({
             message: "Your account info has been updated.",
-            status: 200,
           });
         }
       }
@@ -108,18 +94,11 @@ accountRouter
   })
   .delete("/:userid/account-info", async (req, res) => {
     try {
-      //finds and updates user data
       await getDB();
       const userid = req.user?.sub;
-
-      //check for incoming logs while doing maintnance
-
-      console.log(" userid: ", userid);
-
       const user = await UserModel.findOne({ _id: userid });
-      console.log(" user: ", user);
       if (!user) {
-        return res.status(404).json({ error: "Account ID not found.", status: 404 });
+        return res.status(404).json({ error: "Account ID not found." });
       }
       else {
         const findusertextData = await textModel.find({ owner: userid });
@@ -143,7 +122,6 @@ accountRouter
                 return res.status(200).json({
                   success: true,
                   code: "SINGLE_USER_DATA_DELETED",
-                  status: 200,
                   message: "User Data Wiped",
                 });
               }
@@ -151,7 +129,6 @@ accountRouter
                 return res.status(404).json({
                   success: false,
                   code: "USER_DATA_DELETION_FAILED",
-                  status: 404,
                   message: "Failed to remove a user's data.",
                 });
               }
@@ -160,7 +137,6 @@ accountRouter
               return res.status(404).json({
                 success: true,
                 code: "SINGLE_USER_DATA_NOT_DELETED",
-                status: 200,
                 message: "User Data Not Wiped",
               });
             }
@@ -168,7 +144,6 @@ accountRouter
             return res.status(404).json({
               success: false,
               code: "WORKSPACE_DATA_DELETION_FAILED",
-              status: 404,
               message: "Failed to delete the requested workspace's data",
             });
           }
@@ -178,7 +153,6 @@ accountRouter
 
       return res.status(200).json({
         message: "No response",
-        status: 200,
       });
     }
     catch (err) {

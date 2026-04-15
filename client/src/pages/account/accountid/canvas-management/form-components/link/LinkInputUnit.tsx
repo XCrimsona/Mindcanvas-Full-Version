@@ -17,7 +17,7 @@ const TextLinkInputUnit = () => {
       dataScrollBoardRef,
       globalDraggingRef,
       textLinkInputOffSet,
-
+      setTextLinkToggle,
       //useref used to control the element's left with x and top with y canvas coordinates
       textLinkInputCompPosRef,
       textLinkInputCompRef,
@@ -227,10 +227,18 @@ const TextLinkInputUnit = () => {
             left: `${textLinkInputCompPosRef.current.x}px`,
             top: `${textLinkInputCompPosRef.current.y}px`,
             color: "#fff",
-            zIndex: 4,
+            zIndex: 11,
           }}
           onMouseDown={processTextLinkMouseDown}
         >
+          <div className="absolute top-2 z-11 right-2 h-15 w-5 ">
+            <span
+              className="block cursor-pointer"
+              onClick={() => setTextLinkToggle(false)}
+            >
+              ✕
+            </span>
+          </div>
           <form
             className={"link-input-form"}
             onSubmit={textLinkComponentFormData}
@@ -263,7 +271,7 @@ const TextLinkInputUnit = () => {
                       }}
                     />
                     <EnabledTextAreaInput
-                      id="enabled-link-input-field"
+                      id="enabled-linktext-input-field"
                       className={"enabled-link-input-field"}
                       value={newTextLinkComponent.text}
                       placeholder="What is the is about"
