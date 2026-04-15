@@ -17,7 +17,7 @@ const TextInputUnit = () => {
       dataScrollBoardRef,
       globalDraggingRef,
       textInputOffSet,
-
+      setTextToggle,
       //useref used to control the element's left with x and top with y canvas coordinates
       textInputCompPosRef,
       textInputCompRef,
@@ -213,6 +213,14 @@ const TextInputUnit = () => {
           }}
           onMouseDown={processTextMouseDown}
         >
+          <div className="absolute top-2 z-11 right-2 h-15 w-5 ">
+            <span
+              className="block cursor-pointer"
+              onClick={() => setTextToggle(false)}
+            >
+              ✕
+            </span>
+          </div>
           <form className={"text-input-form"} onSubmit={textComponentFormData}>
             <DivClass className={"text-label-wrapper"}>
               <Label
@@ -221,7 +229,6 @@ const TextInputUnit = () => {
                 text="Create Text"
               />
             </DivClass>
-            <div></div>
             <DivClass className={"text-container"}>
               <DivClass className={"text-input-wrapper"}>
                 {/* {selectedType === "Text" ? ( */}

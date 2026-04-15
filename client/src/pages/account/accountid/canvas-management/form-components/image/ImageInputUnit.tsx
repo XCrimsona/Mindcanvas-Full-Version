@@ -17,6 +17,7 @@ const ImageInputUnit = () => {
       dataScrollBoardRef,
       globalDraggingRef,
       imageInputOffSet,
+      setImageToggle,
       //useref used to control the element's left with x and top with y canvas coordinates
       imageInputCompPosRef,
       imageInputCompRef,
@@ -219,6 +220,14 @@ const ImageInputUnit = () => {
           }}
           onMouseDown={processImageMouseDown}
         >
+          <div className="absolute top-2 z-11 right-2 h-15 w-5 ">
+            <span
+              className="block cursor-pointer"
+              onClick={() => setImageToggle(false)}
+            >
+              ✕
+            </span>
+          </div>
           <form
             className={"image-input-form"}
             onSubmit={imageComponentFormData}

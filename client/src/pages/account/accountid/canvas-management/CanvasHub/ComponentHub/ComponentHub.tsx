@@ -65,8 +65,8 @@ const ComponentHub = () => {
               <ShortText className={"fragment-heading-text"}>
                 Analytic Fragments - Track and visualize data
               </ShortText>
-              <DoughnutChartButton />
-              <ImageButton />
+              {/* <DoughnutChartButton /> */}
+              {/* <ImageButton /> */}
               {/* <AudioButton /> */}
               <ShortText className={"fragment-heading-text"}>
                 Stream Fragments

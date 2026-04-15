@@ -17,6 +17,7 @@ const VideoInputUnit = () => {
       dataScrollBoardRef,
       globalDraggingRef,
       videoInputOffSet,
+      setVideoToggle,
       //useref used to control the element's left with x and top with y canvas coordinates
       videoInputCompPosRef,
       videoInputCompRef,
@@ -219,6 +220,14 @@ const VideoInputUnit = () => {
           }}
           onMouseDown={processVideoMouseDown}
         >
+          <div className="absolute top-2 z-11 right-2 h-15 w-5 ">
+            <span
+              className="block cursor-pointer"
+              onClick={() => setVideoToggle(false)}
+            >
+              ✕
+            </span>
+          </div>
           <form
             className={"video-input-form"}
             onSubmit={videoComponentFormData}

@@ -14,6 +14,7 @@ canvasManagementRouter
         try {
             await getDB();
             const sub = request.user?.sub;
+            console.log(sub);
 
             const user = await UserModel.findOne({ _id: sub });
             if (!user) {

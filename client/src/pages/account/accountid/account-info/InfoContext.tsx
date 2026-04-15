@@ -15,6 +15,7 @@ const InfoContext = createContext<IInfoContextProps | null>(null);
 export const InfoProvider = ({ children }: { children: ReactNode }) => {
   const [accountData, setAccountData] = useState<{}>({});
   const { userid } = useParams();
+  const router = useNavigate();
 
   if (!userid) return;
   const fetchUserInfo = async () => {
@@ -29,11 +30,13 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
       const resData: any = await response.json();
       setAccountData(resData);
     } else {
-      toast.info("Failed to retrieve, try again in 3 minutes");
+      const resData: any = await response.json();
+      if (resData.message === "Failed to retrieve" || resData.status === 404) {
+        router("/signin-portal");
+      }
     }
   };
 
-  const router = useNavigate();
   const requestAccountDeletion = async () => {
     const response: any = await fetch(
       `http://localhost:5000/api/account/${userid}/account-info`,

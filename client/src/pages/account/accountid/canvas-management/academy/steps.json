@@ -17,55 +17,55 @@
     },
     {
         "id": 5,
-        "description": "Now the Canva workspace is created, click on the double arrow icon to enter the Canva Workspace(Canvaspace)."
+        "description": "Now the Canvaspace is created, click on the skew double arrow icon that to enter the Canva Workspace(Canvaspace)."
     },
     {
         "id": 6,
-        "description": "Go to and click the icon on the top left, right under the header navigation. This is the Canvaspace hub to see canvaspace details, access layouts to create different type of data, adjust canva size, and more."
+        "description": "Go to and click on the icon at the top left, under the header navigation. This is the Canvaspace hub to see canvaspace details, access layouts to create different type of data, adjust canva size, and more."
     },
     {
         "id": 7,
-        "description": "The Fragment Hub enables you to create different types of data within the Canvaspace. The Help button leads you to the Academy page to train user how to use MindCanvas correctly."
+        "description": "The Fragment Hub enables you to create different types of data within the Canvaspace. The Help button leads you to the Academy page to train user how to use MindCanvas correctly which is how you get trained now."
     },
     {
         "id": 8,
-        "description": "The Delete button opnes a box to confirm delete the current canvas and its data. Deleting any kind of data is risky. The refresh button is an extra for when the page did not load properly due to possible internet issues."
+        "description": "Click Fragment Hub to show the available ways of creating a Fragment, in our case you have 5 types of fragments you can use, play with it. Click Text to display the layout, drag it around, click save."
     },
     {
         "id": 9,
-        "description": "Click Fragment Hub to show the available ways of creating a Data Fragment, in our case the demo has only the Text Fragment. Click Text to display the layout. "
+        "description": "The Delete button opnes a box to confirm delete the current canvas and its data. Deleting any kind of data is risky. The refresh button is an extra for when the page did not load properly due to possible internet issues."
     },
     {
         "id": 10,
-        "description": "Enter some text of your choice and hit SAVE."
+        "description": "Click the 'i' icon on the left of the Data Fragment for options."
     },
     {
         "id": 11,
-        "description": "Drag the Input layout away from the created Data Fragment containing your new information. Click the 'i' icon on the left of the Data Fragment for options."
+        "description": "Click Edit to display the edit window where you can type new information in on the right hand side."
     },
     {
         "id": 12,
-        "description": "Click Edit to display the edit window where you can type new information in on the right hand side. Use 'Copy to Clipboard' to save typing stress. When ready, Paste it using 'Write lastest clipboard',  add more info by typing it in and hit the Update button to save your extra data."
+        "description": "Use 'Copy to Clipboard' to save typing stress. When ready, Paste it using 'Write Text' for text and 'Write Link' for the Link Fragment,  add more info by typing it in and hit the Update button to save your extra data."
     },
     {
         "id": 13,
-        "description": "To close the Data Fragment you go backt to he Fragment hub anc click on Text Fragment again to hide the input layout."
+        "description": "To close the Data Fragment, click the X on the to pright of the Fragment window to hide the input layout."
     },
     {
         "id": 14,
-        "description": "Back to the options menu clicking on the 'i' icon, you will see the Reorganize data fragment. Click it to enable dragging the data fragment to a new position. and hit Update Coordinates to save the new position. When done, click 'I'm done' to collapse the drag window."
+        "description": "When clicking on the 'i' icon, you will see the Reorganize data fragment; It enables you to store the already create data at a new xy position using the Update Coordinates button. When finished, click 'I'm done' to collapse the drag window."
     },
     {
         "id": 15,
-        "description": "Lastly, There are two buttons, one which looks like a shield that enables the delete function; Two, named as 'Delete' which is a delete button to remove that single data fragment permanently."
+        "description": "Lastly, There are two buttons, one which looks like a shield that prevents accidental deletion of data when clicked on the other button seen as 'Delete' removes that single fragment permanently."
     },
     {
         "id": 16,
-        "description": "Congratulations on completing these tasks!"
+        "description": "Congratulations on completing these tasks. Others give up and you didn't."
     },
     {
         "id": 17,
-        "description": "Keep an eye on notifications; they are important."
+        "description": "Keep an eye on notifications at the edges of the screen when creating, changing and deleting data; they are important."
     },
     {
         "id": 18,

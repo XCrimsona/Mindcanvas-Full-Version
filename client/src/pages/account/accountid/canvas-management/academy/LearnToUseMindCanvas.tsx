@@ -54,9 +54,13 @@ const LearnToUseMindCanvas = () => {
             <Div>
               <Question>Why are there so many Data Fragments?</Question>
               <Answer>
-                Each one is designed for different user preferences such as
-                reading A4 like pages, scrolling down a list, studying a chart,
-                comparing information while you work.
+                Each one is designed for different use cases such as reading
+                text stored on text formats that may be large; studying a chart;
+                storing links that travel across the web or local links from
+                other canvaspaces in this app you own. Videos from your local
+                device- which is being improved as well as the image cluster
+                that stores multiple images - The Chart and Image Cluster UI's
+                take down to to keep the app stable.
               </Answer>
             </Div>
           </div>

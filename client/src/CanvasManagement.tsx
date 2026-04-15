@@ -21,7 +21,6 @@ const DataManagement = ({ source }: { source: any }) => {
   if (!userid) return;
   //NOTE: the workspace data usestate variable needs to change to canva data
   const [canvaData, setCanvaData] = useState<any>([]);
-  // console.log("data management source.data: ", source);
 
   const fetchMoreData = async () => {
     const response = await fetch(
@@ -37,7 +36,6 @@ const DataManagement = ({ source }: { source: any }) => {
 
     if (response.ok) {
       const data = await response.json();
-      // sort the canvases ascending by name
       data.data.sort((a: any, b: any) => a.name.localeCompare(b.name));
       setCanvaData(data.data);
 
@@ -47,9 +45,7 @@ const DataManagement = ({ source }: { source: any }) => {
       };
     } else {
       const issue = await response.json();
-      console.log("issue from data management: ", issue);
-
-      setCanvaData(issue);
+      // setCanvaData(issue);
       return {
         status: "false",
         message: issue,

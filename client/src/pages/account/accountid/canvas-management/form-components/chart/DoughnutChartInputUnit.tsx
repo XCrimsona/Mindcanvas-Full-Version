@@ -17,7 +17,7 @@ const DoughnutChartInputUnit = () => {
       dataScrollBoardRef,
       globalDraggingRef,
       doughnutChartInputOffSet,
-
+      setDoughnutChartToggle,
       //useref used to control the element's left with x and top with y canvas coordinates
       doughnutChartInputCompPosRef,
       doughnutChartInputCompRef,
@@ -316,6 +316,14 @@ const DoughnutChartInputUnit = () => {
           }}
           onMouseDown={processDoughnutChartMouseDown}
         >
+          <div className="absolute top-2 z-11 right-2 h-15 w-5 ">
+            <span
+              className="block  cursor-pointer"
+              onClick={() => setDoughnutChartToggle(false)}
+            >
+              ✕
+            </span>
+          </div>
           <form
             className={"doughnutchart-input-form"}
             onSubmit={chartComponentFormData}

@@ -17,7 +17,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Label from "../../../../../src/components/form-elements/Label";
 import Button from "../../../../../src/components/form-elements/Button";
 import PipeSpan from "../../../../../src/components/PipeSpan";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useInfo } from "./InfoContext";
 interface formDataInterface {
@@ -46,7 +46,10 @@ const Info = ({ params }: any) => {
   // define form field data types and input
   try {
     const { userid } = useParams();
-    if (!userid) return;
+    const router = useNavigate();
+    if (!userid) {
+      router("/signin-portal");
+    }
     const { fetchUserInfo, requestAccountDeletion } = useInfo();
     const [formData, setNewFormData] = useState<formDataInterface>({
       firstname: "",
@@ -77,7 +80,8 @@ const Info = ({ params }: any) => {
       "Prefer not to specify",
       "Female",
       "Male",
-      "Transgender",
+      "Transgender Woman",
+      "Transgender Man",
       "Non-Binary",
       "Other",
     ];
@@ -96,105 +100,97 @@ const Info = ({ params }: any) => {
     const [touchPasswordField, setTouchPasswordField] =
       useState<boolean>(false);
     const processSubmission = async (e: FormEvent<HTMLInputElement>) => {
-      // try {
-      e.preventDefault();
-      console.log(formData);
-
-      if (!formData) {
-        toast.info("Please complete required fields");
-      } else {
-        const updateAccountData: UpdateAccountDataProps = {};
-
-        if (
-          formData.firstname?.length === 0 &&
-          formData.lastname?.length === 0 &&
-          formData.gender?.length === 0 &&
-          formData.dob?.length === 0 &&
-          formData.email?.length === 0 &&
-          formData["current-password"]?.length === 0
-        ) {
-          updateAccountData.submitBtnDisabled = touchPasswordField;
-        }
-        if (formData.firstname)
-          updateAccountData.firstname = formData.firstname;
-
-        if (formData.lastname) updateAccountData.lastname = formData.lastname;
-
-        if (formData.gender) updateAccountData.gender = formData.gender;
-
-        if (formData.dob) updateAccountData.dob = formData.dob;
-
-        if (formData.email) updateAccountData.email = formData.email;
-
-        if (formData["current-password"])
-          updateAccountData["currentPassword"] = formData["current-password"];
-
-        if (formData["new-password"]) {
-          updateAccountData["newPassword"] = formData["new-password"];
-        }
-        if (formData["confirm-new-password"]) {
-          updateAccountData["confirmNewPassword"] =
-            formData["confirm-new-password"];
-        }
-        if (formData["confirm-new-password"] !== formData["new-password"]) {
-          toast.info("new password and confirm passwords do not match");
-        }
-
-        // const updatedFormData = {
-        //   _id: userid,
-        //   updateAccountData,
-        // };
-        if (
-          formData.firstname?.length === 0 &&
-          formData.lastname?.length === 0 &&
-          formData.gender?.length === 0 &&
-          formData.dob?.length === 0 &&
-          formData.email?.length === 0 &&
-          formData["current-password"]?.length === 0
-        ) {
-          toast.info("Use at least one field to update your account data", {
-            autoClose: 3500,
-          });
+      try {
+        e.preventDefault();
+        if (!formData) {
+          toast.info("Please complete required fields");
         } else {
-          console.log(updateAccountData);
+          const updateAccountData: UpdateAccountDataProps = {};
 
-          const updatedData = await fetch(
-            `http://localhost:5000/api/account/${userid}/account-info`,
-            {
-              method: "PATCH",
-              credentials: "include",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(updateAccountData),
-            },
-          );
-          if (updatedData.ok) {
-            toast.success("Account Info Has Been Changed", {
-              autoClose: 2500,
+          if (
+            formData.firstname?.length === 0 &&
+            formData.lastname?.length === 0 &&
+            formData.gender?.length === 0 &&
+            formData.dob?.length === 0 &&
+            formData.email?.length === 0 &&
+            formData["current-password"]?.length === 0
+          ) {
+            updateAccountData.submitBtnDisabled = touchPasswordField;
+          }
+          if (formData.firstname)
+            updateAccountData.firstname = formData.firstname;
+
+          if (formData.lastname) updateAccountData.lastname = formData.lastname;
+
+          if (formData.gender) updateAccountData.gender = formData.gender;
+
+          if (formData.dob) updateAccountData.dob = formData.dob;
+
+          if (formData.email) updateAccountData.email = formData.email;
+
+          if (formData["current-password"])
+            updateAccountData["currentPassword"] = formData["current-password"];
+
+          if (formData["new-password"]) {
+            updateAccountData["newPassword"] = formData["new-password"];
+          }
+          if (formData["confirm-new-password"]) {
+            updateAccountData["confirmNewPassword"] =
+              formData["confirm-new-password"];
+          }
+          if (formData["confirm-new-password"] !== formData["new-password"]) {
+            toast.info("new password and confirm passwords do not match");
+          }
+
+          if (
+            formData.firstname?.length === 0 &&
+            formData.lastname?.length === 0 &&
+            formData.gender?.length === 0 &&
+            formData.dob?.length === 0 &&
+            formData.email?.length === 0 &&
+            formData["current-password"]?.length === 0
+          ) {
+            toast.info("Use at least one field to update your account data", {
+              autoClose: 3500,
             });
-            setNewFormData({
-              firstname: "",
-              lastname: "",
-              gender: "",
-              dob: "",
-              email: "",
-              ["current-password"]: "",
-              ["new-password"]: "",
-              ["confirm-new-password"]: "",
-            });
-            fetchUserInfo();
           } else {
-            const error = await updatedData.json();
-            toast.error(`Error: ${error.message}`, {
-              autoClose: 2500,
-            });
+            const updatedData = await fetch(
+              `http://localhost:5000/api/account/${userid}/account-info`,
+              {
+                method: "PATCH",
+                credentials: "include",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updateAccountData),
+              },
+            );
+            if (updatedData.ok) {
+              toast.success("Account Info Has Been Changed", {
+                autoClose: 2500,
+              });
+              setNewFormData({
+                firstname: "",
+                lastname: "",
+                gender: "",
+                dob: "",
+                email: "",
+                ["current-password"]: "",
+                ["new-password"]: "",
+                ["confirm-new-password"]: "",
+              });
+              fetchUserInfo();
+            } else {
+              const error = await updatedData.json();
+              toast.error(`Error: ${error.message}`, {
+                autoClose: 2500,
+              });
+            }
           }
         }
+      } catch (err: any) {
+        console.warn("Something went wrong: ", err.message);
       }
-      // } catch (err: any) {
-      //   console.warn("Something went wrong: ", err.message);
-      // }
     };
 
     //lock deisgned to prevent accidental account deletion
