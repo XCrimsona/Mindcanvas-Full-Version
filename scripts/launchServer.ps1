@@ -1,3 +1,4 @@
+Set-ExecutionPolicy Bypass -Scope Process -Force
 Write-Host "Starting Backend Server..." -ForegroundColor Green
 
 # Move to root project directory
