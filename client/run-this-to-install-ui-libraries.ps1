@@ -1,3 +1,4 @@
+Set-ExecutionPolicy Bypass -Scope Process -Force
 # Ensure package.json exists
 if (-not (Test-Path "package.json")) {
     Write-Host "No package.json found. Creating Vite project..." -ForegroundColor Cyan
