@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/The-Code-Hashira/mindcanvas.git"
+    "url": "git+https://github.com/XCrimsona/Mindcanvas-Full-Version.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/The-Code-Hashira/mindcanvas/issues"
+    "url": "https://github.com/XCrimsona/Mindcanvas-Full-Version/issues"
   },
-  "homepage": "https://github.com/The-Code-Hashira/mindcanvas#readme",
+  "homepage": "https://github.com/XCrimsona/Mindcanvas-Full-Version#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
