@@ -1,6 +1,6 @@
-import getDB from "../../../lib/connnections/Connections.js";
-import sessionModel from "../../../models/sessionModel.js";
-import UserModel from "../../../models/userModel.js";
+import getDB from "../../lib/connnections/Connections.js";
+import sessionModel from "../../models/sessionModel.js";
+import UserModel from "../../models/userModel.js";
 import Router from "express";
 
 

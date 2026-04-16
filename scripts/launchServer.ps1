@@ -1,8 +1,8 @@
 Set-ExecutionPolicy Bypass -Scope Process -Force
 Write-Host "Starting Backend Server..." -ForegroundColor Green
 
-# Move to root project directory
-Set-Location "$PSScriptRoot/.."
+# Move to root project directory to access server folder
+Set-Location "$PSScriptRoot/../server"
 
 $port = 5000
 
