@@ -1,6 +1,6 @@
 Write-Host "Starting Backend Server..." -ForegroundColor Green
 
-# Move to root project directory to access server
+# Move to root project directory
 Set-Location "$PSScriptRoot/.."
 
 $port = 5000
