@@ -1,5 +1,6 @@
 Write-Host "Starting Frontend Client..." -ForegroundColor Cyan
 
+# Move to root project directory to access client
 Set-Location "$PSScriptRoot/../client"
 
 $port = 5176

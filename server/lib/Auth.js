@@ -2,7 +2,7 @@ import { PasswordService } from "./PasswordService.js";
 import UserModel from "../models/userModel.js";
 import { TokenService } from "./JwtTokenService.js";
 import jwt from "jsonwebtoken"
-import getDB from "../lib/connnections/Connections.js"
+import getDB from "./connnections/Connections.js"
 // import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import sessionModel from "../models/sessionModel.js";
