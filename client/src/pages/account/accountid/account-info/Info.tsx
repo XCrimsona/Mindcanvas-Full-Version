@@ -1,5 +1,5 @@
-import { DivClass } from "../../../../../src/ui/Div";
-import HeadingOne from "../../../../../src/ui/HeadingOne";
+import { DivClass } from "../../../../../lib/ui/Div";
+import HeadingOne from "../../../../../lib/ui/HeadingOne";
 // import AuthHeader from "../../../../../auth/auth-partials/AuthHeader";
 import "./info-media-queries.css";
 import "./info.css";
@@ -12,11 +12,11 @@ import {
   InputDisabledEmail,
   InputEnabledEmail,
   InputPassword,
-} from "../../../../components/form-elements/dry-InputFormComponents";
+} from "../../../../../lib/components/form-elements/dry-InputFormComponents";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import Label from "../../../../../src/components/form-elements/Label";
-import Button from "../../../../../src/components/form-elements/Button";
-import PipeSpan from "../../../../../src/components/PipeSpan";
+import Label from "../../../../../lib/components/form-elements/Label";
+import Button from "../../../../../lib/components/form-elements/Button";
+import PipeSpan from "../../../../../lib/components/PipeSpan";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useInfo } from "./InfoContext";

@@ -1,4 +1,4 @@
-import { DivClass } from "../../../../src/ui/Div";
+import { DivClass } from "../../../../lib/ui/Div";
 import Signin from "./Signin";
 import "../mind-canvas-portal.css";
 import "../mind-canvas-portal-media-queries.css";

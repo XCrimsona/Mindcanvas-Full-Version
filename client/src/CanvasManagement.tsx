@@ -1,18 +1,18 @@
-import { DivClass, DivId } from "./ui/Div";
+import { DivClass, DivId } from "../lib/ui/Div";
 import "./style-files/management.css";
 import "./style-files/canva-board-sheet-wrapper.css";
-import Button from "./components/form-elements/Button";
+import Button from "../lib/components/form-elements/Button";
 import {
   InputDisabledText,
   InputSubmit,
   InputText,
-} from "./components/form-elements/dry-InputFormComponents";
-import RouteLink from "./components/ProductSection/RouteLink";
+} from "../lib/components/form-elements/dry-InputFormComponents";
+import RouteLink from "../lib/components/ProductSection/RouteLink";
 import React, { useEffect, useState } from "react";
-import SVG from "./SVG";
-import { EnabledTextAreaInput } from "./components/media-retrieved-components/MediaInputComponents";
+import SVG from "../lib/SVG";
+import { EnabledTextAreaInput } from "../lib/components/media-retrieved-components/MediaInputComponents";
 import { useParams } from "react-router-dom";
-import HeadingOne from "./ui/HeadingOne";
+import HeadingOne from "../lib/ui/HeadingOne";
 import { toast } from "react-toastify";
 
 const DataManagement = ({ source }: { source: any }) => {

@@ -1,14 +1,14 @@
-import { DivClass } from "../../../../../ui/Div";
+import { DivClass } from "../../../../../../lib/ui/Div";
 import "./data-container.css";
-import TextInputUnit from "../form-components/text/TextInputUnit";
-import { useCanvasContext } from "../form-components/canva-data-provider/CanvasDataContextProvider";
-import CanvasData from "../canvas-data/CanvasData";
-import RepositionLiveData from "../form-components/mediaReposition/RepositionLiveData";
+import TextInputUnit from "../../../../../../lib/form-components/text/TextInputUnit";
+import { useCanvasContext } from "../../../../../../lib/form-components/canva-data-provider/CanvasDataContextProvider";
+import CanvasData from "../../../../../../lib/canvas-data/CanvasData";
+import RepositionLiveData from "../../../../../../lib/form-components/mediaReposition/RepositionLiveData";
 // import AudioInputUnit from "./form-components/audio/AudioInputUnit";
-import DoughnutChartInputUnit from "../form-components/chart/DoughnutChartInputUnit";
-import TextLinkInputUnit from "../form-components/link/LinkInputUnit";
-import VideoInputUnit from "../form-components/video/VideoInputUnit";
-import ImageInputUnit from "../form-components/image/ImageInputUnit";
+import DoughnutChartInputUnit from "../../../../../../lib/form-components/chart/DoughnutChartInputUnit";
+import TextLinkInputUnit from "../../../../../../lib/form-components/link/LinkInputUnit";
+import VideoInputUnit from "../../../../../../lib/form-components/video/VideoInputUnit";
+import ImageInputUnit from "../../../../../../lib/form-components/image/ImageInputUnit";
 const CanvaContainer = () => {
   const { dataScrollBoardRef, canvasData } = useCanvasContext();
   const canvaspaceSize = canvasData.data?.workspaceNameData?.canvaspace?.size;

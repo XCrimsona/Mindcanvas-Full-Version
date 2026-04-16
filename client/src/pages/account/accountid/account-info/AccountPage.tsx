@@ -1,4 +1,4 @@
-import { DivClass } from "../../../../ui/Div";
+import { DivClass } from "../../../../../lib/ui/Div";
 import Info from "./Info";
 import "./info.css";
 

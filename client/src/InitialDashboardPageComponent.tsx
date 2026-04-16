@@ -1,4 +1,4 @@
-import { DivClass } from "./ui/Div";
+import { DivClass } from "../lib/ui/Div";
 import DataManagement from "./CanvasManagement";
 import AuthHeader from "../auth/auth-partials/AuthHeader";
 import { useEffect, useState } from "react";

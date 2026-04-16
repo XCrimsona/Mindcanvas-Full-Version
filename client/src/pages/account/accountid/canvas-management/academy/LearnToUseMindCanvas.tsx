@@ -1,9 +1,9 @@
 import step from "./steps.json";
-import RouteLink from "../../../../../components/ProductSection/RouteLink";
+import RouteLink from "../../../../../../lib/components/ProductSection/RouteLink";
 import { useParams } from "react-router-dom";
-import Header from "../../../../../components/Header";
-import { DivClass } from "../../../../../ui/Div";
-import SVG from "../../../../../SVG";
+import Header from "../../../../../../lib/components/Header";
+import { DivClass } from "../../../../../../lib/ui/Div";
+import SVG from "../../../../../../lib/SVG";
 import Question from "./ui-components/Question";
 import Answer from "./ui-components/Answer";
 import Div from "./ui-components/Div";

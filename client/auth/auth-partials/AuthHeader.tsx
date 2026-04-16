@@ -1,7 +1,7 @@
-import Header from "../../src/components/Header";
-import { DivClass } from "../../src/ui/Div";
+import Header from "../../lib/components/Header";
+import { DivClass } from "../../lib/ui/Div";
 import { useNavigate, useParams } from "react-router-dom";
-import RouteLink from "../../src/components/ProductSection/RouteLink";
+import RouteLink from "../../lib/components/ProductSection/RouteLink";
 import "../auth-header.css";
 
 const AuthHeader = () => {
