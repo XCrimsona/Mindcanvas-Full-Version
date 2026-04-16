@@ -1,6 +1,7 @@
 Set-ExecutionPolicy Bypass -Scope Process -Force
 Write-Host "Starting Frontend Client..." -ForegroundColor Cyan
 
+# Move to root project directory to access client folder
 Set-Location "$PSScriptRoot/../client"
 
 $port = 5176
