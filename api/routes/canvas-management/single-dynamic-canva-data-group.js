@@ -444,6 +444,8 @@ singleDynamicCanvaDataGroupRouter
                         // console.log("_id and type: ", _id, type, updateType);
 
                         if (!type || !updateType) {
+                            console.log(type, updateType);
+
                             return res.status(400).json({
                                 success: false,
                                 code: "INSUFFICIENT_DATA",
@@ -454,8 +456,8 @@ singleDynamicCanvaDataGroupRouter
 
                             const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, link, type, x, y, options
                             } = req.body;
-                            // console.log
-                            //     ("req.body: ", req.body);
+                            console.log
+                                ("req.body: ", req.body);
                             // const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset } = req.body;
                             // console.log(label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, link, type, x, y, options);
 
@@ -475,7 +477,13 @@ singleDynamicCanvaDataGroupRouter
                                     const newData = {};
                                     if (text) newData.text = text;
 
-                                    if (newData) {
+                                    if (!newData) {
+                                        return res.status(400).json({
+                                            success: false,
+                                            code: "TEXT_FIELD_NULL",
+                                            message: "Requested text component data is not available",
+                                        });
+                                    } else {
                                         const reqToEditTextComponent = await textModel.updateOne(
                                             {
                                                 _id,
@@ -500,12 +508,6 @@ singleDynamicCanvaDataGroupRouter
                                                 message: "Could not update text component data",
                                             });
                                         }
-                                    } else {
-                                        return res.status(400).json({
-                                            success: false,
-                                            code: "TEXT_FIELD_NULL",
-                                            message: "Requested text component data is not available",
-                                        });
                                     }
                                 }
                                 if (updateType === "XY_POSITIONS") {
@@ -870,8 +872,6 @@ singleDynamicCanvaDataGroupRouter
             await getDB();
             const sub = req.user?.sub;
             const canvaid = req.params.canvaid;
-            const { type, _id } = req.body;
-            // console.log(type, _id);
 
             if (sub && canvaid) {
                 const user = await UserModel.findById(String(sub));
@@ -896,7 +896,7 @@ singleDynamicCanvaDataGroupRouter
                     });
                 }
                 else {
-                    // console.log("type: ", type);
+                    const { type, _id } = req.body;
 
                     if (!type) {
                         return res.status(400).json({

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { DivClass } from "../../../../src/ui/Div";
+import { DivClass } from "../../../../lib/ui/Div";
 import "../mind-canvas-portal.css";
 import Signup from "./Signup";
 

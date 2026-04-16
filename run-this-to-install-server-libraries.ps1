@@ -13,12 +13,14 @@ $dependencies = @(
     "dotenv@17.2.2",
     "express@5.2.1",
     "express-rate-limit@8.3.1",
+    "ffmpeg",
     "helmet@8.1.0",
     "jsonwebtoken@9.0.2",
     "mongo-connect@0.0.6",
     "mongodb@6.19.0",
     "mongoose@8.18.1",
     "morgan@1.10.1",
+    "sharp",
     "multer@2.1.1",
     "systeminformation@5.31.5"
 )

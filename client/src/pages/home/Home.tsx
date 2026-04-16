@@ -1,12 +1,12 @@
-import { DivClass } from "../../../src/ui/Div";
-import HeadingOne from "../../../src/ui/HeadingOne";
-import "../../../src/components/Header";
-import ShortText from "../../../src/ui/ShortText";
+import { DivClass } from "../../../lib/ui/Div";
+import HeadingOne from "../../../lib/ui/HeadingOne";
+import "../../../lib/components/Header";
+import ShortText from "../../../lib/ui/ShortText";
 import "./home.css";
 import "./tailwind-style.css";
 import { useEffect } from "react";
-import Footer from "../../components/Footer";
-import Link from "../../ui/Link";
+import Footer from "../../../lib/components/Footer";
+import Link from "../../../lib/ui/Link";
 
 // Home Page Dashboard
 const Home = () => {

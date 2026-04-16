@@ -1,8 +1,8 @@
 "use client";
-import { DivClass } from "../../../../src/ui/Div";
-import Section from "../../../../src/ui/Section";
-import Label from "../../../../src/components/form-elements/Label";
-import HeadingOne from "../../../../src/ui/HeadingOne";
+import { DivClass } from "../../../../lib/ui/Div";
+import Section from "../../../../lib/ui/Section";
+import Label from "../../../../lib/components/form-elements/Label";
+import HeadingOne from "../../../../lib/ui/HeadingOne";
 import "../mind-canvas-portal.css";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
@@ -11,11 +11,11 @@ import {
   InputPassword,
   InputSelect,
   InputText,
-} from "../../../components/form-elements/dry-InputFormComponents";
+} from "../../../../lib/components/form-elements/dry-InputFormComponents";
 
-import { LongText } from "../../../../src/ui/LongText";
-import Button from "../../../../src/components/form-elements/Button";
-import RouteLink from "../../../../src/components/ProductSection/RouteLink";
+import { LongText } from "../../../../lib/ui/LongText";
+import Button from "../../../../lib/components/form-elements/Button";
+import RouteLink from "../../../../lib/components/ProductSection/RouteLink";
 // import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";

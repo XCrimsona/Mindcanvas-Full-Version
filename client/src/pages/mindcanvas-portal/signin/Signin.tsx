@@ -3,21 +3,21 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 //custom built dry components
-import { DivClass } from "../../../../src/ui/Div";
-import Section from "../../../../src/ui/Section";
-import Label from "../../../../src/components/form-elements/Label";
-import HeadingOne from "../../../../src/ui/HeadingOne";
+import { DivClass } from "../../../../lib/ui/Div";
+import Section from "../../../../lib/ui/Section";
+import Label from "../../../../lib/components/form-elements/Label";
+import HeadingOne from "../../../../lib/ui/HeadingOne";
 import "../mind-canvas-portal.css";
 import {
   InputEmail,
   InputPassword,
   InputSubmit,
-} from "../../../components/form-elements/dry-InputFormComponents";
-import { LongText } from "../../../../src/ui/LongText";
-import Button from "../../../../src/components/form-elements/Button";
+} from "../../../../lib/components/form-elements/dry-InputFormComponents";
+import { LongText } from "../../../../lib/ui/LongText";
+import Button from "../../../../lib/components/form-elements/Button";
 
 //for navigating content
-import RouteLink from "../../../components/ProductSection/RouteLink";
+import RouteLink from "../../../../lib/components/ProductSection/RouteLink";
 import { toast, ToastContainer } from "react-toastify";
 
 interface formData {
