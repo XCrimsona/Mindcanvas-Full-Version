@@ -53,7 +53,6 @@
         <strong>Prepare the Backend Environment:</strong>
         <p>Navigate into the <code>/server</code> folder. Locate the initialization script (pwsh basis script). Run this to generate your <code>.env</code> file. Open the new <code>.env</code> file and ensure the 6 items listed in the "Missing Config" section above are filled in.</p>
     </li>
-
     <li>
         <strong>Configure .ps1 Files to use PowerShell 7:</strong>
         <p>Before installing libraries, we must tell Windows to use the correct version of PowerShell. This is a one-time setup:</p>
@@ -65,22 +64,18 @@
             <li>Select <strong>pwsh.exe</strong>, click <strong>Open</strong>, then click <strong>Apply</strong> and <strong>OK</strong> on the Properties window.</li>
         </ul>
     </li>
-
     <li>
         <strong>Install Backend Libraries:</strong>
         <p>In the <code>/server</code> folder, right-click <code>run-this-to-install-server-libraries.ps1</code>. Instead of 'Run with PowerShell', look for the <strong>Open PowerShell icon</strong> or <strong>'Open with PowerShell 7'</strong>. This will open a terminal and download the necessary Node.js modules. Wait for it to finish and close automatically.</p>
     </li>
-
     <li>
         <strong>Install UI (Frontend) Libraries:</strong>
         <p>Go back to the root folder, then enter the <code>/client</code> folder. Right-click <code>run-this-to-install-ui-libraries.ps1</code> and run it using the same method as the previous step.</p>
     </li>
-
     <li>
         <strong>Create Your Desktop Shortcut:</strong>
         <p>Go to the <code>/scripts</code> folder. Find <code>start-mindcanvas.ps1</code>. Right-click it and select <strong>Send to > Desktop (create shortcut)</strong>. You can now start your entire app by double-clicking this shortcut on your desktop!</p>
     </li>
-
 </ol>
 
 <h2>Closing the App (Proper Termination)</h2>
