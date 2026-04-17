@@ -100,7 +100,6 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
       default:
         break;
     }
-    // console.log(updateType);
   }
 
   return (

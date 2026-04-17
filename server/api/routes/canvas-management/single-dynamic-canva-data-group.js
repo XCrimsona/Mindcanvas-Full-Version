@@ -24,11 +24,7 @@ singleDynamicCanvaDataGroupRouter
             await getDB();
             const userid = req.user?.sub;
             const canvaid = req.params.canvaid;
-            // console.log(userid);
-
             const user = await UserModel.findOne({ _id: userid });
-            // console.log(user);
-
             if (!user) {
                 return res.status(404).json({
                     success: false,
@@ -40,8 +36,6 @@ singleDynamicCanvaDataGroupRouter
                     createdBy: user._id,
                     _id: canvaid,
                 });
-                // console.log("canvaspace: ", canvaspace);
-
                 if (canvaspace) {
                     const [texts, links, charts, images, videos
                         // , audios, images, videos
@@ -279,16 +273,11 @@ singleDynamicCanvaDataGroupRouter
                             }
                         }
                         else if (pathtoimages && type === "Images" && x >= 0 && y >= 0) {
-
-                            console.log("this Images line works");
-                            console.log(pathtoimages, type, x, y);
-
-
-
+                            // console.log("this Images line works");
+                            // console.log(pathtoimages, type, x, y);
                             //Ensure directory exists
                             if (!fs.existsSync(pathtoimages)) {
-                                console.log("dir does not exist");
-
+                                // console.log("dir does not exist");
                                 return res.status(404).json({ success: false, message: "Directory not found on disk" });
                             }
                             else {
@@ -300,7 +289,7 @@ singleDynamicCanvaDataGroupRouter
                                 // 4. READ DIRECTORY (SERVER-ONLY OPERATION)
                                 // This returns ALL files inside the folder
                                 const files = fs.readdirSync(pathtoimages);
-                                console.log("files: ", files);
+                                // console.log("files: ", files);
 
                                 // 5. FILTER ONLY IMAGE FILES
                                 const allowedExtensions = [".png", ".jpg", ".jpeg", ".webp"];
@@ -314,7 +303,7 @@ singleDynamicCanvaDataGroupRouter
 
                                 // At this point:
                                 // imageFiles.length === number of images found
-                                console.log("Images found:", imageFiles.length);
+                                // console.log("Images found:", imageFiles.length);
 
                                 // 6. CREATE DYNAMIC ARRAY (based on directory contents)
                                 const imagesPayload = [];
@@ -323,7 +312,7 @@ singleDynamicCanvaDataGroupRouter
                                 for (const fileName of imageFiles) {
                                     // Build full path
                                     const fullPath = path.join(directoryPath, fileName);
-                                    console.log("fullPath: ", fullPath);
+                                    // console.log("fullPath: ", fullPath);
 
                                     // Read file into memory (BUFFER)
                                     // This loads the entire file as binary data
@@ -352,15 +341,9 @@ singleDynamicCanvaDataGroupRouter
                                     });
                                 }
 
-                                console.log("imagesPayload: ", imagesPayload);
-                                // const positions = {
-                                //     position: {
-                                //         x: x,
-                                //         y: y
-                                //     }
-                                // };
+                                // console.log("imagesPayload: ", imagesPayload);
                                 const imagecluster = imagesPayload;
-                                console.log("imagecluster: ", imagecluster);
+                                // console.log("imagecluster: ", imagecluster);
 
                                 const createImageComponent = await imageModel.create({
                                     pathtoimages,
@@ -425,13 +408,6 @@ singleDynamicCanvaDataGroupRouter
             //id can be passed as the layout/fragment id store in the db 
             //communication at each invocation must be explained or future updates could regress development
             const { _id, type, updateType, text, x, y, newHeight, newWidth } = req.body;
-            // console.log(req.body);
-
-            //text  will be null for xy updates 
-            //text will be present for text updates
-            // console.log(newHeight, newWidth);
-
-
             if (sub && canvaid) {
                 const user = await UserModel.findById(String(sub));
                 if (user) {
@@ -450,7 +426,6 @@ singleDynamicCanvaDataGroupRouter
                                 message: "type or updateType argument is missing a value",
                             });
                         } else {
-                            // console.log("type: ", type);
 
                             const { label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset, text, link, type, x, y, options
                             } = req.body;
@@ -632,7 +607,6 @@ singleDynamicCanvaDataGroupRouter
                                         });
                                     }
 
-                                    //type === "DoughnutChart" && x >= 0 && y >= 0  && label && labels && listOfBackgroundColors && listOfNumericValues && borderColor && borderWidth >= 0 && hoverOffset && offset && options
                                     // console.log("type, x, y, label, labels, listOfBackgroundColors,listOfNumericValues,borderColor,borderWidth,hoverOffset,offset: ", type, x, y, label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset);
                                     // console.log("this update chart line works");
 
@@ -651,7 +625,6 @@ singleDynamicCanvaDataGroupRouter
                                         { $set: positions },
                                         { new: true }
                                     );
-                                    // req.save
 
                                     if (!reqToUpdateMediaFragmentXYCordinates) {
                                         return res.status(404).json({
@@ -937,8 +910,6 @@ singleDynamicCanvaDataGroupRouter
                             }
                         }
                         else if (type === "TextLink" && _id) {
-                            // console.log("type, x, y, label, labels, listOfBackgroundColors,listOfNumericValues,borderColor,borderWidth,hoverOffset,offset: ", type, x, y, label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset);
-                            // console.log("this chart line works");
                             // console.log("_id for delete comp op: ", req.body._id);
 
                             const deleteDoughnutChartComponent = await textLinkModel.findOneAndDelete({
@@ -964,7 +935,6 @@ singleDynamicCanvaDataGroupRouter
                             }
                         }
                         else if (type === "DoughnutChart" && _id) {
-                            // console.log("type, x, y, label, labels, listOfBackgroundColors,listOfNumericValues,borderColor,borderWidth,hoverOffset,offset: ", type, x, y, label, labels, listOfBackgroundColors, listOfNumericValues, borderColor, borderWidth, hoverOffset, offset);
                             // console.log("this chart line works");
                             // console.log("_id for delete comp op: ", req.body._id);
 
@@ -1042,7 +1012,6 @@ singleDynamicCanvaDataGroupRouter
                             const reqToDeleteTextComponents =
                                 await textModel.deleteMany({
                                     //component's id
-                                    //user data
                                     // owner: user._id,
                                     workspaceId: canvaspace._id,
                                     createdBy: user._id,

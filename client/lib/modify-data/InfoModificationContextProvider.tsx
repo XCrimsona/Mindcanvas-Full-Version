@@ -163,8 +163,6 @@ const InfoModificationContextProvider = ({
     link: string,
   ) => {
     try {
-      // const updateType = "Text";
-
       const editedRequest = await fetch(
         `http://localhost:5000/api/account/${userid}/canvas-management/${canvaid}`,
         {
@@ -239,7 +237,7 @@ const InfoModificationContextProvider = ({
       );
       if (deleteRequest.ok) {
         const succMessage = await deleteRequest.json();
-        toast.success(`Attention: ${succMessage.message}`);
+        toast.success(`${succMessage.message}`);
         updateCanvasData();
       } else {
         const err = await deleteRequest.json();
@@ -307,7 +305,6 @@ const InfoModificationContextProvider = ({
     //^save pin feature original xy values befor the click overwrites the current values^^^^
 
     if (dataComponentDiv) {
-      // console.log("dataComponentDiv: ", dataComponentDiv);
       if (pinnedText === false) {
         console.log(dataComponentDiv.style.position);
         dataComponentDiv.style.position = "fixed";
