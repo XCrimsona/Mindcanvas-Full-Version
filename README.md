@@ -27,7 +27,7 @@
 
 ### Missing config | You need to create this yourself since .env uploads are dangerous</p>
 
-<p>================================================================================</p>
+<p>============================================================================</p>
 <h2>Prerequisite: Install PowerShell 7 (The "One-Command" Way)</h2>
 <p>To ensure MindCanvas automation works correctly, you need PowerShell 7. Select your Operating System below and run the command in your terminal.</p>
 <p><i>Note: If the terminal asks "Do you agree to all the source agreements terms?", type <b>Y</b> and press <b>Enter</b>. Once finished, you can close that window and proceed to the guide below.</i></p>
