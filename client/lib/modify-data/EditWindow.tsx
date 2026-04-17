@@ -359,16 +359,16 @@ export const EditWindow = ({ componentData }: { componentData: any }) => {
               //               }
               if (updateType === "text" && !newComponentData.text) {
                 toast.info("Enter text to update");
-              } else if (
-                (updateType === "textlink" && !newComponentData.text) ||
-                !newComponentData.link
-              ) {
-                toast.info("Enter Link or Link description to update");
+              } else if (updateType === "textlink") {
+                if (!newComponentData.text && !newComponentData.link) {
+                  toast.info("Enter Link or Link description to update");
+                }
               } else if (
                 updateType === "DoughnutChart" &&
                 !newComponentData.text
               ) {
                 // requires improved conditional flow since chart data is structurely different. for now its void
+                toast.info("Complete the doughnut chart form to update");
               } else if (updateType === "Video" && !newComponentData.text) {
                 toast.info("Paste video location from OS to update");
               } else if (updateType === "Images" && !newComponentData.text) {

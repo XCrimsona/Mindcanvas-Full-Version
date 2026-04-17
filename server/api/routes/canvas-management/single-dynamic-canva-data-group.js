@@ -555,7 +555,7 @@ singleDynamicCanvaDataGroupRouter
                                     //create checkpoint to ensure field
                                     const newData = {};
                                     if (text) newData.text = text;
-                                    if (text) newData.link = link;
+                                    if (link) newData.link = link;
 
                                     if (newData) {
                                         const reqToEditTextComponent = await textLinkModel.updateOne(
