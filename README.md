@@ -87,7 +87,7 @@
     <li>Alternatively, simply closing the terminal window (the "X" at the top right) will force the local servers to stop.</li>
 </ul>
 
-<p>================================================================================</p>
+<p>============================================================================</p>
 
 ## Automation
 
