@@ -1,6 +1,5 @@
 import dotenv from "dotenv"
 dotenv.config();
-const port = process.env.PORT;
 
 import express from "express";
 import registerRouter from "./api/routes/register/registerGroup.js";
@@ -18,6 +17,7 @@ import morgan from "morgan";
 import searchRouter from "./api/routes/canvas-management/canvas-search.js";
 import videoLoader from "./api/routes/canvas-management/videoLoader.js";
 import imageLoader from "./api/routes/canvas-management/imageLoader.js";
+const port = process.env.PORT;
 const app = express();
 
 try {
