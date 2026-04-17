@@ -3,7 +3,6 @@ import "./repositionUnit.css";
 import Button from "../../components/form-elements/Button";
 import { useModificationContext } from "../../modify-data/InfoModificationContextProvider";
 import { useParams } from "react-router-dom";
-import CanvaNotification_MoveXYFailed from "../../notifications/fragment-updates/CanvaNotification_MoveXYFailed";
 import { toast } from "react-toastify";
 // import { SpanFragment } from "../../../../../../ui/spanElement";
 import { useLayoutEffect, useState } from "react";
@@ -203,7 +202,8 @@ const RepositionLiveData = () => {
         updateCanvasData();
         //resets the element value
       } else {
-        CanvaNotification_MoveXYFailed();
+        const res = await repositionUpdateResponse.json();
+        toast.error(`Fragment XY data not updated: ${res.message}`);
         return;
       }
     }
