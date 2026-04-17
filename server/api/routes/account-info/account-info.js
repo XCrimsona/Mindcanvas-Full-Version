@@ -12,11 +12,8 @@ const accountRouter = Router();
 accountRouter
   .get("/:userid/account-info", async (req, res) => {
     await getDB();
-
     const userid = req.user?.sub;
-
     const user = await UserModel.findOne({ _id: userid });
-    console.log("user: ", user);
 
     if (!user) {
       return res.status(404).json({ error: "Failed to retrieve", status: 404 });
@@ -76,15 +73,10 @@ accountRouter
           if (gender) newAccountInfo.gender = gender;
           if (dob) newAccountInfo.dob = dob;
           if (email) newAccountInfo.email = email;
-          // if (currentPassword) {
-          //   newAccountInfo.currentPassword = currentPassword;
-          // }
           //these three work together
           if (newPassword && confirmNewPassword) {
             newAccountInfo.password = await bcrypt.hash(newPassword, 12);
           }
-          // if (confirmNewPassword) newAccountInfo.confirmNewPassword = confirmNewPassword;
-          //create a new hashed password
           if (newPassword !== confirmNewPassword) {
             return res.status(400).json({ error: "New passwords don't match", status: 400 });
           }
@@ -111,13 +103,7 @@ accountRouter
       //finds and updates user data
       await getDB();
       const userid = req.user?.sub;
-
-      //check for incoming logs while doing maintnance
-
-      console.log(" userid: ", userid);
-
       const user = await UserModel.findOne({ _id: userid });
-      console.log(" user: ", user);
       if (!user) {
         return res.status(404).json({ error: "Account ID not found.", status: 404 });
       }
