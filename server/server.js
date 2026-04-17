@@ -3,7 +3,7 @@ dotenv.config();
 const port = process.env.PORT;
 
 import express from "express";
-import registerRouter from "./api/routes/register/registerGroup.js";
+import registerRouter from "../api/routes/register/registerGroup.js";
 import loginRouter from "./api/routes/login/loginGroup.js";
 import accountRouter from "./api/routes/account-info/account-info.js";
 import canvasManagementRouter from "./api/routes/canvas-management/canvas-management.js";
