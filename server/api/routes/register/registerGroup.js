@@ -7,8 +7,6 @@ const registrationRouter = Router();
 registrationRouter.get("/", async (req, res) => {
 
   try {
-    console.log("get register route");
-
     await getDB();
     return res.json({ status: 200 });
   } catch (err) {
@@ -24,8 +22,8 @@ registrationRouter.get("/", async (req, res) => {
       console.log("post register route");
       const { firstname, lastname, gender, dob, email, password } = req.body;
       console.log(req.body.email);
-      
-      const user = await UserModel.findOne({ email:email });
+
+      const user = await UserModel.findOne({ email: email });
       if (!firstname || !lastname || !email || !password) {
         return res.status(400).json(
           { message: "Please fill required fields!", status: 400 }
@@ -47,8 +45,6 @@ registrationRouter.get("/", async (req, res) => {
           data.password = hashpassword;
         }
         data.role = "user"
-console.log(data);
-
         const newUserData = await UserModel.create(data);
         if (newUserData._id) {
           return res.status(200).json({ message: "Account created" });
@@ -58,8 +54,7 @@ console.log(data);
         }
       }
     } catch (err) {
-      console.log("Regsiter issue: ",err.message);
-      
+      console.log("Register issue: ", err.message);
       return res.status(500).json(
         { message: err.message || "Unexpected server error" });
     }

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 
-const MediaShrinkUI = () => {
+export const MediaShrinkUI = () => {
   const [type, setType] = useState("video");
   const [path, setPath] = useState("");
   const [status, setStatus] = useState("Idle");
@@ -18,12 +18,13 @@ const MediaShrinkUI = () => {
   // return () => socket.disconnect();
   // }, []);
 
-  const handleShrink = async () => {
+  const shrinkProcess = async () => {
     setStatus("Initializing...");
     const res = await fetch(
       `http://localhost:5000/api/account/${userId}/canvas-management/${canvasId}/media-shrink`,
       {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type, filePath: path }),
       },
@@ -56,7 +57,7 @@ const MediaShrinkUI = () => {
         style={inputStyle}
       />
 
-      <button onClick={handleShrink} style={buttonStyle}>
+      <button onClick={shrinkProcess} style={buttonStyle}>
         Execute Shrink
       </button>
 
